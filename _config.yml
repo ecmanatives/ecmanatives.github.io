@@ -1,0 +1,21 @@
+title: "The Ecma Natives "
+description: >-
+  A simple site with labs used by lamplighters from the global code programme.
+baseurl: "/"
+url: "https://localhost:4000"
+
+header_pages:
+  - index.md
+  - about.md
+
+style: dark
+
+footer: '<h1><a href="/">Ecma Natives Labs</a></h1>More from Peter over at <a href="http://picoreclame.nl">Picoreclame</a>'
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+theme: jekyll-theme-console
+plugins:
+  - jekyll-feed
