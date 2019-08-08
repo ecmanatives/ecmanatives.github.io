@@ -32,3 +32,7 @@ I'm going to write some labs, see if we can get some FaceTime. We'll figure
 it out. This stuff is going to be slightly next level and mostly focused on 
 the front of things. But the principles above can be applied to other 
 languages on back-end too!
+
+The design of this site comes from [b2a3e8][theme site] with some alterations
+
+[theme site]: https://github.com/b2a3e8/jekyll-theme-console
