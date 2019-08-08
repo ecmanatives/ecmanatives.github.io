@@ -14,3 +14,7 @@ p {
 h1 a {
   text-decoration: none;
 }
+
+:not(.menu) > ul {
+  margin: 0 0 10px;
+}

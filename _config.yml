@@ -10,7 +10,7 @@ header_pages:
 
 style: dark
 
-footer: '<h1><a href="/">Ecma Natives Labs</a></h1>More from Peter over at <a href="http://picoreclame.nl">Picoreclame</a>'
+footer: '<h1><a href="/ecmanatives">Ecma Natives Labs</a></h1>More from Peter over at <a href="http://picoreclame.nl">Picoreclame</a>'
 
 # Build settings
 markdown: kramdown

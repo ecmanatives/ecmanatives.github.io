@@ -5,11 +5,170 @@ date:   2019-08-08 10:56:09 +0200
 categories: JavaScript History
 ---
 
+# Lab 0: The history of JavaScript and Installation
+
 Lab number zero. That sounds a bit weird right? In this lab we're not going to
 do to much. Instead I'll talk a bit about the history of the web, JavaScript,
 some of the politics that created the community we have today and then I'll help
 you setup an environment so we can start developing stuff in Lab one.
 
+> JavaScript is an prototype-based object-based interpreted scripting language. 
+
+Now here are a few hard terms already. 
+
+Let's start with the first one: 
+"**prototype based object-based**". Object-based means that a programming language 
+stores states and operations. An object-based language becomes an 
+object-oriented language when it also supports "inheritance" and "sub-typing". 
+If you want to know more about that, I'd advice you to just look for the 
+words on Wikipedia.
+
+The weird thing with older versions of JavaScript was that they did support some
+light forms of inheritance and sub-typing, yet older versions of JavaScript
+never had Classes. JavaScript did and does however support "prototypes"; the
+ability to inherit and re-use objects directly from "template objects".
+
+This has changed a bit however with the introduction of Classes a few years ago,
+but lets not go into that rabbit-hole yet ;)
+
+All of this might be a bit hard to understand now, and I do apologise for the 
+bad explanation I'm doing here, but We'll get back to this later in the course.
+
+"**interpreted**" is the second weird thing here. Basically 4 major forms of
+code-executing exist today:
+
+- Machine
+- Assembly
+- Compiled
+- Interpreted
+
+Machine, is a set of instructions that can be read and executed by the processor
+of your computer directly, Assembly is a type of code that the architecture on
+which your computer runs understands.
+
+In many cases when you write code, it can't be read by the computer directly.
+Instead before you execute your code, it needs to be turned into an other 
+language. (preferably one, the processors in your computer understand). 
+
+When you use code that needs to compile, you need to turn that language into
+either machine or assembly code. You do it once, and then the "translated"
+result of your code can be executed and stored on the same or another computer.
+
+When you use interpreted code, that code is translated on the fly. So you send
+your "untranslated" code to your server or computer and the translation happens
+as a line of code is picked up. The drawback here would be that before the
+processor of your computer can do anything, it first needs to translate code.
+When the code has been translated and executed it's not (often) stored for 
+later use.
+
+## So where did it begin?
+JavaScript isn't really that new. It has been around for quite some time. 
+JavaScript started its life as "Netscape's Mocha". It was created by Brendan
+Eich in 1995. Brendan based the scripting language on Java, Scheme and Self.
+Netscape being pretty much the online big player for web-sites at the time
+strengthened its position quite firmly With the new-found ability to write 
+small programs that could be run client-side on web-pages. 
+
+The first idea behind Mocha was to look a lot like Scheme, a dialect of Lisp. In
+talks to create a good standard fast (Netscape and Sun were in all kinds of
+weird deals) Sun pushed Brendan to make the language look more like Java in an
+attempt to make Mocha a Java-companion for the web. The script was renamed to
+LiveScript and then as Sun signed deals with Netscape the name JavaScript was
+adopted for small client-side scripts, while Java applets would take care of the
+heavier operations. If your computer is old enough, you probably still see those
+occasional pop-ups asking you to update Java.
+
+![Not today](https://i.imgur.com/wJ6ENWm.jpg)
+
+You can still detect some of the haste in JavaScript today. A good example can
+be found on the "string" object
+
 {% highlight javascript %}
-console.log('hello world')
+> typeof "hello world"
+"string"
+
+> typeof new String('hello world')
+"object"
 {% endhighlight %}
+
+In 1996 Microsoft joined in and tried to some extend take more control of the 
+market by creating their own browser "Internet Explorer" which featured their 
+own implementation of JavaScript, called jscript at the time because of 
+trademark issues. Netscape reacted to this by making a bunch of
+standards and beginning to refactor its engine (which had been written in
+haste). The new interpretor was called SpiderMonkey. The name SpiderMonkey can
+still be found in Firefox, Netscape's grandson.
+
+Jscript and SpiderMonkey kept doing their own implementations, making surfing
+the web bit of a chaos. Internet Explorer had all kinds of quirks on the DOM,
+that Netscape would miss while Netscape would implement its own things.
+
+Prototypes (the ability to re-use information, functions and other objects from
+template objects) was derived from the Self language and would work mostly the
+same between the two browsers.
+
+Features like regular expressions, JSON and the ability to raise exceptions were
+not there yet. JavaScript would undergo some big changes in the years that
+followed, only slowed by the development of Flash with ActionScript, a spin-off
+from JavaScript.
+
+One big change had to happen however: **ECMA** standardization. ECMA is an
+organisation formed in 1961 (long before most people were able to get their own
+computer at home) with the sole purpose to create standardization of information
+and communications systems.
+
+So a team called [TC-39](TC-39) set off creating a standard for JavaScript called
+ECMA-262. The ECMA committee could however not use the name JavaScript for the
+same trademark reasons Internet Explorer had to go with JScript, so they decided
+to go with the name ECMAScript. While we call the language JavaScript today,
+it's technically still called ECMAScript.
+
+In ECMA 1 & 2 the main focus was to create some standards. Features from
+different browsers were brought together. [Version one][ECMA 1] was released in 
+June 1997 with NetScape 4. ECMA 2 mostly just updated small inconsistencies.
+
+ECMAScript 3 introduced some big changes. Suddenly developers were able to
+perform Regular expressions, `do` and `while`, exceptions (and the ability to
+`catch` them), formatting on numberic output, `in` and `instanceof` opeators, 
+more built-in functions on strings and arrays and much much better error 
+handling. 
+The iteration was released in 1999 and became the bread and butter for 
+Javascript development in the years to follow. Even today a lot of websites 
+still transpile new fancy javascript code to this old standard.
+
+ECMA ran into some bumps as well. Two factions started to rise within TC-39. One
+faction wanted to develop the language further to allow running more heavy code
+client-wise; while another group thought it wouldn't be the good course for
+JavaAcript. The release of ECMAScript 4 was pushed further and further away.
+
+One of the big wrinkles popped up when browsers started to support AJAX --
+asynchronous JavaScript and XML -- allowing code to send requests to servers
+without having to reload web-pages. Most browsers at the time implemented it
+natively, but Internet Explorer didn't join the party. When it eventually did
+one had to go through some weird loops to get it to work.
+The AJAX discussion did however re-kindle the development light for ECMAScript
+4. in the peak of its development the new implementation had features like:
+
+- Classes
+- Interfaces
+- Namespaces
+- Packages
+- Optional type annonations
+- Optional static type checking (I'll get back to this as we start exploring
+  TypeScript later!!!)
+- Multimethods
+- Iterators
+- Constant binding
+- Destructuring
+- Array comprehensions. 
+
+The committee developing ECMAScript 4 at the time was formed by Adobe, Mozilla,
+Opera and  Microsoft. Yahoo entered later when most of the features were already
+decided. Dough Crockford was the person sent by Yahoo. He voiced concerns for
+many of the proposed features and got a lot of support from Microsoft. Microsoft
+didn't want any of ECMAScript 4's features in their browsers and even threatened
+legal actions. ECMAScript 4 development stopped again. 
+
+
+[TC-39]: https://github.com/tc39
+[ECMA 1]: http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf
