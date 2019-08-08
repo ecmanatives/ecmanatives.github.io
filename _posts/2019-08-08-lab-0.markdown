@@ -5,6 +5,8 @@ date:   2019-08-08 10:56:09 +0200
 categories: JavaScript History
 ---
 
+THIS POST IS STILL BEING WRITTEN!!!
+
 # Lab 0: The history of JavaScript and Installation
 
 Lab number zero. That sounds a bit weird right? In this lab we're not going to
@@ -29,7 +31,7 @@ never had Classes. JavaScript did and does however support "prototypes"; the
 ability to inherit and re-use objects directly from "template objects".
 
 This has changed a bit however with the introduction of Classes a few years ago,
-but lets not go into that rabbit-hole yet ;)
+but let's not go into that rabbit-hole yet ;)
 
 All of this might be a bit hard to understand now, and I do apologise for the 
 bad explanation I'm doing here, but We'll get back to this later in the course.
@@ -146,8 +148,8 @@ asynchronous JavaScript and XML -- allowing code to send requests to servers
 without having to reload web-pages. Most browsers at the time implemented it
 natively, but Internet Explorer didn't join the party. When it eventually did
 one had to go through some weird loops to get it to work.
-The AJAX discussion did however re-kindle the development light for ECMAScript
-4. in the peak of its development the new implementation had features like:
+The AJAX discussion did however re-kindle the development light for ECMAScript 4. 
+In the peak of its development the new implementation had features like:
 
 - Classes
 - Interfaces
@@ -164,11 +166,55 @@ The AJAX discussion did however re-kindle the development light for ECMAScript
 
 The committee developing ECMAScript 4 at the time was formed by Adobe, Mozilla,
 Opera and  Microsoft. Yahoo entered later when most of the features were already
-decided. Dough Crockford was the person sent by Yahoo. He voiced concerns for
+decided. Douglas Crockford was the person sent by Yahoo. He voiced concerns for
 many of the proposed features and got a lot of support from Microsoft. Microsoft
 didn't want any of ECMAScript 4's features in their browsers and even threatened
 legal actions. ECMAScript 4 development stopped again. 
 
+Douglas pushed the idea to push out a simpler, reduced set of features for the
+new standard, the things most of the committee could agree on. So no new syntax,
+just some improvements from the experience of using version 3
+
+ECMAScript 4 was a problem still. In the end Brendan Eigh ripped the band-aid
+and posted a mail after a meeting in Oslo in 2008 outlining the following details:
+
+1. Work should be focused on ECMAScript 3.1 aka ES3.1, and should be implemented by
+   browsers.
+2. Collaboration should be continued for the next steps beyond ES3.1, which
+   should include some new syntax, but should be more modest than the many ideas
+   from ECMAScript 4 aka ES4.
+3. Some of the ideas for ES4 were so unsound for the web. Packages, Namespaces
+   and early binding were off the table.
+4. Some of the ideas from ES4 should be rephrased and redefined like Classes.
+
+ECMAScript took 8 years of development and was scrapped in the end.
+
+Brendan used the word "Harmony" in the conclusions of his mail. This harmony
+would become the name for the future place of new JavaScript ideas. "ECMAScript
+Harmony" was born. 
+
+Adobe implemented a big bunch of features from ES4 into ActionScript and kept
+maintaining it for a while for its own "Flash".
+
+Before the end of ES4 a small spinoff was created called E4X, it featured some
+nice patches for XML parsing, was introduced into SpiderMonkey, but was removed
+for lack of use.
+
+ECMAScript 5 became the long sought rebirth of JavaScript. It included:
+
+- Getters and setters
+- Trailing comma support in arrays and object literals
+- Reserved words as property names
+- Extension of Object with `create`, `defineProperty`, `keys`, `seal`, etc.
+- New Date methods
+- `bind` on functions
+- JSON (Took a while, but there it was)
+- Immutable global objects
+- Strict mode
+- exceptions with proper `this` values
+
+It was released in different browsers between 2011 and 2012.
+ECMAScript 5 got a 5.1 iteration in 2011, which fixed some ambiguities.
 
 [TC-39]: https://github.com/tc39
 [ECMA 1]: http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf
