@@ -15,6 +15,7 @@ footer: '<h1><a href="/">Ecma Natives Labs</a></h1>More from Peter over at <a hr
 # Build settings
 markdown: kramdown
 kramdown:
-  input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+  input: GFM
+  hard_wrap: false
 plugins:
   - jekyll-feed
