@@ -10,7 +10,7 @@ header_pages:
 
 style: light
 
-footer: '<h1><a href="/ecmanatives">Ecma Natives Labs</a></h1>More from Peter over at <a href="http://picoreclame.nl">Picoreclame</a>'
+footer: '<h1><a href="/ecmanatives">Ecma Natives Labs</a></h1>More from Peter over at <a href="http://picoreclame.nl">Picoreclame</a><br> more about the summer programme at <a href="https://globalcode.org.uk/">Global Code</a>'
 
 # Build settings
 markdown: kramdown
