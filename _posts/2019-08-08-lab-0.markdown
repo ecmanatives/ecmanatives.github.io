@@ -8,7 +8,7 @@ categories: JavaScript History
 # Lab 0: The history of JavaScript and Installation
 
 Lab number zero. That sounds a bit weird right? In this lab we're not going to
-do to much. Instead I'll talk a bit about the history of the web, JavaScript,
+do too much. Instead I'll talk a bit about the history of the web, JavaScript,
 some of the politics that created the community we have today and then I'll help
 you setup an environment so we can start developing stuff in Lab one.
 
