@@ -44,22 +44,25 @@ code-executing exist today:
 
 Machine, is a set of instructions that can be read and executed by the processor
 of your computer directly, Assembly is a type of code that the architecture on
-which your computer runs understands.
+which your computer runs understands. Here we are in 1 and 0 land. Lots of
+machine and assembly type codes can't be read by humans.
 
 In many cases when you write code, it can't be read by the computer directly.
 Instead before you execute your code, it needs to be turned into an other 
-language. (preferably one, the processors in your computer understand). 
+language. (preferably one, the processors in your computer understand):
 
 When you use code that needs to compile, you need to turn that language into
 either machine or assembly code. You do it once, and then the "translated"
 result of your code can be executed and stored on the same or another computer.
+Some examples of compiled code are: Java, Go and Elixir.
 
 When you use interpreted code, that code is translated on the fly. So you send
 your "untranslated" code to your server or computer and the translation happens
 as a line of code is picked up. The drawback here would be that before the
 processor of your computer can do anything, it first needs to translate code.
 When the code has been translated and executed it's not (often) stored for 
-later use.
+later use. Some examples of interpreted code are: Ruby, Python and you
+guessed it: JavaScript.
 
 ## So where did it begin?
 JavaScript isn't really that new. It has been around for quite some time. 
@@ -74,19 +77,20 @@ talks to create a good standard fast (Netscape and Sun were in all kinds of
 weird deals) Sun pushed Brendan to make the language look more like Java in an
 attempt to make Mocha a Java-companion for the web. The script was renamed to
 LiveScript and then as Sun signed deals with Netscape the name JavaScript was
-adopted for small client-side scripts, while Java applets would take care of the
-heavier operations. If your computer is old enough, you probably still see those
-occasional pop-ups asking you to update Java.
+adopted and would run small client-side scripts, while big brother Java 
+would work with "Java applets" to take care of the heavier operations. 
+If your computer is old enough, you probably still see those occasional pop-ups
+asking you to update Java.
 
 ![Not today](https://i.imgur.com/wJ6ENWm.jpg)
 
 In 1996 Microsoft joined in and tried to some extend take more control of the 
-market by creating their own browser "Internet Explorer" which featured their 
-own implementation of JavaScript, called JScript at the time because of 
-trademark issues. Netscape reacted to this by making a bunch of
-standards and beginning to refactor its engine (which had been written in
-haste). The new interpretor was called SpiderMonkey. The name SpiderMonkey can
-still be found in Firefox, Netscape's grandson.
+market by creating their own browser "Internet Explorer", featuring their 
+own implementation of JavaScript, called "JScript" because of 
+trademark issues with the name JavaScript. Netscape reacted to this by making 
+a bunch of standards and beginning to refactor its engine (which had been 
+written in haste). The new interpretor was called SpiderMonkey. 
+The name SpiderMonkey can still be found in Firefox, Netscape's grandson.
 
 You can still detect some of the haste JavaScript was written in today. 
 A good example can be found on the "string" object
@@ -99,9 +103,10 @@ A good example can be found on the "string" object
 "object"
 ```
 
-Jscript and SpiderMonkey kept doing their own implementations, making surfing
-the web bit of a chaos. Internet Explorer had all kinds of quirks on the DOM,
-that Netscape would miss while Netscape would implement its own things.
+JScript and SpiderMonkey kept doing their own implementations, making surfing
+the web bit of a chaos. Internet Explorer had all kinds of quirks on the
+[DOM][DOM], that Netscape would miss while Netscape would implement its 
+own things.
 
 Prototypes (the ability to re-use information, functions and other objects from
 template objects) was derived from the Self language and would work mostly the
@@ -110,12 +115,13 @@ same between the two browsers.
 Features like regular expressions, JSON and the ability to raise exceptions were
 not there yet. JavaScript would undergo some big changes in the years that
 followed, only slowed by the development of Flash with ActionScript, a spin-off
-from JavaScript.
+from JavaScript, as well as the continued interest in Java on the web.
 
 One big change had to happen however: **ECMA** standardization. ECMA is an
 organisation formed in 1961 (long before most people were able to get their own
 computer at home) with the sole purpose to create standardization of information
-and communications systems.
+and communications systems. Making sets of rules if you will on how languages
+should function when multiple people and companies had different ideas.
 
 So a team called [TC-39](TC-39) set off creating a standard for JavaScript called
 ECMA-262. The ECMA committee could however not use the name JavaScript for the
@@ -125,7 +131,7 @@ it's technically still called ECMAScript.
 
 In ECMA 1 & 2 the main focus was to create some standards. Features from
 different browsers were brought together. [Version one][ECMA 1] was released in 
-June 1997 with NetScape 4. ECMA 2 mostly just updated small inconsistencies.
+June 1997 with NetScape 4. Later ECMA 2 mostly just updated small inconsistencies.
 
 ![Netscape 4](https://i.imgur.com/a0FCY8z.png)
 
@@ -166,7 +172,7 @@ like:
 - Array comprehensions. 
 
 The committee developing ECMAScript 4 at the time was formed by Adobe, Mozilla,
-Opera and  Microsoft. Yahoo entered later when most of the features were already
+Opera and Microsoft. Yahoo entered later when most of the features were already
 decided. Douglas Crockford was the person sent by Yahoo. He voiced concerns for
 many of the proposed features and got a lot of support from Microsoft. Microsoft
 didn't want any of ECMAScript 4's features in their browsers and even threatened
@@ -187,16 +193,17 @@ and posted a mail after a meeting in Oslo in 2008 outlining the following detail
    from ECMAScript 4 aka ES4.
 3. Some of the ideas for ES4 were so unsound for the web. Packages, Namespaces
    and early binding were off the table.
-4. Some of the ideas from ES4 should be rephrased and redefined like Classes.
+4. Some of the ideas from ES4 should be rephrased and redefined (like Classes).
 
 ECMAScript took 8 years of development and was scrapped in the end.
 
-Brendan used the word "Harmony" in the conclusions of his mail. This harmony
-would become the name for the future place of new JavaScript ideas. "ECMAScript
-Harmony" was born. 
+Brendan used the word "Harmony" a few times in the conclusions of his mail. 
+This harmony would become the name for the future place of new JavaScript ideas. 
+"ECMAScript Harmony" was born. 
 
 Adobe decided to implement a big bunch of features from ES4 into ActionScript 3 
-and kept maintaining it for a while for its own "Flash".
+and kept maintaining it for a while for its own (from Macromedia acquired) 
+"Flash".
 
 Before the end of ES4, a small spin-off was created called E4X. It featured some
 nice patches for XML parsing, was introduced into SpiderMonkey, but removed not
@@ -225,8 +232,9 @@ ECMAScript 5 got a 5.1 iteration in 2011, which fixed some ambiguities.
 
 With the development back on track TC-39 and ECMAScript Harmony steamed on with
 some fundamental new features in ECMAScript 6 and 7 which would get the
-respective names ECMAScript 2015. It featured some ideas from ECMAScript 4 and a
-range of new improvements to the languages like:
+respective names ECMAScript 2015 and ECMAScript 2017. 
+EcmaScript 2016 featured some ideas from ECMAScript 4 and a range of new 
+improvements to the languages like:
 
 - `let` (rebindable bindings) and `const` (unrebindable bindings)
 - Arrow functions and lexical this
@@ -295,7 +303,7 @@ directly from the Google Play Store (and still does today).
 
 But when developing sites and web-apps we do need to consider the stuff we can
 use or not.
-Can I Use is a website that lists new features in Javascript, CSS and HTML and
+"Can I Use" is a website that lists new features in Javascript, CSS and HTML and
 tells us where we can use what. Let's take a look at [Async][Can I Use Async].
 
 Here we see that (as of writing) Internet Explorer and Opera Mini don't give any 
@@ -363,7 +371,7 @@ basically Javascript, but not in a browser. Just like Python, Ruby and other
 languages we can use NodeJS as a [REPL interface][REPL] and execute files.
 
 Looking at the fact that we'll eventually start making either IOS or Android
-apps with JavaScript, it's best if you follow this course on a Laptop with
+apps with JavaScript, it's best if you follow this course on a computer with
 [Ubuntu 19.04](Ubuntu) or Mac OSX. Any laptop or desktop from the past five 
 years will do.
 
@@ -372,10 +380,6 @@ Windows, but as we'll start diving into sending development apps over the wire
 to phones, You'll notice that connecting physical phones to vitalisation is
 painful. Ping me if you need help setting up dual-boot and I'll join you on a
 call and help you get it done!!
-
-We'll also set you up with a smarter code-editor, that checks your programming-
-spelling (Through small javascript-plugins called ESLint and prettier) and 
-slaps you on the wrist when you happen to write ugly code accidentally.
 
 I'm going to assume that you've been part of Global Code and know some Terminal
 Lingo already.
@@ -505,13 +509,18 @@ about how the community for JavaScript came to be and you managed to install
 NodeJS! 
 
 In the next lab we'll dive into the most common functions and features of
-JavaScript and get you started with a nice Code editor.
+JavaScript.
+We'll also set you up with a smarter code-editor, that checks your programming-
+spelling (Through small javascript-plugins called ESLint and prettier) and 
+slaps you on the wrist when you happen to write ugly code accidentally.
+
 
 Can't wait? Check out one of these 3 editors today:
 - [Atom](Atom) (good for faster computers)
 - [Sublime](Sublime) (good for slower computers)
 - [NeoVim](Neovim) (good for everything)
 
+[DOM]: https://www.computerhope.com/jargon/d/dom.htm
 [TC-39]: https://github.com/tc39
 [ECMA 1]: http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf
 [Can I Use Async]: https://caniuse.com/#feat=async-functions
