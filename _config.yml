@@ -8,7 +8,7 @@ header_pages:
   - index.md
   - about.md
 
-style: dark
+style: light
 
 footer: '<h1><a href="/ecmanatives">Ecma Natives Labs</a></h1>More from Peter over at <a href="http://picoreclame.nl">Picoreclame</a>'
 
@@ -19,3 +19,6 @@ kramdown:
   hard_wrap: false
 plugins:
   - jekyll-feed
+
+host: 0.0.0.0
+port: 4000

@@ -5,8 +5,6 @@ date:   2019-08-08 10:56:09 +0200
 categories: JavaScript History
 ---
 
-THIS POST IS STILL BEING WRITTEN!!!
-
 # Lab 0: The history of JavaScript and Installation
 
 Lab number zero. That sounds a bit weird right? In this lab we're not going to
@@ -82,24 +80,24 @@ occasional pop-ups asking you to update Java.
 
 ![Not today](https://i.imgur.com/wJ6ENWm.jpg)
 
-You can still detect some of the haste in JavaScript today. A good example can
-be found on the "string" object
+In 1996 Microsoft joined in and tried to some extend take more control of the 
+market by creating their own browser "Internet Explorer" which featured their 
+own implementation of JavaScript, called JScript at the time because of 
+trademark issues. Netscape reacted to this by making a bunch of
+standards and beginning to refactor its engine (which had been written in
+haste). The new interpretor was called SpiderMonkey. The name SpiderMonkey can
+still be found in Firefox, Netscape's grandson.
 
-{% highlight javascript %}
+You can still detect some of the haste JavaScript was written in today. 
+A good example can be found on the "string" object
+
+```javascript
 > typeof "hello world"
 "string"
 
 > typeof new String('hello world')
 "object"
-{% endhighlight %}
-
-In 1996 Microsoft joined in and tried to some extend take more control of the 
-market by creating their own browser "Internet Explorer" which featured their 
-own implementation of JavaScript, called jscript at the time because of 
-trademark issues. Netscape reacted to this by making a bunch of
-standards and beginning to refactor its engine (which had been written in
-haste). The new interpretor was called SpiderMonkey. The name SpiderMonkey can
-still be found in Firefox, Netscape's grandson.
+```
 
 Jscript and SpiderMonkey kept doing their own implementations, making surfing
 the web bit of a chaos. Internet Explorer had all kinds of quirks on the DOM,
@@ -129,33 +127,36 @@ In ECMA 1 & 2 the main focus was to create some standards. Features from
 different browsers were brought together. [Version one][ECMA 1] was released in 
 June 1997 with NetScape 4. ECMA 2 mostly just updated small inconsistencies.
 
+![Netscape 4](https://i.imgur.com/a0FCY8z.png)
+
 ECMAScript 3 introduced some big changes. Suddenly developers were able to
 perform Regular expressions, `do` and `while`, exceptions (and the ability to
-`catch` them), formatting on numberic output, `in` and `instanceof` opeators, 
+`catch` them), formatting on numeric output, `in` and `instanceof` operators, 
 more built-in functions on strings and arrays and much much better error 
 handling. 
 The iteration was released in 1999 and became the bread and butter for 
-Javascript development in the years to follow. Even today a lot of websites 
-still transpile new fancy javascript code to this old standard.
+JavaScript development in the years to follow. Even today a lot of websites 
+still transpile new fancy JavaScript code to this old standard.
 
 ECMA ran into some bumps as well. Two factions started to rise within TC-39. One
 faction wanted to develop the language further to allow running more heavy code
 client-wise; while another group thought it wouldn't be the good course for
-JavaAcript. The release of ECMAScript 4 was pushed further and further away.
+JavaScript. The release of ECMAScript 4 was pushed further and further away.
 
-One of the big wrinkles popped up when browsers started to support AJAX --
+Some big wrinkles popped up when browsers started to support AJAX --
 asynchronous JavaScript and XML -- allowing code to send requests to servers
 without having to reload web-pages. Most browsers at the time implemented it
 natively, but Internet Explorer didn't join the party. When it eventually did
 one had to go through some weird loops to get it to work.
 The AJAX discussion did however re-kindle the development light for ECMAScript 4. 
-In the peak of its development the new implementation had features like:
+In the peak of its development the new version 4 implementation had features 
+like:
 
 - Classes
 - Interfaces
 - Namespaces
 - Packages
-- Optional type annonations
+- Optional type annotations
 - Optional static type checking (I'll get back to this as we start exploring
   TypeScript later!!!)
 - Multimethods
@@ -173,7 +174,8 @@ legal actions. ECMAScript 4 development stopped again.
 
 Douglas pushed the idea to push out a simpler, reduced set of features for the
 new standard, the things most of the committee could agree on. So no new syntax,
-just some improvements from the experience of using version 3
+just some improvements from the experience of using version 3. This iteration
+should be called ECMAScript 3.1
 
 ECMAScript 4 was a problem still. In the end Brendan Eigh ripped the band-aid
 and posted a mail after a meeting in Oslo in 2008 outlining the following details:
@@ -193,14 +195,17 @@ Brendan used the word "Harmony" in the conclusions of his mail. This harmony
 would become the name for the future place of new JavaScript ideas. "ECMAScript
 Harmony" was born. 
 
-Adobe implemented a big bunch of features from ES4 into ActionScript and kept
-maintaining it for a while for its own "Flash".
+Adobe decided to implement a big bunch of features from ES4 into ActionScript 3 
+and kept maintaining it for a while for its own "Flash".
 
-Before the end of ES4 a small spinoff was created called E4X, it featured some
-nice patches for XML parsing, was introduced into SpiderMonkey, but was removed
-for lack of use.
+Before the end of ES4, a small spin-off was created called E4X. It featured some
+nice patches for XML parsing, was introduced into SpiderMonkey, but removed not
+long after for lack of use.
 
-ECMAScript 5 became the long sought rebirth of JavaScript. It included:
+So the book on ES4 was closed. TC-39 wasn't sitting still however. The ECMAScript
+Harmony project started coming up with some good ideas!
+The result, ECMAScript 5 became the long sought rebirth of JavaScript. 
+It included:
 
 - Getters and setters
 - Trailing comma support in arrays and object literals
@@ -213,8 +218,308 @@ ECMAScript 5 became the long sought rebirth of JavaScript. It included:
 - Strict mode
 - exceptions with proper `this` values
 
-It was released in different browsers between 2011 and 2012.
+ES5 was released in all different browsers between 2011 and 2012. It became the
+standard for Internet Explorer 10 and Safari 6, of which the first is still
+being used by a good chunk of users world-wide today.
 ECMAScript 5 got a 5.1 iteration in 2011, which fixed some ambiguities.
+
+With the development back on track TC-39 and ECMAScript Harmony steamed on with
+some fundamental new features in ECMAScript 6 and 7 which would get the
+respective names ECMAScript 2015. It featured some ideas from ECMAScript 4 and a
+range of new improvements to the languages like:
+
+- `let` (rebindable bindings) and `const` (unrebindable bindings)
+- Arrow functions and lexical this
+- Classes (as syntastic sugar on top of prototypes)
+- Object literal improvements
+- Template strings
+- Promises
+- Generators, iterables, iterators and `for..of`
+- Default arguments for functions and the rest operator
+- Restructuring
+- Module syntax
+- Spread syntax
+- Symbols
+- New collections (Set, Map, WeakSet, WeakMap)
+- proxies and Reflection
+- Typed arrays
+- Subclassing built-ins
+- Guaranteed tail-call optimization
+- Simpler Unicode support
+- Binary and octal literals
+
+In the course We'll touch on a good bunch of these.
+
+Thanks to not taking features like namespacing and optional typing along in
+EcmaScript 2015 as well as the rephrasing of some of the features (like classes) 
+all of these features made it past the standardization process. It did take
+almost 6 years to implement everything however. The fact that the committee as
+well as the community were able to pull something like this off gave a further
+boost to the development of ECMAScript. Short after the release of the
+ECMAScript 2015 spec some further small changes were made like
+Array.prototype.includes (which would be pushed to ECMAScript 2017 later), 
+the exponention operator and some small corrections.
+
+At this point, most of the features from the ECMAScript 2015 spec are
+implemented in modern browsers.
+
+With that behind us we are now in the realm of ECMAScript 2017 and 2018. Some of
+the features you are going to use from that in the rest of this course include:
+
+- Async await
+- Trailing commas
+- Array.prototype.includes
+- Object Rest/Spread Properties
+- Asynchronous Iteration (I'll see if we ca apply this somewhere)
+- Promise.prototype.finally()
+- RegExp named capture
+
+## There is however a catch.
+And this is and has been the bane of JavaScript developers for quite some time
+now. We need to care about browsers. Sure, there is a standard and browser
+makers do their best to develop new features as soon as possible, but the
+end-users of those browsers need to update their computers.
+3 browsers that have been a problem for a very long time to that regard are:
+
+- Internet Explorer
+- Safari
+- The android built-in browser
+
+There are still a lot of people out there using Windows 7 with Internet 
+Explorer 10. This version of Internet explorer still runs on ECMAScript 5 and
+doesn't support all the new fancy features yet. Safari fixed most of the issues
+by continuing to update their browser through Apple update and Android fixed the
+problem of old phones when it pulled its interpretor out of the browser into a
+separate (system) app called webkit, This app would then receive updates
+directly from the Google Play Store (and still does today).
+
+But when developing sites and web-apps we do need to consider the stuff we can
+use or not.
+Can I Use is a website that lists new features in Javascript, CSS and HTML and
+tells us where we can use what. Let's take a look at [Async][Can I Use Async].
+
+Here we see that (as of writing) Internet Explorer and Opera Mini don't give any 
+support at all yet. So here we can do two things:
+
+- Not use Async, until more browsers update and internet users update their
+  browsers.
+- Convert Async to something older and unsupported browsers understand. 
+
+The last can be achieved in two ways:
+
+- Include Polyfill javascript functions that act like Async, but do it a bit
+  different on older browsers.
+- Include Babel, a plugin that automatically rewrites and minifies our
+  javascript for older and unsupported browsers.
+
+In our future lessons we're going to play with the last of those. Having to
+polyfill stuff only applies when we deal with a browser. When we write
+backend-server Apps or react-native Apps we can often use all the new tools we
+want as we are in control of what ECMAScript version we use.
+
+There are also some JavaScript features that exist in one browser only, but not
+in others. These differences are created when the creators of browsers don't
+agree with each other or if they want to try out new features that are being
+researched by TC-39 or ECMAScript Harmony. One good example of this is the
+`forEach()` function on a node-list. Normally when you have an array you can use
+`forEach()` like this:
+
+```javascript
+[1, 2, 3].forEach((number) => {
+  console.log(number)
+})
+```
+
+In Chrome, Firefox and Safari you could do:
+
+```javascript
+document.querySelectorAll('p').forEach((node) => {
+  console.log(node.id)
+})
+```
+
+This will fetch all the `paragraph` objects from a page and put them in a
+node-list. This node-list then has the prototype function `forEach` (like the list
+above). In Internet explorer however, that forEach doesn't exist forcing you to
+either Polyfill it or write an old fashioned for-loop:
+
+```javascript
+nodes = document.querySelectorAll('p')
+for (let i = 0; i < nodes.length; i += 1) {
+ const node = nodes[i];
+ console.log(node)
+}
+```
+
+Browsers have also started to support other things than just Javascript. Some
+browsers are starting to dip their toes into Web Assembly and some browsers have
+started to venue into the native support of a new language called TypeScript.
+We'll eventually venture into the latter in a later stage of this course.
+
+## Installation
+With the history and  some of the weird quirks now behind us, let's focus on
+that computer of yours! We're going to install a program called NodeJS. It's
+basically Javascript, but not in a browser. Just like Python, Ruby and other
+languages we can use NodeJS as a [REPL interface][REPL] and execute files.
+
+Looking at the fact that we'll eventually start making either IOS or Android
+apps with JavaScript, it's best if you follow this course on a Laptop with
+[Ubuntu 19.04](Ubuntu) or Mac OSX. Any laptop or desktop from the past five 
+years will do.
+
+You could probably do major parts of this course in contraptions like Bash for
+Windows, but as we'll start diving into sending development apps over the wire
+to phones, You'll notice that connecting physical phones to vitalisation is
+painful. Ping me if you need help setting up dual-boot and I'll join you on a
+call and help you get it done!!
+
+We'll also set you up with a smarter code-editor, that checks your programming-
+spelling (Through small javascript-plugins called ESLint and prettier) and 
+slaps you on the wrist when you happen to write ugly code accidentally.
+
+I'm going to assume that you've been part of Global Code and know some Terminal
+Lingo already.
+
+> Whenever I prefix a command with `$` You should run  the command after
+> (excluding the `$`) in  your terminal. Whenever I prefix with `>`, you should
+> execute the command in a NodeJS REPL.
+> If something goes wrong, open an issue on Github and mention the line in the
+> markdown source of this file where things started to go wrong. You can find
+> [the source of this page here][Page Source]
+
+### For Mac OSX users
+First things first, that standard terminal app of yours is ugly and useless.
+Let's install something better called Iterm2, lets download and install the
+[latest stable release][Iterm]
+
+With that done, let's fire up Iterm and install some basics. For the next steps
+we're going to need 2 components:
+
+Xcode platform tools (git, some compilers, readLine for REPL, etc.) you can
+install them like this:
+
+```bash
+$ xcode-select --install
+```
+
+When that is done, let's install and update HomeBrew, an app-store for developer
+goodies. run `brew --version`. If it doesn't return the version of homebrew and
+throws you a "command not found" error run the following step:
+
+```bash
+$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Now let's update our package manager and upgrade installed software:
+
+```sh
+$ brew update
+$ brew upgrade
+```
+
+Now that that works, lets install Nodenv with node-build. 2 programs that will
+help us keep multiple versions of NodeJS on our computer so we can switch
+between them depending on what project we work on later.
+
+```sh
+$ brew install nodenv
+$ nodenv -v # Should output a version
+$ nodenv init
+```
+
+Follow the instructions that are returned. The instruction will most likely be
+that you need to add a small line of code to `~/.bash_profile`. You can do this
+by opening an editor like pico and pasting it in.
+
+```sh
+$ pico ~/.bash_profile
+```
+
+After this you will need to close your existing terminal screen and open a new
+one. (since you edited basic instructions for the terminal)
+
+### For Ubuntu Users
+Your terminal application should be on par already. If you want to  have
+something more advanced, you could check out [Terminator][Terminator]
+
+To make sure you have all the necesairy side-plugins, we'll install an older
+version of nodeJS from the Ubuntu apt-get store.
+
+```sh
+$ sudo apt update
+$ sudo apt install nodejs npm
+```
+
+With that done let's use the nodenv installer to install nodenv, the NodeJS version
+manager allowing you to easily switch between different versions of NodeJS later
+
+```sh
+$ curl -fsSL https://github.com/nodenv/nodenv-installer/raw/master/bin/nodenv-installer | bash
+```
+
+At the end of the installation a doctor script will run and determine that you
+haven't got nodenv in your PATH. let's fix that real quick!
+
+```sh
+$ echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.bash_profile
+$ echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.bashrc
+$ echo 'eval "$(nodenv init -)"' >> ~/.bash_profile
+$ echo 'eval "$(nodenv init -)"' >> ~/.bashrc
+```
+
+Exit your terminal and open a new one. The command `nodenv -v` should now return
+more info!
+
+### For OSX and Ubuntu
+
+Now that we have a node version manager, lets install the latest version of node
+(you can find the latest stable version by executing `nodenv install --list`). 
+In our case we'll go for: 
+
+
+```sh
+$ nodenv install 12.7.0
+$ nodenv global 12.7.0
+$ nodenv rehash
+$ node -v # Should return v12.7.0
+```
+
+The global bit here tells our system that when we don't ask for a specific node
+version, it should  use 12.7.0 instead.
+The rehash bit, tells the system to reload all NodeJS related things.
+
+And that's it, Let's boot it up and try some things!
+
+```sh
+$ node
+> console.log('hello world!')
+hello world!
+undefined
+> new Date()
+2019-08-09T10:51:50.247Z
+```
+
+## Final remarks
+That's it for now! Today you learned a bit about the history of ECMA, a bit
+about how the community for JavaScript came to be and you managed to install
+NodeJS! 
+
+In the next lab we'll dive into the most common functions and features of
+JavaScript and get you started with a nice Code editor.
+
+Can't wait? Check out one of these 3 editors today:
+- [Atom](Atom) (good for faster computers)
+- [Sublime](Sublime) (good for slower computers)
+- [NeoVim](Neovim) (good for everything)
 
 [TC-39]: https://github.com/tc39
 [ECMA 1]: http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf
+[Can I Use Async]: https://caniuse.com/#feat=async-functions
+[REPL]: https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop
+[Ubuntu]: https://ubuntu.com/download/desktop
+[Page Source]: https://github.com/HendrikPetertje/ecmanatives/blob/master/_posts/2019-08-08-lab-0.markdown
+[Iterm]: https://iterm2.com/downloads.html
+[Terminator]: https://www.tecrobust.com/install-terminator-linux-ubuntu-fedora/
+[Neovim]: https://git.picodevelopment.nl/hendrikpeter/pico-vim
+[Sublime]: https://www.sublimetext.com/
+[Atom]: https://atom.io/
