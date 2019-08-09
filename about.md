@@ -11,9 +11,9 @@ The target of this site and the different labs on it is to teach a small group
 of students from the Global Code programme 2019 the chops of Test Driven
 JavaScript development, some react and even some react native.
 
-Target of this project is to dive a bit into Ecma script 6, the currently 
-existing group of lobbyists and developers that work on the continued 
-development of JavaScript.  
+Target of this project is to dive a bit into ECMAScript and the workings of
+TC-39, the current existing group of lobbyists and developers that work on the 
+continued development of JavaScript.  
 
 Do some test driven development too.  
 
