@@ -451,7 +451,7 @@ version of nodeJS from the Ubuntu apt-get store.
 
 ```sh
 $ sudo apt update
-$ sudo apt install nodejs npm
+$ sudo apt install nodejs npm curl git
 ```
 
 With that done let's use the nodenv installer to install nodenv, the NodeJS version
