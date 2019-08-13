@@ -41,7 +41,7 @@ GitHub!
 I am boring you sorry. let's download and install Atom.
 
 ## OSX & Windows
-On osx we nee to download and install Atom from their site. 
+On OSX we need to download and install Atom from their site. 
 [Go to the atom site][Atom] and download Atom for your OS.
 When that's done install it and try to open it.
 
@@ -95,13 +95,13 @@ It's always good to take a peek at the different type of objects we can use.
 It's kinda like checking what kind of hammers, saws and screw-drivers you  have
 in your toolbox.
 
-Open a new terminal screen and execute the command 
+Open a new terminal screen and execute the command to pop into a 
+NodeJS REPL shell.
 
 ```sh
 $ node
 ```
 
-to pop into a NodeJS REPL shell.
 We'll type some fun commands to get started.
 
 ```javascript
@@ -141,7 +141,7 @@ Okay, some weird things are happening here.
 - both `1` and `1.1` are called numbers. So in types we don't care too much
   about numbers being `float` (remember python?) or `integers`.
 - both [] and {} have the type of 'object'. This is a bit missleading though as
-  [] is still officially called an `Array` (and receive the special functions
+  [] is still officially called an `Array` (and receives the special functions
   from Array).
 - A class is actually a cool looking function? Jep, It does however get some
   extras, but we'll dive into that later.
@@ -165,7 +165,7 @@ So we have object 0 and object 1, but the list has a length of 2 items.
 Okay, lets look at objects then!
 
 ```javascript
-> let thing =  { hello: 'world', someNumber: 42 }
+> let thing = { hello: 'world', someNumber: 42 }
 undefined
 > thing
 { hello: 'world', someNumber: 42 }
@@ -205,6 +205,7 @@ undefined
 > foo
 'test 1'
 > foo = 'test 2'
+'test 2'
 > foo
 'test 2'
 
@@ -247,7 +248,7 @@ $ cd dev/ecma-natives/lab-1/
 $ touch functions.js
 ```
 
-Cool. before we continue let's start some versin control. In this lab we're
+Cool. Before we continue let's start some version control. In this lab we're
 going to create some functions and play  with them. It'd be nice if you could
 scroll back in time later to see the  different function options.
 
@@ -273,7 +274,7 @@ $ atom .
 
 ![Atom](https://i.imgur.com/mO1U9wK.png)
 
-Sweet!, lets open our functions.js on the side.
+Sweet! Now let's open our functions.js from the sidebar of Atom.
 
 [Atom]: https://atom.io/
 
