@@ -381,10 +381,13 @@ to phones, You'll notice that connecting physical phones to vitalisation is
 painful. Ping me if you need help setting up dual-boot and I'll join you on a
 call and help you get it done!!
 
+If you really need to keep Windows on your laptop, then drop a message in our
+WhatsApp group and someone will help you set up VirtualBox with Ubuntu 19.
+
 I'm going to assume that you've been part of Global Code and know some Terminal
 Lingo already.
 
-> Whenever I prefix a command with `$` You should run  the command after
+> Whenever I prefix a command with `$` You should run the command after
 > (excluding the `$`) in  your terminal. Whenever I prefix with `>`, you should
 > execute the command in a NodeJS REPL.
 > If something goes wrong, open an issue on Github and mention the line in the
