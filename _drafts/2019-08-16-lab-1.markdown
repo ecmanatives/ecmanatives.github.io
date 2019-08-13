@@ -1,0 +1,279 @@
+---
+layout: post
+title:  "Lab 1: The basics of Awesome"
+date:   2019-08-08 10:56:09 +0200
+categories: JavaScript Basics
+---
+
+# Lab 1: The basics of Awesome!
+Let's rub those hands together; after last weeks introduction and installation
+it's about time we got real!
+
+In this lab we're going to look at some of the basic constructions of the
+JavaScript Language. We'll dive a bit into the different object types available
+in the language, different ways to call for functions and take a look a bit 
+at classes (We're doing new JavaScript magic after all!).
+
+But lets start this course by making sure we got a nice editor in place that
+helps us write code a bit. During this course I'll mostly look at an editor
+called Atom, as it's easiest to setup and tool.
+
+If you ended last weeks course on an older machine or if you are dealing with
+a slow VirtualBox, then Atom might be a bit to "heavy" to run on your machine. 
+Give me a ping and we'll get you started with "Sublime 3"
+
+ 
+> Whenever I prefix a command with `$` You should run  the command
+> (excluding the `$`) in  your terminal. Whenever I prefix with `>`, you should
+> execute the command in a NodeJS REPL.
+> If something goes wrong, open an issue on Github and mention the line in the
+> markdown source of this file where things started to go wrong. 
+<!-- > You can find [the source of this page here][Page Source] -->
+
+## Installing Atom.io
+Atom is an editor running on javaScript. jep, the core of the editor is actually
+running on the language we're learning! It can act like a program through  the
+help of a toolkit called "Electron". It's made by the folks that also made
+GitHub!
+
+![boring](https://media1.giphy.com/media/LTYT5GTIiAMBa/giphy.gif)
+
+I am boring you sorry. let's download and install Atom.
+
+## OSX & Windows
+On osx we nee to download and install Atom from their site. 
+[Go to the atom site][Atom] and download Atom for your OS.
+When that's done install it and try to open it.
+
+## Ubuntu (and VirtualBox)
+Installing on Ubuntu will be done through the `Ubuntu App-get` store. The only
+problem is that the normal store doesn't have Atom. So we're going to add an
+extra app-source (from which the store can find & download apps) to our `apt-get`.
+
+```sh
+$ sudo apt-get -y install wget
+$ wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
+$ sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
+```
+
+With the new "source" in our app store we can now update the list (to get the
+latest shopping-lists of apps that can be installed) and install Atom.
+
+```
+$ sudo apt-get update
+$ sudo apt-get -y install atom
+```
+
+That's done!
+
+## OSX, windows and Ubuntu
+With Atom installed, we got the editor working! Let's open it up and prepare the
+rest.
+
+With Atom open, let's go into preferences. Once in preferences we'll go to  the
+install section.
+
+![preferences](https://i.imgur.com/xgTkaG0.png)
+
+We'll install the following packages:
+
+- Emmet
+- linter (by Steelbrain)
+- linter-eslint (there are several, use "linter-eslint")
+
+Emmet will auto-complete some nifty things, Linter and linter-eslint will work
+like spelling and grammar checks... But they will grammar and spell-check your
+code!
+
+You can also change themes in the settings here! Knock yourself out!
+My faves are One Dark (which is the default), "atom-material-ui" and 
+"gruvbox-dark-ui"
+
+
+## Let's REPL
+It's always good to take a peek at the different type of objects we can use.
+It's kinda like checking what kind of hammers, saws and screw-drivers you  have
+in your toolbox.
+
+Open a new terminal screen and execute the command 
+
+```sh
+$ node
+```
+
+to pop into a NodeJS REPL shell.
+We'll type some fun commands to get started.
+
+```javascript
+> typeof "hello world!"
+'string'
+> "hello  World!"
+'hello world'
+```
+
+That's kinda funny isn't it? When NodeJS sees a boring `string` (strings without
+special bits and bops) it will actually prefer you to put them between single
+quotes. Let's keep that in mind for the future.
+
+Lets try some other basic types:
+
+```javascript
+> typeof true
+'boolean'
+> typeof false
+'boolean'
+> typeof 1
+'number'
+> typeof 1.1
+'number'
+> typeof [1, 2]
+'object'
+> typeof {}
+'object'
+> typeof function() {}
+'function'
+> typeof class Testing {}
+'function'
+```
+
+Okay, some weird things are happening here. 
+
+- both `1` and `1.1` are called numbers. So in types we don't care too much
+  about numbers being `float` (remember python?) or `integers`.
+- both [] and {} have the type of 'object'. This is a bit missleading though as
+  [] is still officially called an `Array` (and receive the special functions
+  from Array).
+- A class is actually a cool looking function? Jep, It does however get some
+  extras, but we'll dive into that later.
+
+It's good to remember that arrays are `index based`, this means that the first
+item in an array is actually the 0th item. Let's test that.
+
+```javascript
+> ['first', 'second'][0]
+'first'
+> ['first', 'second'][1]
+'second'
+> ['first', 'second'].length
+2
+```
+
+So we have object 0 and object 1, but the list has a length of 2 items.
+
+![wat](https://media0.giphy.com/media/xThuW4BaAA2f7nRvoc/giphy.gif)
+
+Okay, lets look at objects then!
+
+```javascript
+> let thing =  { hello: 'world', someNumber: 42 }
+undefined
+> thing
+{ hello: 'world', someNumber: 42 }
+> thing.hello
+'world'
+> thing.someNumber
+42
+```
+
+Cool, so we can store bits and pieces of information in objects!
+Unlike some mutable languages you  can actually overwrite some things.
+Let's take that object from earlier and change something
+
+```javascript
+> thing.hello = 'world!'
+'world'
+> thing
+{ hello: 'world!', someNumber: 42 }
+```
+
+That's a bit creepy huh? One part of your code can actually change something
+that was created earlier. It's fine to do those kind of things, but you need to
+make sure you name your functions and code in such a way, that it's easy to
+understand why and where the "state" of objects are changed.
+
+Now without you noticing it actually we used another piece of special code
+above. Did you see the `let` I used there?  
+**When you define a variable name for the first time**, you need to prefix 
+it with either `let` or `const`. Back in the days of ECMA 3 we only had 
+`var` (you shouldn't use that anymore). But `let` and `const` are much better.
+
+Let's experiment with them:
+
+```javascript
+> let foo = 'test 1'
+undefined
+> foo
+'test 1'
+> foo = 'test 2'
+> foo
+'test 2'
+
+> const bar = 'test 1'
+undefined
+> bar
+'test 1'
+> bar = 'test 2'
+Thrown:
+TypeError: Assignment to constant variable.
+```
+
+AHA!!! So when you define a variable with let, you are allowed to "re-assign" it
+with an entirely different value later, but when  you use `const` you can't.  
+That's handy when you don't want variables that shouldn't change to change.
+
+## We need to go deeper!
+Okay, so we got a basic idea of JavaScripts Types now. (there are a few more,
+but we won't cover them today).
+
+Let's see if we can execute some functions, write some callbacks and create some
+classes. It's pretty bad to do that in a REPL however so let's start using that
+editor of ours!
+
+Let's exit the REPL (you  can also hit `ctrl` + `c` twice).
+
+```javascript
+> .exit
+```
+
+Now it would be handy to have a folder reserved to our javaScript stuff. Let's
+go to the home-folder, create a dev folder and put a folder in that called
+`ecma-natives` with a `lab-1` folder inside. In that folder we'll put a new file
+called functions.js
+
+```sh
+$ cd ~
+$ mkdir -p dev/ecma-natives/lab-1/
+$ cd dev/ecma-natives/lab-1/
+$ touch functions.js
+```
+
+Cool. before we continue let's start some versin control. In this lab we're
+going to create some functions and play  with them. It'd be nice if you could
+scroll back in time later to see the  different function options.
+
+```sh
+$ git init
+$ git add .
+$ git commit -m "initial commit"
+```
+
+> If this is the first time you do git stuff on your computer, you might need to
+> set your username and email address. just follow the instructions in the error
+> that was raised. (it will say something like `git config --global user.name`).
+> Make sure to fill in your real name and a valid email address. The combo will
+> be your copyright and proof of ownership of the code you  write in the future.
+
+Cool, our code is safe! Let's open the current folder in atom (or sublime).
+Don't forget the dot in the end of the command. A `.` means "do something with
+the current  directory"
+
+```sh
+$ atom .
+```
+
+![Atom](https://i.imgur.com/mO1U9wK.png)
+
+Sweet!, lets open our functions.js on the side.
+
+[Atom]: https://atom.io/
+
