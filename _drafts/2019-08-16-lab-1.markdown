@@ -204,8 +204,8 @@ make sure you name your functions and code in such a way, that it's easy to
 understand why and where the "state" of objects are changed.
 
 
-![Chaning](http://giphygifs.s3.amazonaws.com/media/8aK7QzcK6dJLO/giphy.gif)
-*changing values, while they run somwehere else be like.*
+![Chaning](http://giphygifs.s3.amazonaws.com/media/8aK7QzcK6dJLO/giphy.gif)  
+*changing values, while they run somewhere else be like.*
 
 > Did you see me putting a whitespace between `{` and `hello:`?   
 > It's good to put a bit of breathing space between things here and there!
