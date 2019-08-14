@@ -203,6 +203,10 @@ that was created earlier. It's fine to do those kind of things, but you need to
 make sure you name your functions and code in such a way, that it's easy to
 understand why and where the "state" of objects are changed.
 
+
+![Chaning](http://giphygifs.s3.amazonaws.com/media/8aK7QzcK6dJLO/giphy.gif)
+*changing values, while they run somwehere else be like.*
+
 > Did you see me putting a whitespace between `{` and `hello:`?   
 > It's good to put a bit of breathing space between things here and there!
 
@@ -601,6 +605,8 @@ So open up your terminal, `cd` to the project and do something like this:
 git add .
 git commit -m "Adding some functions"
 ```
+
+![Github](https://media.giphy.com/media/3oD3YveOJWdwIAfZ5e/giphy.gif)
 
 ## Final remarks
 You made it through todays lab! Go to WhatsApp and post something like "lab 1 is
