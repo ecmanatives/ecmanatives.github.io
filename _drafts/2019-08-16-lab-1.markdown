@@ -31,14 +31,14 @@ Give me a ping and we'll get you started with "Sublime 3"
 <!-- > You can find [the source of this page here][Page Source] -->
 
 ## Installing Atom.io
-Atom is an editor running on javaScript. jep, the core of the editor is actually
-running on the language we're learning! It can act like a program through  the
-help of a toolkit called "Electron". It's made by the folks that also made
+Atom is an editor running on JavaScript. Jep, the core of the editor is actually
+running on the language we're learning! It can act like a program through the
+help of a toolkit called "Electron". Atom was made by the folks that also made
 GitHub!
 
 ![boring](https://media1.giphy.com/media/LTYT5GTIiAMBa/giphy.gif)
 
-I am boring you sorry. let's download and install Atom.
+I am boring you sorry. Let's download and install Atom.
 
 ## OSX & Windows
 On OSX we need to download and install Atom from their site. 
@@ -70,7 +70,7 @@ That's done!
 With Atom installed, we got the editor working! Let's open it up and prepare the
 rest.
 
-With Atom open, let's go into preferences. Once in preferences we'll go to  the
+First let's go into preferences. Once in preferences we'll go to  the
 install section.
 
 ![preferences](https://i.imgur.com/xgTkaG0.png)
@@ -82,20 +82,20 @@ We'll install the following packages:
 - linter-eslint (there are several, use "linter-eslint")
 
 Emmet will auto-complete some nifty things, Linter and linter-eslint will work
-like spelling and grammar checks... But they will grammar and spell-check your
+like spelling and grammar checks, but they will grammar and spell-check your
 code!
 
-You can also change themes in the settings here! Knock yourself out!
+You can also change themes in the settings here!
 My faves are One Dark (which is the default), "atom-material-ui" and 
-"gruvbox-dark-ui"
+"gruvbox-dark-ui". Knock yourself out!
 
 
 ## Let's REPL
 It's always good to take a peek at the different type of objects we can use.
-It's kinda like checking what kind of hammers, saws and screw-drivers you  have
+It's kinda like checking what kind of hammers, saws and screw-drivers you have
 in your toolbox.
 
-Open a new terminal screen and execute the command to pop into a 
+Open a new terminal screen and execute the command below to pop into a 
 NodeJS REPL shell.
 
 ```sh
@@ -105,10 +105,11 @@ $ node
 We'll type some fun commands to get started.
 
 ```javascript
-> typeof "hello world!"
-'string'
 > "hello  World!"
 'hello world'
+
+> typeof "hello world!"
+'string'
 ```
 
 That's kinda funny isn't it? When NodeJS sees a boring `string` (strings without
@@ -120,33 +121,40 @@ Lets try some other basic types:
 ```javascript
 > typeof true
 'boolean'
+
 > typeof false
 'boolean'
+
 > typeof 1
 'number'
+
 > typeof 1.1
 'number'
+
 > typeof [1, 2]
 'object'
+
 > typeof {}
 'object'
+
 > typeof function() {}
 'function'
+
 > typeof class Testing {}
 'function'
 ```
 
 Okay, some weird things are happening here. 
 
-- both `1` and `1.1` are called numbers. So in types we don't care too much
+- both `1` and `1.1` are called `number`. So in types we don't care too much
   about numbers being `float` (remember python?) or `integers`.
-- both [] and {} have the type of 'object'. This is a bit missleading though as
-  [] is still officially called an `Array` (and receives the special functions
-  from Array).
+- both `[]` and `{}` have the type of 'object'. This is a bit misleading though 
+  as `[]` is still officially called an `Array` (and receives the special 
+  functions from Array).
 - A class is actually a cool looking function? Jep, It does however get some
   extras, but we'll dive into that later.
 
-It's good to remember that arrays are `index based`, this means that the first
+It's good to remember that arrays are `index`-based, this means that the first
 item in an array is actually the 0th item. Let's test that.
 
 ```javascript
@@ -162,7 +170,7 @@ So we have object 0 and object 1, but the list has a length of 2 items.
 
 ![wat](https://media0.giphy.com/media/xThuW4BaAA2f7nRvoc/giphy.gif)
 
-Okay, lets look at objects then!
+Sure, lets look at objects then!
 
 ```javascript
 > let thing = { hello: 'world', someNumber: 42 }
@@ -176,7 +184,7 @@ undefined
 ```
 
 Cool, so we can store bits and pieces of information in objects!
-Unlike some mutable languages you  can actually overwrite some things.
+Unlike mutable languages you can actually overwrite some things.
 Let's take that object from earlier and change something
 
 ```javascript
@@ -191,10 +199,13 @@ that was created earlier. It's fine to do those kind of things, but you need to
 make sure you name your functions and code in such a way, that it's easy to
 understand why and where the "state" of objects are changed.
 
-Now without you noticing it actually we used another piece of special code
+> Did you see me putting a whitespace between `{` and `hello:`?   
+> It's good to put a bit of breathing space between things here and there!
+
+Now without you actually noticing it, we used another piece of special code
 above. Did you see the `let` I used there?  
-**When you define a variable name for the first time**, you need to prefix 
-it with either `let` or `const`. Back in the days of ECMA 3 we only had 
+**When you define a variable name for the first time, you need to prefix 
+it with either `let` or `const`**. Back in the days of ECMA 3 we only had 
 `var` (you shouldn't use that anymore). But `let` and `const` are much better.
 
 Let's experiment with them:
@@ -223,8 +234,8 @@ with an entirely different value later, but when  you use `const` you can't.
 That's handy when you don't want variables that shouldn't change to change.
 
 ## We need to go deeper!
-Okay, so we got a basic idea of JavaScripts Types now. (there are a few more,
-but we won't cover them today).
+Okay, so we got a basic idea of JavaScripts Types now. There are a few more,
+but we won't cover them today.
 
 Let's see if we can execute some functions, write some callbacks and create some
 classes. It's pretty bad to do that in a REPL however so let's start using that
@@ -236,7 +247,7 @@ Let's exit the REPL (you  can also hit `ctrl` + `c` twice).
 > .exit
 ```
 
-Now it would be handy to have a folder reserved to our javaScript stuff. Let's
+Now it would be handy to have a folder reserved to our JavaScript stuff. Let's
 go to the home-folder, create a dev folder and put a folder in that called
 `ecma-natives` with a `lab-1` folder inside. In that folder we'll put a new file
 called functions.js
@@ -249,8 +260,8 @@ $ touch functions.js
 ```
 
 Cool. Before we continue let's start some version control. In this lab we're
-going to create some functions and play  with them. It'd be nice if you could
-scroll back in time later to see the  different function options.
+going to create some functions and play with them. It'd be nice if you could
+scroll back in time later to see the different function options we went through.
 
 ```sh
 $ git init
@@ -259,7 +270,7 @@ $ git commit -m "initial commit"
 ```
 
 > If this is the first time you do git stuff on your computer, you might need to
-> set your username and email address. just follow the instructions in the error
+> set your username and email address. Just follow the instructions in the error
 > that was raised. (it will say something like `git config --global user.name`).
 > Make sure to fill in your real name and a valid email address. The combo will
 > be your copyright and proof of ownership of the code you  write in the future.
@@ -274,7 +285,68 @@ $ atom .
 
 ![Atom](https://i.imgur.com/mO1U9wK.png)
 
-Sweet! Now let's open our functions.js from the sidebar of Atom.
+Sweet! Now let's open our functions.js from the left sidebar in Atom.
+We'll start with an easy function.
+
+```javascript
+function hello() {
+  console.log('world!')
+}
+```
+
+Now if we save this file and execute it from the console, it's not going to do
+much. It looks like that function isn't running at all!
+
+```sh
+$ node functions.js
+```
+
+We have just defined our function, but we'll still need to call it somewhere.
+Let's add an extra line to our code then
+
+```javascript
+function hello() {
+  console.log('world!');
+}
+
+hello();
+```
+
+Save it and execute it!
+
+```sh
+$ node functions.js
+world!
+```
+
+Sweet!, what would happen if we didn't actually add those () on our function
+call?
+
+```javascript
+function hello() {
+  console.log('world!');
+}
+
+hello;
+```
+
+```sh
+$ node functions.js
+```
+
+Ah, so when we pass around a function and don't add the `()` yet, the function
+won't actually run yet. That's good to know.
+
+Let's play with arguments next
+
+```javascript
+function hello(name) {
+  console.log(`Hello ${name}`);
+}
+
+hello("Peter");
+```
+
 
 [Atom]: https://atom.io/
 
