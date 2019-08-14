@@ -231,8 +231,8 @@ being used by a good chunk of users world-wide today.
 ECMAScript 5 got a 5.1 iteration in 2011, which fixed some ambiguities.
 
 With the development back on track TC-39 and ECMAScript Harmony steamed on with
-some fundamental new features in ECMAScript 6 and 7 which would get the
-respective names ECMAScript 2015 and ECMAScript 2017. 
+some fundamental new features in ECMAScript 6, 7 and 8 which would get the
+respective names ECMAScript 2015, 2016 and 2017. 
 EcmaScript 2015 featured some ideas from ECMAScript 4 and a range of new 
 improvements to the languages like:
 

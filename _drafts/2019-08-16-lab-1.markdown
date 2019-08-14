@@ -146,11 +146,11 @@ Lets try some other basic types:
 
 Okay, some weird things are happening here. 
 
-- both `1` and `1.1` are called `number`. So in types we don't care too much
+- both `1` and `1.1` are called [number][Number]. So in types we don't care too much
   about numbers being `float` (remember python?) or `integers`.
 - both `[]` and `{}` have the type of 'object'. This is a bit misleading though 
-  as `[]` is still officially called an `Array` (and receives the special 
-  functions from Array).
+  as `[]` is still officially called an `Array` (and receives the [special 
+  functions from Array][Array]).
 - A class is actually a cool looking function? Jep, It does however get some
   extras, but we'll dive into that later.
 
@@ -233,7 +233,63 @@ AHA!!! So when you define a variable with let, you are allowed to "re-assign" it
 with an entirely different value later, but when  you use `const` you can't.  
 That's handy when you don't want variables that shouldn't change to change.
 
-## We need to go deeper!
+## If, else, else if
+Like pretty much any  other language JavaScript supports conditions. Let's try
+some:
+
+```javascript
+> if ('hello' === 'hello')  { console.log('HELLO!' }
+HELLO!
+
+> if ( 1 === 2 ) { 'possible!' } else { 'impossible!' }
+impossible!
+
+> if ( '1' === 1 ) { 'possible!' } else if (1 === 1) { 'impossible!' }
+impossible!
+
+> if ( '1' == 1 ) { 'same content, different types, but it works!' }
+same content, different types, but it works!
+
+> if ( !false )  { 'false with a ! is false upside down and thus true' }
+false with a ! is false upside down and thus true
+
+> if ( 10 <= 100 ) { '10 is less than or equal to 100' }
+10 is less than or equal to 100
+
+> if ( 'something' ) { "anything that isn't false or undefined is actually 'truthy'" }
+anything that isn't false or undefined is actually 'truthy'
+```
+
+So these are the different If statements you can use. Do you see the important
+difference between `===` and `==`?
+
+-  `==` will evaluate to true when 2 objects have the same content, but it
+   won't care about the different types of those objects.
+- `===` will  evaluate to true when 2 objects have the same content and are of
+  the same type.
+
+Generally we never really use `==`.
+
+An `if` statement will resolve "truthy" when it receives true or anything that
+isn't `false`, `null` or `undefined`. So  you don't need to try to always get 
+a `true`.
+
+So far you've seen some `if` `else` and `if else`. But there's an extra one.  
+The **Conditional ([ternary][Ternary]) operator**. It looks like this:
+
+```javascript
+condition ? "when truthy" : "when falsy";
+```
+
+It works like this:
+
+```javascript
+> let tester = 'hello';
+> tester ? tester : 'no tester';
+'hello'
+```
+
+## We need to go deeper! Let's do functions
 Okay, so we got a basic idea of JavaScripts Types now. There are a few more,
 but we won't cover them today.
 
@@ -341,12 +397,221 @@ Let's play with arguments next
 
 ```javascript
 function hello(name) {
-  console.log(`Hello ${name}`);
+  console.log(`Hello ${ name }`);
 }
 
 hello("Peter");
 ```
 
+```sh
+$ node functions.js
+Hello Peter
+```
 
+So an argument is parsed between the `()`, like in pretty much any programming
+language you've used so far. What's going on with `Hello ${ name }`?
+
+Up till ECMAScript 3 we'd use constructions like this to add 2 strings to each
+other:
+
+```javascript
+'hello ' + name;
+```
+
+With ECMAScript 2015 we got the ability to do these kind of things using
+a so called [template literal](Template literal). A template literal consists
+out of two important bits:
+
+- It doesn't have `"` or `'` surrounding it, but a so called backtick `` ` ``.
+- It needs templates (bits of executing code) between `${  }`
+
+Template literals aren't supported by Internet Explorer at all, so you'll need
+to transpile this bit if you ever use it out in the wild. But all of that's is 
+for later concern.
+
+Let's do two more things before we wrap it up for this week:
+
+- Default values
+- Returned values
+
+Like in many languages JavaScript supports the use of default values in function
+calls. It works a bit like this:
+
+```javascript
+function hello(name, country  = 'Ghana') {
+  console.log(`Hello ${ name } from ${ country }`);
+}
+
+hello(name);
+```
+
+When you run this you'll see:
+
+```sh
+$ node functions.js
+Hello Peter from Ghana
+```
+
+Neat! It's important to remember that optional arguments last. 
+If you are dealing with a lot of optional arguments, it's better to instead call
+the function with an object like so:
+
+```javascript
+function printDetails(person) {
+  age = (person.age ? person.age : 0);
+  country = (person.country ? person.country : 'Ghana');
+
+  console.log(`Hello ${ person.name } from ${ country } with age ${ age } years`);
+}
+
+printDetails({ name: 'peter', age: '29' });
+```
+
+When we run this we get:
+
+```sh
+$ node functions.js
+Hello Peter from Ghana with age 29 years
+```
+
+The function we wrote so far does 2 things:
+- It combines values into a string.
+- It prints that string to our terminal.
+
+It's often much better if a function is really good at doing only one or two
+things. Let's see if we can move that console.log out instead.
+
+
+```javascript
+function printDetails(person) {
+  age = (person.age ? person.age : 0)
+  country = (person.country ? person.country : 'Ghana')
+
+  `Hello ${ person.name } from ${ country } with age ${ age } years`;
+}
+
+message = printDetails({ name: 'peter', age: '29' });
+console.log(message)
+```
+
+When we save and run this we'll see the following:
+
+
+```sh
+$ node functions.js
+
+```
+
+Hey, what happened? Well the function we ran didn't actually return anything.
+Let's fix that.
+
+```javascript
+function printDetails(person) {
+  age = (person.age ? person.age : 0)
+  country = (person.country ? person.country : 'Ghana')
+
+  return `Hello ${ person.name } from ${ country } with age ${ age } years`;
+}
+
+message = printDetails({ name: 'peter', age: '29' });
+console.log(message)
+```
+
+When run: 
+
+```sh
+$ node functions.js
+Hello peter from Ghana with age 29 years
+```
+
+Awesome. Let's do something weird:
+
+```javascript
+function printDetails(person) {
+  age = (person.age ? person.age : 0)
+  country = (person.country ? person.country : 'Ghana')
+
+  return `Hello ${ person.name } from ${ country } with age ${ age } years`;
+  console.log('You made it here boss!!!')
+}
+
+message = printDetails({ name: 'peter', age: '29' });
+console.log(message)
+```
+
+When we run this, that extra "You made it here boss!!!" isn't shown:
+
+```sh
+$ node functions.js
+Hello peter from Ghana with age 29 years
+```
+
+So when you return, you stop a function from executing from that point on as
+well! We can use that.
+
+```javascript
+function printDetails(person) {
+  if (!person.name) { return 'you forgot the name' }
+
+  age = (person.age ? person.age : 0)
+  country = (person.country ? person.country : 'Ghana')
+
+  return `Hello ${ person.name } from ${ country } with age ${ age } years`;
+  console.log('You made it here boss!!!')
+}
+
+message = printDetails({ age: '29' });
+console.log(message)
+```
+
+When we run this we see:
+
+```sh
+$ node functions.js
+you forgot the name
+```
+
+Stopping functions from executing this way is called `guard clausing`.
+
+You can simplify the above even more if you want. The following two lines both
+stop and return the code.
+
+```javascript
+if (!person.name) { return 'you forgot the name'; }
+if (!person.name) return 'you forgot the name';
+```
+
+When you deal with if-statements on a single line you can actually just leave
+out the function body marking `{  }`. This is only  possible from ECMAScript
+2015 onward though.
+
+## Git away
+It's good to commit this work now, You've been creating a file with some
+function logic. It's good to commit that (and possibly even put it on Github) so
+you  can look at these things later when you  forgot how something worked 
+(happens to me all the time!).
+
+So open up your terminal, `cd` to the project and do something like this:
+
+```javascript
+git add .
+git commit -m "Adding some functions"
+```
+
+## Final remarks
+You made it through todays lab! Go to WhatsApp and post something like "lab 1 is
+done!" for eternal glory (and my ability to see if I'm not making things too
+complicated). 
+
+We covered a lot of ground though and maybe you want to read a bit more. It's
+not actually bad to try this lab 2 times. I've also hidden links to more
+examples when I mentioned hard-to-understand words in a few different places. 
+Feel free to check them out.
+
+Next week we'll dive into advanced objects and classes. See you next week!
+
+[Number]: https://www.w3schools.com/jsref/jsref_obj_number.asp
+[Array]: https://www.w3schools.com/jsref/jsref_obj_array.asp
+[Ternary]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
 [Atom]: https://atom.io/
-
+[Template literal]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
