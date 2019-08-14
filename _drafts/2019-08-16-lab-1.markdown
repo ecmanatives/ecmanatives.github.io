@@ -14,6 +14,10 @@ JavaScript Language. We'll dive a bit into the different object types available
 in the language, different ways to call for functions and take a look a bit 
 at classes (We're doing new JavaScript magic after all!).
 
+In this Lab we're going to cover a lot of ground. I understand it's a bit much,
+but try to work through it. We need the stuff we learn here to do the rest of
+the labs later. Next week is going to be a bit easier. I promise ;)
+
 But lets start this course by making sure we got a nice editor in place that
 helps us write code a bit. During this course I'll mostly look at an editor
 called Atom, as it's easiest to setup and tool.
