@@ -588,7 +588,7 @@ out the function body marking `{  }`. This is only  possible from ECMAScript
 ## Git away
 It's good to commit this work now, You've been creating a file with some
 function logic. It's good to commit that (and possibly even put it on Github) so
-you  can look at these things later when you  forgot how something worked 
+you  can look at these things later when you forget how something worked 
 (happens to me all the time!).
 
 So open up your terminal, `cd` to the project and do something like this:
