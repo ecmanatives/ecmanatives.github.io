@@ -27,6 +27,9 @@ In that case its better to use "Sublime 3"
 
 If you like to use Sublime instead, [follow these instructions](Sublime Install) 
 for the install. 
+
+If you like to use NeoVim instead, Check this post in a few days. I'm writing a
+mini-guide for it now.
  
 > Whenever I prefix a command with `$` You should run the command
 > (excluding the `$`) in  your terminal. Whenever I prefix with `>`, you should
@@ -655,7 +658,7 @@ Feel free to check them out.
 Next week we'll dive into advanced objects and classes. See you next week!
 
 [Sublime Install]: https://gist.github.com/HendrikPetertje/1709a29021947bcc58abe864af7cdfd2
-[Page Source]: https://github.com/HendrikPetertje/ecmanatives/blob/master/_posts/2019-08-16-lab-1.markdown
+[Page Source]: https://github.com/HendrikPetertje/ecmanatives/blob/master/_posts/2019-08-15-lab-1.markdown
 [Number]: https://www.w3schools.com/jsref/jsref_obj_number.asp
 [Array]: https://www.w3schools.com/jsref/jsref_obj_array.asp
 [Ternary]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
