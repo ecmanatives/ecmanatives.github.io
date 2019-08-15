@@ -8,26 +8,27 @@ categories: JavaScript Basics
 # This lab is still a draft. I'm still working on it, making changes and making sure I'm not breaking your computer. If you managed to find this file, please don't follow it yet. Stick to the posts that are available on https://hendrikpetertje.github.io/ecmanatives/
 
 # Lab 1: The basics of Awesome!
-Let's rub those hands together; after last weeks introduction and installation
+Let's rub those hands together, after last weeks introduction and installation
 it's about time we got real!
 
-In this lab we're going to look at some of the basic constructions of the
+In this lab we're going to look at some basic constructions of the
 JavaScript Language. We'll dive a bit into the different object types available
-in the language, different ways to call for functions and take a look a bit 
-at classes (We're doing new JavaScript magic after all!).
+in the language, some conditional stuff and functions.
 
-In this Lab we're going to cover a lot of ground. I understand it's a bit much,
-but try to work through it. We need the stuff we learn here to do the rest of
-the labs later. Next week is going to be a bit easier. I promise ;)
+You'll notice that we're covering a lot of ground today. I understand it's a 
+bit much, but try to work through it. We need the stuff we learn here to do 
+the rest of the labs later. Next week is going to be a bit easier. I promise ;)
 
-But lets start this course by making sure we got a nice editor in place that
+Lets start this course by making sure we got a nice editor in place that
 helps us write code a bit. During this course I'll mostly look at an editor
 called Atom, as it's easiest to setup and tool.
 
 If you ended last weeks course on an older machine or if you are dealing with
 a slow VirtualBox, then Atom might be a bit to "heavy" to run on your machine. 
-Give me a ping and we'll get you started with "Sublime 3"
+Give me a ping and we'll get you started with "Sublime 3".
 
+If you like to use Sublime, [follow these instructions for](Sublime Install) 
+the install
  
 > Whenever I prefix a command with `$` You should run  the command
 > (excluding the `$`) in  your terminal. Whenever I prefix with `>`, you should
@@ -46,12 +47,20 @@ GitHub!
 
 I am boring you sorry. Let's download and install Atom.
 
-## OSX & Windows
+### OSX & Windows
+
+First we need some node stuff. Let's install and set them up them:
+
+```
+npm install -g eslint
+echo '{ "rules": {} }' > ~/.eslintrc
+```
+
 On OSX we need to download and install Atom from their site. 
 [Go to the atom site][Atom] and download Atom for your OS.
 When that's done install it and try to open it.
 
-## Ubuntu (and VirtualBox)
+### Ubuntu (and VirtualBox)
 Installing on Ubuntu will be done through the `Ubuntu App-get` store. The only
 problem is that the normal store doesn't have Atom. So we're going to add an
 extra app-source (from which the store can find & download apps) to our `apt-get`.
@@ -72,7 +81,7 @@ $ sudo apt-get -y install atom
 
 That's done!
 
-## OSX, windows and Ubuntu
+### OSX, windows and Ubuntu
 With Atom installed, we got the editor working! Let's open it up and prepare the
 rest.
 
@@ -91,10 +100,27 @@ Emmet will auto-complete some nifty things, Linter and linter-eslint will work
 like spelling and grammar checks, but they will grammar and spell-check your
 code!
 
-You can also change themes in the settings here!
+Within settings go to "packages" and hit settings on "linter-eslint":
+
+![settings](https://i.imgur.com/Gto6jKO.png)
+
+Within those settings scroll down until you  locate "Global eslint"
+Follow the instructions by going to a terminal and typing
+
+```
+$ npm get prefix
+```
+
+It should return a path for you. Paste that path into atom (like I did)
+
+![prefix](https://i.imgur.com/uzazBhz.png)
+
+Then copy the first bit (like I did) of that path up until your `user-name`,
+pate it into the `.eslintrc path` field and write `.eslintrc` after it.
+
+While you are in settings you can also change themes in the settings here!
 My faves are One Dark (which is the default), "atom-material-ui" and 
 "gruvbox-dark-ui". Knock yourself out!
-
 
 ## Let's REPL
 It's always good to take a peek at the different type of objects we can use.
@@ -622,6 +648,7 @@ Feel free to check them out.
 
 Next week we'll dive into advanced objects and classes. See you next week!
 
+[Sublime Install]: https://gist.github.com/HendrikPetertje/1709a29021947bcc58abe864af7cdfd2
 [Number]: https://www.w3schools.com/jsref/jsref_obj_number.asp
 [Array]: https://www.w3schools.com/jsref/jsref_obj_array.asp
 [Ternary]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
