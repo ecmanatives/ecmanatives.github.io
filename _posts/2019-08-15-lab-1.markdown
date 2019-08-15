@@ -5,8 +5,6 @@ date:   2019-08-15 13:00:00 +0200
 categories: JavaScript Basics
 ---
 
-# This lab is still a draft. I'm still working on it, making changes and making sure I'm not breaking your computer. If you managed to find this file, please don't follow it yet. Stick to the posts that are available on https://hendrikpetertje.github.io/ecmanatives/
-
 # Lab 1: The basics of Awesome!
 Let's rub those hands together, after last weeks introduction and installation
 it's about time we got real!
