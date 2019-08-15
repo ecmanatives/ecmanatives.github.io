@@ -116,8 +116,8 @@ It should return a path for you. Paste that path into atom (like I did)
 
 ![prefix](https://i.imgur.com/uzazBhz.png)
 
-Then copy the first bit (like I did) of that path up until your `user-name`,
-pate it into the `.eslintrc path` field and write `.eslintrc` after it.
+Then copy the first bit (like I did) of that path up until your `user-name`.  
+Paste it into the `.eslintrc path` field and write `.eslintrc` after it.
 
 While you are in settings you can also change themes in the settings here!
 My faves are One Dark (which is the default), "atom-material-ui" and 
