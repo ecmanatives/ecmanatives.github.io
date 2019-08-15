@@ -494,8 +494,8 @@ the function with an object like so:
 
 ```javascript
 function printDetails(person) {
-  age = (person.age ? person.age : 0);
-  country = (person.country ? person.country : 'Ghana');
+  const age = (person.age ? person.age : 0);
+  const country = (person.country ? person.country : 'Ghana');
 
   console.log(`Hello ${ person.name } from ${ country } with age ${ age } years`);
 }
@@ -520,13 +520,13 @@ things. Let's see if we can move that console.log out instead.
 
 ```javascript
 function printDetails(person) {
-  age = (person.age ? person.age : 0)
-  country = (person.country ? person.country : 'Ghana')
+  const age = (person.age ? person.age : 0)
+  const country = (person.country ? person.country : 'Ghana')
 
   `Hello ${ person.name } from ${ country } with age ${ age } years`;
 }
 
-message = printDetails({ name: 'peter', age: '29' });
+const message = printDetails({ name: 'peter', age: '29' });
 console.log(message)
 ```
 
@@ -543,13 +543,13 @@ Let's fix that.
 
 ```javascript
 function printDetails(person) {
-  age = (person.age ? person.age : 0)
-  country = (person.country ? person.country : 'Ghana')
+  const age = (person.age ? person.age : 0)
+  const country = (person.country ? person.country : 'Ghana')
 
   return `Hello ${ person.name } from ${ country } with age ${ age } years`;
 }
 
-message = printDetails({ name: 'peter', age: '29' });
+const message = printDetails({ name: 'peter', age: '29' });
 console.log(message)
 ```
 
@@ -564,14 +564,14 @@ Awesome. Let's do something weird:
 
 ```javascript
 function printDetails(person) {
-  age = (person.age ? person.age : 0)
-  country = (person.country ? person.country : 'Ghana')
+  const age = (person.age ? person.age : 0)
+  const country = (person.country ? person.country : 'Ghana')
 
   return `Hello ${ person.name } from ${ country } with age ${ age } years`;
   console.log('You made it here boss!!!')
 }
 
-message = printDetails({ name: 'peter', age: '29' });
+const message = printDetails({ name: 'peter', age: '29' });
 console.log(message)
 ```
 
@@ -589,14 +589,14 @@ well! We can use that.
 function printDetails(person) {
   if (!person.name) { return 'you forgot the name' }
 
-  age = (person.age ? person.age : 0)
-  country = (person.country ? person.country : 'Ghana')
+  const age = (person.age ? person.age : 0)
+  const country = (person.country ? person.country : 'Ghana')
 
   return `Hello ${ person.name } from ${ country } with age ${ age } years`;
   console.log('You made it here boss!!!')
 }
 
-message = printDetails({ age: '29' });
+const message = printDetails({ age: '29' });
 console.log(message)
 ```
 
