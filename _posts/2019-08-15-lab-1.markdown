@@ -103,7 +103,7 @@ code!
 
 Within settings go to "packages" and hit settings on "linter-eslint":
 
-![settings](https://i.imgur.com/Gto6jKO.png)
+![settings](https://i.imgur.com/GCEgTbn.png)
 
 Within those settings scroll down until you  locate "Global eslint"
 Follow the instructions by going to a terminal and typing
