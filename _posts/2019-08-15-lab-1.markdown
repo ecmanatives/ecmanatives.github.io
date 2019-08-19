@@ -50,7 +50,7 @@ I am boring you sorry. Let's download and install Atom.
 
 ### OSX & Windows
 
-First we need some node stuff. Let's install and set them up them:
+First we need some node stuff. Let's install and set up them:
 
 ```
 npm install -g eslint
