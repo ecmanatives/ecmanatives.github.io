@@ -479,7 +479,7 @@ function hello(name, country  = 'Ghana') {
   console.log(`Hello ${ name } from ${ country }`);
 }
 
-hello(name);
+hello("peter");
 ```
 
 When you run this you'll see:
