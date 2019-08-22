@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Lab 2: Stay Classy"
+title: 'Lab 2: Stay Classy'
 date: 2019-08-15 13:00:00 +0200
 categories: JavaScript classes
 ---
@@ -8,6 +8,7 @@ categories: JavaScript classes
 # WATCH OUT: I'M STILL WRITING THIS LAB. ADDING, REMOVING AND MIXING BITS AND PIECES AROUND. HOLD OF DOING THIS LAB UNTIL IT'S FINISHED
 
 # Lab 2: Stay Classy
+
 This lab is the second in a series of three labs where we don't build anything
 awesome yet, but instead look at some of the fundamental building blocks of the
 language. Last week you did a lot of things with the different simple object
@@ -22,6 +23,7 @@ so this lab is going to among the most important labs so far!
 Enough introduction let's begin from the beginning.
 
 ## What is a class
+
 It's good to know what this very particular tool in our tool-belt does before we
 start using it.
 
@@ -78,6 +80,7 @@ something among the lines of:
 ```
 
 ## A "real" project
+
 Let's start writing some code ourselves. Until now you've written code in a
 single file, then executing that code. We're going to do things a bit different
 now. When working with classes, components, modules and other patterns of
@@ -282,6 +285,7 @@ Congratulations, you have now probably spent 15 minutes on something entirely
 different than classes!
 
 ## Let's write a class
+
 We create a new file in our project called `book.js` (you can do that in Atom
 or use the `touch book.js` command like before in your terminal). This `book.js`
 needs to sit in the same project folder as your `package.json` and `index.js`
@@ -302,6 +306,7 @@ module.exports = Book;
 Let's go over this code line by line:
 
 ### `class Book`
+
 Sets the name of our new class. Like a `const` a Class can't be re-assigned to
 something else. It's probably good to mention regular naming of things in
 javascript now:
@@ -316,17 +321,20 @@ javascript now:
   should be `mountain_bike.js`.
 
 ### `constructor(title)`
+
 A constructor is one of the features that sets a class in JavaScript apart from
 function objects. When you call `new Book('Gardening')` later, JavaScript will
 create a new "instance" -- a unique new product from the blueprint that is a
 class -- and run the constructor first.
 
 ### `this.title = title`
+
 In our constructor we assign the `title` given when we created the class to the
 `this` object. `this` is the current state of the object around that line of
 code. In this case that is the new instance of our Book.
 
 ### `module.exports = Book`
+
 In `module.exports` we define what parts of the code are "exported" from our
 JavaScript `book.js` file. These exported bits can be imported by other
 JavaScript files. This is super nice as you can sort what other files should
@@ -335,6 +343,7 @@ You normally assign either a single variable (`Book` in this case) or an `{}`
 to your `module.exports`
 
 ## Importing and using a class
+
 Now that we've written a simple book class it's time to start using it!
 Open up your `index.js` in Atom, remove all code you had in it (if there was
 code in there) and write (ignore the `console` linting errors):
@@ -366,14 +375,17 @@ Second title: cooking
 Now this is neat huh? Let's go over the different lines of code we wrote!
 
 ### `const Book = require('./book')`
+
 In this first line we import the book class we exported earlier and put it in
 the variable `Book`.
 
 ### `new Book('gardening')`
+
 Here we create a new "instance" of a book where `'gardening'` is the first
 argument we send to it's constructor.
 
 ### `book.title`
+
 since we have a new instance of a book we can ask for the objects assigned to
 its instance. the title being one of them.
 
