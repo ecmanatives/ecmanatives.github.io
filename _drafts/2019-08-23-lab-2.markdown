@@ -1,0 +1,381 @@
+---
+layout: post
+title: "Lab 2: Stay Classy"
+date: 2019-08-15 13:00:00 +0200
+categories: JavaScript classes
+---
+
+# WATCH OUT: I'M STILL WRITING THIS LAB. ADDING, REMOVING AND MIXING BITS AND PIECES AROUND. HOLD OF DOING THIS LAB UNTIL IT'S FINISHED
+
+# Lab 2: Stay Classy
+This lab is the second in a series of three labs where we don't build anything
+awesome yet, but instead look at some of the fundamental building blocks of the
+language. Last week you did a lot of things with the different simple object
+types in JavaScript and next week we'll cover some basic Test Driven Development
+(aka TDD). This week however we're going to dive into "Classes"!
+We'll also cover some functions, pure-functions and simple objects.
+
+Classes, functions and objects are among the basic building blocks for a lot of
+new (web) applications. Modern frameworks like Vue and React rely heavy on them,
+so this lab is going to among the most important labs so far!
+
+Enough introduction let's begin from the beginning.
+
+## What is a class
+It's good to know what this very particular tool in our tool-belt does before we
+start using it.
+
+![What does it do?](https://i.imgur.com/SszghQ5.png)
+
+To explain classes I'm going to borrow the description Oracle gives on classes
+in their [classes section on programming concepts][oracle on classes].
+
+> In the real world, you'll often find many individual objects all of the same
+> kind. There may be thousands of bicycles in existence, all of the same
+> make and model. Each bicycle was built from the same set of blueprints and
+> therefore contains the same components. In object-oriented terms, we say that
+> your bicycle is an instance of the class of objects known as bicycles. A class
+> is the blueprint from which individual objects are created.
+
+So a bike in JavaScript would look a bit like this (you don't have to write this
+yet):
+
+```javascript
+class Bike {
+  type;
+  colour;
+  wheelCount = 2;
+  speed = 0;
+
+  constructor(type, colour, wheelCount) {
+    this.type = type;
+    this.colour = colour;
+    this.wheelCount = wheelCount;
+  }
+
+  increaseSpeed(difference) {
+    this.speed += difference;
+    return this.speed;
+  }
+
+  decreaseSpeed(difference) {
+    this.speed -= difference;
+    return this.speed;
+  }
+}
+```
+
+![Bicycle](https://media0.giphy.com/media/wg4y5TWOFXN3a/giphy.gif)
+_Just 2 wheels?_
+
+When we want to "build" a new instance of a bike we simply perform
+something among the lines of:
+
+```javascript
+> bike = new Bike('mountainbike', 'red')
+> bike.increaseSpeed(10)
+10
+```
+
+## A "real" project
+Let's start writing some code ourselves. Until now you've written code in a
+single file, then executing that code. We're going to do things a bit different
+now. When working with classes, components, modules and other patterns of
+programming it's quite common to put different subjects in different files and
+call for them when needed.
+
+So we're going to build a project now. Let's begin at the beginning.
+Open a new terminal window on your machine. We're going to assume that you have
+Nodenv with a working version of NodeJS installed (you did this in previous
+labs).
+
+`cd` to the folder where you keep your projects & code snippets and create a new
+folder like so:
+
+```sh
+$ mkdir classes_app
+$ cd classes_app
+```
+
+In this folder we are going to "intialize" a new NodeJS project like this:
+
+```sh
+$ npm init
+```
+
+When you run that command it will ask you some questions. Fill them in like
+this:
+
+```
+package name: (classes_app)
+version: (1.0.0) 0.0.1
+description: ecma natives classes app
+entry point: (index.js)
+test command:
+git repository:
+keywords:
+author:
+license: (ISC)
+
+Is this OK? (yes)
+```
+
+The values between `(` and `)` are default values. You only have to fill in
+`version` and `description`, you can just hit [ENTER] on the rest of the
+questions.
+
+When done, try to execute `ls` to see the new file added to your project. The
+`package.json` file that just popped up contains the basic information about
+your project and its dependencies. We'll open it up later. First we need take
+care of some `eslint` grammar rules for our project.
+
+![ESLint](https://media1.giphy.com/media/xVRjhzurfBoAaGvy4D/giphy.gif)
+_ESLint introduces (code) grammar and spelling checks to our project_
+
+Execute the following command to install ESLint on your entire machine. We'll
+need this in a bit to create a local configuration later.
+
+```sh
+$ npm install -g eslint
+$ nodenv rehash
+```
+
+The `-g` command tells the terminal to install a plug-in globally on the machine
+in the folder `~/.nodenv/versions/x/lib/node_modules`. This way the plug-in you
+install will be available to the entire system. The plug-in will however not
+follow along when you share your project with others on sites like GitHub.
+
+When you leave the `-g` out, the plug-in will instead install in your project's
+`package.json` and its `../your-project/node_modules`. But we'll let the global
+plug-in take care of that in a bit.
+
+> The `nodenv rehash` bit refreshes the list of commands that can be run using
+> node. Eslint added some commands to our terminal that we need.
+
+The next step is the "project-only" installation of ESLint and the setup of the
+Grammer- and spelling-dialect we want to use (we call the combination of this
+grammar and spelling "style-rules").
+
+```sh
+$ eslint --init
+```
+
+ESLint will go through some questions with you. Use the Arrow keys on your
+keyboard to select the following options (in some cases you also need Space-bar):
+
+```
+? How would you like to use ESLint? (Use arrow keys)
+(3) ❯ To check syntax, find problems, and enforce code style
+
+? What type of modules does your project use?
+(2) ❯ CommonJS (require/exports)
+
+? Which framework does your project use?
+(3) ❯ None of these
+
+? Where does your code run?
+◯ Browser (un-select with space-bar)
+◉ Node (select with space-bar)
+
+? How would you like to define a style for your project?
+(1) ❯ Use a popular style guide
+
+? Which style guide do you want to follow?
+(1) ❯ Airbnb (https://github.com/airbnb/javascript)
+
+? What format do you want your config file to be in?
+(1) ❯ JavaScript
+
+? Would you like to install them now with npm? Y (Type "Y" and hit ENTER)
+```
+
+If you make a mistake, just hit `<CTRL>` + `<C>` on your keyboard and rerun
+`eslint --init`
+
+When you're done and run `ls -a` you'll see four things in your project:
+
+- `.eslintrc.js` - A file with the ESLint "grammar dialect" (aka style-rules)
+  we are going to use.
+- `node_modules/` - A folder where all project plugins are installed.
+- `package-lock.json` - A file specifying the locked versions of your
+  dependencies.
+- `package.json` - your project configuration.
+
+Let's open our project in Atom and load our `package.json` file (don't forget
+the `.`.):
+
+```sh
+$ atom .
+```
+
+It should look something like this:
+
+```json
+{
+  "name": "classes_app",
+  "version": "0.0.1",
+  "description": "ecma natives classes app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
+```
+
+Let's replace the test line to easily run an `index.js` file later:
+
+```json
+{
+  "name": "classes_app",
+  "version": "0.0.1",
+  "description": "ecma natives classes app",
+  "main": "index.js",
+  "scripts": {
+    "app": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
+```
+
+Good! Now that we are talking about an `index.js` file, we probably want to
+create that file. Go back to your terminal and execute:
+
+```
+$ touch index.js
+```
+
+Open up the file in atom and write the following code:
+
+```
+console.log('test');
+```
+
+If everything in the editor is working as expected, you should be seeing the
+following (when mouse/cursor-hovering over the `console.log` line):
+
+![Linter](https://i.imgur.com/Ns9CNxn.png)
+_Atom_
+
+![Linter](https://i.imgur.com/Hwy3Zvp.png)
+_sublime_
+
+Neat, our linter is telling us we are using code that should probably not be
+there when we release stuff to the internet later!
+
+> Check out the [Atom and Sublime instructions in Lab 1][atom and sublime] if
+> you aren't seeing grammar errors.
+
+Congratulations, you have now probably spent 15 minutes on something entirely
+different than classes!
+
+## Let's write a class
+We create a new file in our project called `book.js` (you can do that in Atom
+or use the `touch book.js` command like before in your terminal). This `book.js`
+needs to sit in the same project folder as your `package.json` and `index.js`
+
+In this `book.js` we'll write the following code:
+
+```javascript
+class Book {
+  constructor(title) {
+    this.title = title;
+    this.sorting = title.charAt(0); // first character of our title
+  }
+}
+
+module.exports = Book;
+```
+
+Let's go over this code line by line:
+
+### `class Book`
+Sets the name of our new class. Like a `const` a Class can't be re-assigned to
+something else. It's probably good to mention regular naming of things in
+javascript now:
+
+- Classes always begin with uppercase and then CamelCase. A `mountain-bike`
+  class should therefore be named `MountainBike`. Classes are also often
+  singular as a new instance of a class often represents _one_ object with
+  properties and functions.
+- Normal variables begin with lower-case and continue CamelCase. So a regular
+  non-class mountain-bike would be named `mountainBike` (the B is our camels)
+- File-names use underscores. So the file-name for the `MountainBike` class
+  should be `mountain_bike.js`.
+
+### `constructor(title)`
+A constructor is one of the features that sets a class in JavaScript apart from
+function objects. When you call `new Book('Gardening')` later, JavaScript will
+create a new "instance" -- a unique new product from the blueprint that is a
+class -- and run the constructor first.
+
+### `this.title = title`
+In our constructor we assign the `title` given when we created the class to the
+`this` object. `this` is the current state of the object around that line of
+code. In this case that is the new instance of our Book.
+
+### `module.exports = Book`
+In `module.exports` we define what parts of the code are "exported" from our
+JavaScript `book.js` file. These exported bits can be imported by other
+JavaScript files. This is super nice as you can sort what other files should
+have access too in your JavaScript files and what things should be private.
+You normally assign either a single variable (`Book` in this case) or an `{}`
+to your `module.exports`
+
+## Importing and using a class
+Now that we've written a simple book class it's time to start using it!
+Open up your `index.js` in Atom, remove all code you had in it (if there was
+code in there) and write (ignore the `console` linting errors):
+
+```es6
+const Book = require('./book');
+
+const book = new Book('gardening');
+console.log('Book:', book);
+console.log('title:', book.title);
+
+const secondBook = new Book('cooking');
+console.log('Second Book:', secondBook);
+console.log('Second title:', secondBook.title);
+```
+
+Now instead of running `node index.js`, we can now run an easier command (one
+that we set in our package.json earlier) like this:
+
+```sh
+$ npm run app
+
+Book: Book { title: 'gardening', sorting: 'g' }
+title: gardening
+Second Book: Book { title: 'cooking', sorting: 'c' }
+Second title: cooking
+```
+
+Now this is neat huh? Let's go over the different lines of code we wrote!
+
+### `const Book = require('./book')`
+In this first line we import the book class we exported earlier and put it in
+the variable `Book`.
+
+### `new Book('gardening')`
+Here we create a new "instance" of a book where `'gardening'` is the first
+argument we send to it's constructor.
+
+### `book.title`
+since we have a new instance of a book we can ask for the objects assigned to
+its instance. the title being one of them.
+
+[oracle on classes]: https://docs.oracle.com/javase/tutorial/java/concepts/class.html
+[atom and sublime]: https://hendrikpetertje.github.io/ecmanatives/javascript/basics/2019/08/15/lab-1.html
