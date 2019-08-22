@@ -386,8 +386,170 @@ argument we send to it's constructor.
 
 ### `book.title`
 
-since we have a new instance of a book we can ask for the objects assigned to
-its instance. the title being one of them.
+Since we have a new instance of a book we can ask for the objects assigned to
+its instance. The title being one of them.
+
+## Creating some functions in the class
+
+We've created a class now that can store some information for us. But classes
+can do a lot more! Let's write some functions for our class. I'll show you two
+methods of doing so.
+
+Open `book.js` and make it look like this:
+
+```javascript
+class Book {
+  constructor(title) {
+    this.title = title;
+    this.sorting = title.charAt(0); // first character of our title
+  }
+
+  logTitle() {
+    console.log('book:', this);
+    console.log(this.title);
+  }
+
+  logTitleAfter(seconds) {
+    const miliseconds = seconds * 1000;
+    setTimeout(this.logTitle, miliseconds);
+  }
+}
+
+module.exports = Book;
+```
+
+So here we create two functions:
+
+- `logTitle()` which will consol`e.log` the title of our book.
+- `logTitleAfter()` which will wait x seconds and then call the `logTitle`
+  function (spoiler: nope, this will fail)
+
+Let's incorporate this code in our `index.js` (we're commenting out our old code):
+
+```javascript
+const Book = require('./book');
+
+// const book = new Book('gardening');
+// console.log('Book:', book);
+// console.log('title:', book.title);
+
+// const secondBook = new Book('cooking');
+// console.log('Second Book:', secondBook);
+// console.log('Second title:', secondBook.title);
+
+const book = new Book('gardening');
+book.logTitle();
+book.logTitleAfter(2);
+```
+
+And then run it:
+
+```sh
+$ npm run app
+```
+
+Hey something weird is happening!
+
+Our call `book.logTitle();` gave us what we wanted. It logged our book object
+and then logged the title.
+
+```javascript
+book: Book { title: 'gardening', sorting: 'g' }
+gardening
+```
+
+But something went wrong with the time-out... all of a sudden the `this` object
+isn't our book anymore, but the timeout.
+
+```javascript
+book: Timeout {
+  _idleTimeout: 2000,
+  _idlePrev: null,
+  _idleNext: null,
+  _idleStart: 30,
+  _onTimeout: [Function: logTitle],
+  _timerArgs: undefined,
+  _repeat: null,
+  _destroyed: false,
+  [Symbol(refed)]: true,
+  [Symbol(asyncId)]: 6,
+  [Symbol(triggerId)]: 1
+}
+undefined
+```
+
+So we have switched contexts. To get the book back we can attempt two things.
+
+In older versions of Javascript (up till ECMAScript 3) we'd need to bind stuff
+like so:
+
+```javascript
+setTimeout(this.logTitle.bind(this), miliseconds);
+```
+
+Or create an anonymous (lambda in Python) function (looks messy):
+
+```javascript
+const that = this;
+setTimeout(function() {
+  that.logTitle();
+}, miliseconds);
+```
+
+In ECMAScript 2015 we got access to so called `arrow-functions`. These
+arrow-functions respect the this context around the caller a bit better. Right
+now TC-39 is working on getting those arrow functions working in the newest
+version of ECMAScript. Let's rewrite our `book.js` a bit until it looks like this:
+
+```javascript
+class Book {
+  constructor(title) {
+    this.title = title;
+    this.sorting = title.charAt(0); // first character of our title
+  }
+
+  // the line below will raise a linter error. that's fine.
+  logTitle = () => {
+    console.log('book:', this);
+    console.log(this.title);
+  };
+
+  logTitleAfter(seconds) {
+    const miliseconds = seconds * 1000;
+    setTimeout(this.logTitle, miliseconds);
+  }
+}
+
+module.exports = Book;
+```
+
+> using arrow-functions as class-functions is extremely new. TC-39 is currently
+> working on making browsers & platforms work with it under the ES7
+> specifications.
+> Your linter is still tuned to ES6, the line will work fine on the terminal.
+
+```sh
+$ npm run app
+```
+
+Well, the result from that looks much better!
+
+```sh
+$ npm run app
+
+book: Book {
+  logTitle: [Function: logTitle],
+  title: 'gardening',
+  sorting: 'g'
+}
+gardening
+book: Book {
+  logTitle: [Function: logTitle],
+  title: 'gardening',
+  sorting: 'g'
+}
+gardening
+```
 
 [oracle on classes]: https://docs.oracle.com/javase/tutorial/java/concepts/class.html
 [atom and sublime]: https://hendrikpetertje.github.io/ecmanatives/javascript/basics/2019/08/15/lab-1.html
