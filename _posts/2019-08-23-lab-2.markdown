@@ -79,7 +79,9 @@ something among the lines of:
 10
 ```
 
-## A "real" project
+Enough examples. You're not here to just read.
+
+## starting a "real" project
 
 Let's start writing some code ourselves. Until now you've written code in a
 single file, then executing that code. We're going to do things a bit different
