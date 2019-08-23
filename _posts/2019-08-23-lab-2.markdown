@@ -83,13 +83,15 @@ Enough examples. You're not here to just read.
 
 ## starting a "real" project
 
-Let's start writing some code ourselves. Until now you've written code in a
-single file, then executing that code. We're going to do things a bit different
-now. When working with classes, components, modules and other patterns of
+Let's start writing some code ourselves.  
+Until now you've written code in a single file, then executing that code.
+We're going to do things a bit different now.
+
+When working with classes, components, modules and other patterns of
 programming it's quite common to put different subjects in different files and
 call for them when needed.
 
-So we're going to build a project now. Let's begin at the beginning.
+So we're going to "init" a project. Let's begin at the beginning.
 Open a new terminal window on your machine. We're going to assume that you have
 Nodenv with a working version of NodeJS installed (you did this in previous
 labs).
