@@ -344,10 +344,10 @@ code. In this case that is the new instance of our Book.
 
 In `module.exports` we define what parts of the code are "exported" from our
 JavaScript `book.js` file. These exported bits can be imported by other
-JavaScript files. This is super nice as you can sort what other files should
-have access to in your JavaScript files and what things should be private.
+JavaScript files. This is super nice as we can sort what variables in our
+book.js file other files should have access to and what things should be private.
 You normally assign either a single variable (`Book` in this case) or an `{}`
-to your `module.exports`
+to `module.exports`
 
 ## Importing and using a class
 
