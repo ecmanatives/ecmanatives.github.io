@@ -811,6 +811,6 @@ itself for errors!
 **See you next week**!
 
 [oracle on classes]: https://docs.oracle.com/javase/tutorial/java/concepts/class.html
-[atom and sublime]: https://hendrikpetertje.github.io/ecmanatives/javascript/basics/2019/08/15/lab-1.html
+[atom and sublime]: https://ecmanatives/ecmanatives.github.io/javascript/basics/2019/08/15/lab-1.html
 [callback]: https://en.wikipedia.org/wiki/Callback_%28computer_programming%29
 [babel]: https://babeljs.io!

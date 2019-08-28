@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "Lab 1: The basics of Awesome!"
-date:   2019-08-15 13:00:00 +0200
+title: 'Lab 1: The basics of Awesome!'
+date: 2019-08-15 13:00:00 +0200
 categories: JavaScript Basics
 ---
 
 # Lab 1: The basics of Awesome!
+
 Let's rub those hands together, after last weeks introduction and installation
 it's about time we got real!
 
@@ -13,8 +14,8 @@ In this lab we're going to look at some basic constructions of the
 JavaScript Language. We'll dive a bit into the different object types available
 in the language, some conditional stuff and functions.
 
-You'll notice that we're covering a lot of ground today. I understand it's a 
-bit much, but try to work through it. We need the stuff we learn here to do 
+You'll notice that we're covering a lot of ground today. I understand it's a
+bit much, but try to work through it. We need the stuff we learn here to do
 the rest of the labs later. Next week is going to be a bit easier. I promise ;)
 
 Lets start this course by making sure we got a nice editor in place that
@@ -22,23 +23,24 @@ helps us write code a bit. During this course I'll mostly look at an editor
 called Atom, as it's easiest to setup and tool.
 
 If you ended last weeks course on an older machine or if you are dealing with
-a slow VirtualBox, then Atom might be a bit to "heavy" to run on your machine. 
+a slow VirtualBox, then Atom might be a bit to "heavy" to run on your machine.
 In that case its better to use "Sublime 3"
 
-If you like to use Sublime instead, [follow these instructions][Sublime Install] 
-for the install. 
+If you like to use Sublime instead, [follow these instructions][sublime install]
+for the install.
 
 If you like to use NeoVim instead, Check this post in a few days. I'm writing a
 mini-guide for it now.
- 
+
 > Whenever I prefix a command with `$` You should run the command
-> (excluding the `$`) in  your terminal. Whenever I prefix with `>`, you should
+> (excluding the `$`) in your terminal. Whenever I prefix with `>`, you should
 > execute the command in a NodeJS REPL.
 > If something goes wrong, open an issue on Github and mention the line in the
-> markdown source of this file where things started to go wrong. 
-> You can find [the source of this page here][Page Source]
+> markdown source of this file where things started to go wrong.
+> You can find [the source of this page here][page source]
 
 ## Installing Atom.io
+
 Atom is an editor running on JavaScript. Jep, the core of the editor is actually
 running on the language we're learning! It can act like a program through the
 help of a toolkit called "Electron". Atom was made by the folks that also made
@@ -57,11 +59,12 @@ npm install -g eslint
 echo '{ "rules": {} }' > ~/.eslintrc
 ```
 
-On OSX we need to download and install Atom from their site. 
-[Go to the atom site][Atom] and download Atom for your OS.
+On OSX we need to download and install Atom from their site.
+[Go to the atom site][atom] and download Atom for your OS.
 When that's done install it and try to open it.
 
 ### Ubuntu (and VirtualBox)
+
 Installing on Ubuntu will be done through the `Ubuntu App-get` store. The only
 problem is that the normal store doesn't have Atom. So we're going to add an
 extra app-source (from which the store can find & download apps) to our `apt-get`.
@@ -83,10 +86,11 @@ $ sudo apt-get -y install atom
 That's done!
 
 ### OSX, windows and Ubuntu
+
 With Atom installed, we got the editor working! Let's open it up and prepare the
 rest.
 
-First let's go into preferences. Once in preferences we'll go to  the
+First let's go into preferences. Once in preferences we'll go to the
 install section.
 
 ![preferences](https://i.imgur.com/xgTkaG0.png)
@@ -105,7 +109,7 @@ Within settings go to "packages" and hit settings on "linter-eslint":
 
 ![settings](https://i.imgur.com/GCEgTbn.png)
 
-Within those settings scroll down until you  locate "Global eslint"
+Within those settings scroll down until you locate "Global eslint"
 Follow the instructions by going to a terminal and typing
 
 ```
@@ -120,15 +124,16 @@ Then copy the first bit (like I did) of that path up until your `user-name`.
 Paste it into the `.eslintrc path` field and write `.eslintrc` after it.
 
 While you are in settings you can also change themes in the settings here!
-My faves are One Dark (which is the default), "atom-material-ui" and 
+My faves are One Dark (which is the default), "atom-material-ui" and
 "gruvbox-dark-ui". Knock yourself out!
 
 ## Let's REPL
+
 It's always good to take a peek at the different type of objects we can use.
 It's kinda like checking what kind of hammers, saws and screw-drivers you have
 in your toolbox.
 
-Open a new terminal screen and execute the command below to pop into a 
+Open a new terminal screen and execute the command below to pop into a
 NodeJS REPL shell.
 
 ```sh
@@ -177,13 +182,13 @@ Lets try some other basic types:
 'function'
 ```
 
-Okay, some weird things are happening here. 
+Okay, some weird things are happening here.
 
-- both `1` and `1.1` are called [number][Number]. So in types we don't care too much
+- both `1` and `1.1` are called [number][number]. So in types we don't care too much
   about numbers being `float` (remember python?) or `integers`.
-- both `[]` and `{}` have the type of 'object'. This is a bit misleading though 
-  as `[]` is still officially called an `Array` (and receives the [special 
-  functions from Array][Array]).
+- both `[]` and `{}` have the type of 'object'. This is a bit misleading though
+  as `[]` is still officially called an `Array` (and receives the [special
+  functions from Array][array]).
 - A class is actually a cool looking function? Jep, It does however get some
   extras, but we'll dive into that later.
 
@@ -232,17 +237,16 @@ that was created earlier. It's fine to do those kind of things, but you need to
 make sure you name your functions and code in such a way, that it's easy to
 understand why and where the "state" of objects are changed.
 
-
 ![Chaning](http://giphygifs.s3.amazonaws.com/media/8aK7QzcK6dJLO/giphy.gif)  
-*changing values, while they run somewhere else be like.*
+_changing values, while they run somewhere else be like._
 
-> Did you see me putting a whitespace between `{` and `hello:`?   
+> Did you see me putting a whitespace between `{` and `hello:`?  
 > It's good to put a bit of breathing space between things here and there!
 
 Now without you actually noticing it, we used another piece of special code
 above. Did you see the `let` I used there?  
-**When you define a variable name for the first time, you need to prefix 
-it with either `let` or `const`**. Back in the days of ECMA 3 we only had 
+**When you define a variable name for the first time, you need to prefix
+it with either `let` or `const`**. Back in the days of ECMA 3 we only had
 `var` (you shouldn't use that anymore). But `let` and `const` are much better.
 
 Let's experiment with them:
@@ -267,11 +271,12 @@ TypeError: Assignment to constant variable.
 ```
 
 AHA!!! So when you define a variable with let, you are allowed to "re-assign" it
-with an entirely different value later, but when  you use `const` you can't.  
+with an entirely different value later, but when you use `const` you can't.  
 That's handy when you don't want variables that shouldn't change to change.
 
 ## If, else, else if
-Like pretty much any  other language JavaScript supports conditions. Let's try
+
+Like pretty much any other language JavaScript supports conditions. Let's try
 some:
 
 ```javascript
@@ -300,22 +305,22 @@ anything that isn't false or undefined is actually 'truthy'
 So these are the different If statements you can use. Do you see the important
 difference between `===` and `==`?
 
--  `==` will evaluate to true when 2 objects have the same content, but it
-   won't care about the different types of those objects.
-- `===` will  evaluate to true when 2 objects have the same content and are of
+- `==` will evaluate to true when 2 objects have the same content, but it
+  won't care about the different types of those objects.
+- `===` will evaluate to true when 2 objects have the same content and are of
   the same type.
 
 Generally we never really use `==`.
 
 An `if` statement will resolve "truthy" when it receives true or anything that
-isn't `false`, `null` or `undefined`. So  you don't need to try to always get 
+isn't `false`, `null` or `undefined`. So you don't need to try to always get
 a `true`.
 
 So far you've seen some `if` `else` and `if else`. But there's an extra one.  
-The **Conditional ([ternary][Ternary]) operator**. It looks like this:
+The **Conditional ([ternary][ternary]) operator**. It looks like this:
 
 ```javascript
-condition ? "when truthy" : "when falsy";
+condition ? 'when truthy' : 'when falsy';
 ```
 
 It works like this:
@@ -327,6 +332,7 @@ It works like this:
 ```
 
 ## We need to go deeper! Let's do functions
+
 Okay, so we got a basic idea of JavaScript's Types now. There are a few more,
 but we won't cover them today.
 
@@ -334,7 +340,7 @@ Let's see if we can execute some functions, write some callbacks and create some
 classes. It's pretty bad to do that in a REPL however so let's start using that
 editor of ours!
 
-Let's exit the REPL (you  can also hit `ctrl` + `c` twice).
+Let's exit the REPL (you can also hit `ctrl` + `c` twice).
 
 ```javascript
 > .exit
@@ -366,11 +372,11 @@ $ git commit -m "initial commit"
 > set your `username` and `email`. Just follow the instructions in the error
 > that was raised. (it will say something like `git config --global user.name`).
 > Make sure to fill in your real name and a valid email address. The combo will
-> be your copyright and proof of ownership of the code you  write in the future.
+> be your copyright and proof of ownership of the code you write in the future.
 
 Cool, our code is safe! Let's open the current folder in atom (or sublime).
 Don't forget the dot in the end of the command. A `.` means "do something with
-the current  directory"
+the current directory"
 
 ```sh
 $ atom .
@@ -383,7 +389,7 @@ We'll start with an easy function.
 
 ```javascript
 function hello() {
-  console.log('world!')
+  console.log('world!');
 }
 ```
 
@@ -434,10 +440,10 @@ Let's play with arguments next
 
 ```javascript
 function hello(name) {
-  console.log(`Hello ${ name }`);
+  console.log(`Hello ${name}`);
 }
 
-hello("Peter");
+hello('Peter');
 ```
 
 ```sh
@@ -456,14 +462,14 @@ other:
 ```
 
 With ECMAScript 2015 we got the ability to do these kind of things using
-so called [template literals][Template literals]. A template literal consists
+so called [template literals][template literals]. A template literal consists
 out of two important bits:
 
 - It doesn't have `"` or `'` surrounding it, but a so called backtick `` ` ``.
-- It needs templates (bits of executing code) between `${  }`
+- It needs templates (bits of executing code) between `${ }`
 
 Template literals aren't supported by Internet Explorer at all, so you'll need
-to transpile this bit if you ever use it out in the wild. But all of that's is 
+to transpile this bit if you ever use it out in the wild. But all of that's is
 for later concern.
 
 Let's do two more things before we wrap it up for this week:
@@ -475,11 +481,11 @@ Like in many languages, JavaScript supports the use of default values in functio
 calls. It works a bit like this:
 
 ```javascript
-function hello(name, country  = 'Ghana') {
-  console.log(`Hello ${ name } from ${ country }`);
+function hello(name, country = 'Ghana') {
+  console.log(`Hello ${name} from ${country}`);
 }
 
-hello("peter");
+hello('peter');
 ```
 
 When you run this you'll see:
@@ -489,16 +495,16 @@ $ node functions.js
 Hello Peter from Ghana
 ```
 
-Neat! It's important to remember that optional arguments go last. 
+Neat! It's important to remember that optional arguments go last.
 If you are dealing with a lot of optional arguments, it's better to instead call
 the function with an object like so:
 
 ```javascript
 function printDetails(person) {
-  const age = (person.age ? person.age : 0);
-  const country = (person.country ? person.country : 'Ghana');
+  const age = person.age ? person.age : 0;
+  const country = person.country ? person.country : 'Ghana';
 
-  console.log(`Hello ${ person.name } from ${ country } with age ${ age } years`);
+  console.log(`Hello ${person.name} from ${country} with age ${age} years`);
 }
 
 printDetails({ name: 'peter', age: '29' });
@@ -508,8 +514,8 @@ printDetails({ name: 'peter', age: '29' });
 > in this case the parentheses work a bit like parentheses work in math.
 > If you do `5 x (5 + 6)` in math, it will do `(5 + 6)` first in isolation. The
 > same counts for our condition. Without the parentheses, some browsers might
-> interpret the condition side to be `const age = person.age` (effectively 
-> testing if we were able to assign a variable), which is not what we want 
+> interpret the condition side to be `const age = person.age` (effectively
+> testing if we were able to assign a variable), which is not what we want
 > to test here.
 
 When we run this we get:
@@ -520,27 +526,26 @@ Hello Peter from Ghana with age 29 years
 ```
 
 The function we wrote so far does 2 things:
+
 - It combines values into a string.
 - It prints that string to our terminal.
 
 It's often much better if a function is really good at doing only one or two
 things. Let's see if we can move that console.log out instead.
 
-
 ```javascript
 function printDetails(person) {
-  const age = (person.age ? person.age : 0)
-  const country = (person.country ? person.country : 'Ghana')
-
-  `Hello ${ person.name } from ${ country } with age ${ age } years`;
+  const age = person.age ? person.age : 0;
+  const country = (person.country
+    ? person.country
+    : 'Ghana')`Hello ${person.name} from ${country} with age ${age} years`;
 }
 
 const message = printDetails({ name: 'peter', age: '29' });
-console.log(message)
+console.log(message);
 ```
 
 When we save and run this we'll see the following:
-
 
 ```sh
 $ node functions.js
@@ -552,17 +557,17 @@ Let's fix that.
 
 ```javascript
 function printDetails(person) {
-  const age = (person.age ? person.age : 0)
-  const country = (person.country ? person.country : 'Ghana')
+  const age = person.age ? person.age : 0;
+  const country = person.country ? person.country : 'Ghana';
 
-  return `Hello ${ person.name } from ${ country } with age ${ age } years`;
+  return `Hello ${person.name} from ${country} with age ${age} years`;
 }
 
 const message = printDetails({ name: 'peter', age: '29' });
-console.log(message)
+console.log(message);
 ```
 
-When run: 
+When run:
 
 ```sh
 $ node functions.js
@@ -573,15 +578,15 @@ Awesome. Let's do something weird:
 
 ```javascript
 function printDetails(person) {
-  const age = (person.age ? person.age : 0)
-  const country = (person.country ? person.country : 'Ghana')
+  const age = person.age ? person.age : 0;
+  const country = person.country ? person.country : 'Ghana';
 
-  return `Hello ${ person.name } from ${ country } with age ${ age } years`;
-  console.log('You made it here boss!!!')
+  return `Hello ${person.name} from ${country} with age ${age} years`;
+  console.log('You made it here boss!!!');
 }
 
 const message = printDetails({ name: 'peter', age: '29' });
-console.log(message)
+console.log(message);
 ```
 
 When we run this, that extra "You made it here boss!!!" isn't shown:
@@ -596,17 +601,19 @@ well! We can use that.
 
 ```javascript
 function printDetails(person) {
-  if (!person.name) { return 'you forgot the name' }
+  if (!person.name) {
+    return 'you forgot the name';
+  }
 
-  const age = (person.age ? person.age : 0)
-  const country = (person.country ? person.country : 'Ghana')
+  const age = person.age ? person.age : 0;
+  const country = person.country ? person.country : 'Ghana';
 
-  return `Hello ${ person.name } from ${ country } with age ${ age } years`;
-  console.log('You made it here boss!!!')
+  return `Hello ${person.name} from ${country} with age ${age} years`;
+  console.log('You made it here boss!!!');
 }
 
 const message = printDetails({ age: '29' });
-console.log(message)
+console.log(message);
 ```
 
 When we run this we see:
@@ -622,18 +629,21 @@ You can simplify the above even more if you want. The following two lines both
 stop and return the code.
 
 ```javascript
-if (!person.name) { return 'you forgot the name'; }
+if (!person.name) {
+  return 'you forgot the name';
+}
 if (!person.name) return 'you forgot the name';
 ```
 
 When you deal with if-statements on a single line you can actually just leave
-out the function body marking `{  }`. This is only  possible from ECMAScript
+out the function body marking `{ }`. This is only possible from ECMAScript
 2015 onward though.
 
 ## Git away
+
 It's good to commit this work now, You've been creating a file with some
 function logic. It's good to commit that (and possibly even put it on Github) so
-you  can look at these things later when you forget how something worked 
+you can look at these things later when you forget how something worked
 (happens to me all the time!).
 
 So open up your terminal, `cd` to the project and do something like this:
@@ -646,21 +656,22 @@ git commit -m "Adding some functions"
 ![Github](https://media.giphy.com/media/3oD3YveOJWdwIAfZ5e/giphy.gif)
 
 ## Final remarks
+
 You made it through todays lab! Go to WhatsApp and post something like "lab 1 is
 done!" for eternal glory (and my ability to see if I'm not making things too
-complicated). 
+complicated).
 
 We covered a lot of ground though and maybe you want to read a bit more. It's
 not actually bad to try this lab 2 times. I've also hidden links to more
-examples when I mentioned hard-to-understand words in a few different places. 
+examples when I mentioned hard-to-understand words in a few different places.
 Feel free to check them out.
 
 Next week we'll dive into advanced objects and classes. See you next week!
 
-[Sublime Install]: https://gist.github.com/HendrikPetertje/1709a29021947bcc58abe864af7cdfd2
-[Page Source]: https://github.com/HendrikPetertje/ecmanatives/blob/master/_posts/2019-08-15-lab-1.markdown
-[Number]: https://www.w3schools.com/jsref/jsref_obj_number.asp
-[Array]: https://www.w3schools.com/jsref/jsref_obj_array.asp
-[Ternary]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
-[Atom]: https://atom.io/
-[Template literal]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+[sublime install]: https://gist.github.com/HendrikPetertje/1709a29021947bcc58abe864af7cdfd2
+[page source]: https://github.com/ecmanatives/ecmanatives.github.io/blob/master/_posts/2019-08-15-lab-1.markdown
+[number]: https://www.w3schools.com/jsref/jsref_obj_number.asp
+[array]: https://www.w3schools.com/jsref/jsref_obj_array.asp
+[ternary]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+[atom]: https://atom.io/
+[template literal]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals

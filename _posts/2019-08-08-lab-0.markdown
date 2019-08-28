@@ -534,7 +534,7 @@ Can't wait? Check out one of these 3 editors today:
 [can i use async]: https://caniuse.com/#feat=async-functions
 [repl]: https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop
 [ubuntu]: https://ubuntu.com/download/desktop
-[page source]: https://github.com/HendrikPetertje/ecmanatives/blob/master/_posts/2019-08-08-lab-0.markdown
+[page source]: https://github.com/ecmanatives/ecmanatives.github.io/blob/master/_posts/2019-08-08-lab-0.markdown
 [iterm]: https://iterm2.com/downloads.html
 [terminator]: https://www.tecrobust.com/install-terminator-linux-ubuntu-fedora/
 [neovim]: https://git.picodevelopment.nl/hendrikpeter/pico-vim
