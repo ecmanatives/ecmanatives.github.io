@@ -5,8 +5,6 @@ date: 2019-08-23 22:00:00 +0200
 categories: JavaScript classes
 ---
 
-# WATCH OUT: I'M STILL WRITING THIS LAB. ADDING, REMOVING AND MIXING BITS AND PIECES AROUND. HOLD OF DOING THIS LAB UNTIL IT'S FINISHED
-
 # Lab 2: Stay Classy
 
 This lab is the second in a series of three labs where we don't build anything
