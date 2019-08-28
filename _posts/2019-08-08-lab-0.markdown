@@ -1,26 +1,26 @@
 ---
 layout: post
-title:  "Lab 0: The history of JavaScript and Installation"
-date:   2019-08-08 10:56:09 +0200
+title: 'Lab 0: The history of JavaScript and installation'
+date: 2019-08-08 10:56:09 +0200
 categories: JavaScript History
 ---
 
-# Lab 0: The history of JavaScript and Installation
+# Lab 0: The history of JavaScript and installation
 
 Lab number zero. That sounds a bit weird right? In this lab we're not going to
 do too much. Instead I'll talk a bit about the history of the web, JavaScript,
 some of the politics that created the community we have today and then I'll help
 you setup an environment so we can start developing stuff in Lab one.
 
-> JavaScript is an prototype-based object-based interpreted scripting language. 
+> JavaScript is an prototype-based object-based interpreted scripting language.
 
-Now here are a few hard terms already. 
+Now here are a few hard terms already.
 
-Let's start with the first one: 
-"**prototype based object-based**". Object-based means that a programming language 
-stores states and operations. An object-based language becomes an 
-object-oriented language when it also supports "inheritance" and "sub-typing". 
-If you want to know more about that, I'd advice you to just look for the 
+Let's start with the first one:
+"**prototype based object-based**". Object-based means that a programming language
+stores states and operations. An object-based language becomes an
+object-oriented language when it also supports "inheritance" and "sub-typing".
+If you want to know more about that, I'd advice you to just look for the
 words on Wikipedia.
 
 The weird thing with older versions of JavaScript was that they did support some
@@ -31,7 +31,7 @@ ability to inherit and re-use objects directly from "template objects".
 This has changed a bit however with the introduction of Classes a few years ago,
 but let's not go into that rabbit-hole yet ;)
 
-All of this might be a bit hard to understand now, and I do apologise for the 
+All of this might be a bit hard to understand now, and I do apologise for the
 bad explanation I'm doing here, but We'll get back to this later in the course.
 
 "**interpreted**" is the second weird thing here. Basically 4 major forms of
@@ -48,7 +48,7 @@ which your computer runs understands. Here we are in 1 and 0 land. Lots of
 machine and assembly type codes can't be read by humans.
 
 In many cases when you write code, it can't be read by the computer directly.
-Instead before you execute your code, it needs to be turned into an other 
+Instead before you execute your code, it needs to be turned into an other
 language. (preferably one, the processors in your computer understand):
 
 When you use code that needs to compile, you need to turn that language into
@@ -60,39 +60,40 @@ When you use interpreted code, that code is translated on the fly. So you send
 your "untranslated" code to your server or computer and the translation happens
 as a line of code is picked up. The drawback here would be that before the
 processor of your computer can do anything, it first needs to translate code.
-When the code has been translated and executed it's not (often) stored for 
+When the code has been translated and executed it's not (often) stored for
 later use. Some examples of interpreted code are: Ruby, Python and you
 guessed it: JavaScript.
 
 ## So where did it begin?
-JavaScript isn't really that new. It has been around for quite some time. 
+
+JavaScript isn't really that new. It has been around for quite some time.
 JavaScript started its life as "Netscape's Mocha". It was created by Brendan
 Eich in 1995. Brendan based the scripting language on Java, Scheme and Self.
 Netscape being pretty much the online big player for web-sites at the time
-strengthened its position quite firmly With the new-found ability to write 
-small programs that could be run client-side on web-pages. 
+strengthened its position quite firmly With the new-found ability to write
+small programs that could be run client-side on web-pages.
 
 The first idea behind Mocha was to look a lot like Scheme, a dialect of Lisp. In
 talks to create a good standard fast (Netscape and Sun were in all kinds of
 weird deals) Sun pushed Brendan to make the language look more like Java in an
 attempt to make Mocha a Java-companion for the web. The script was renamed to
 LiveScript and then as Sun signed deals with Netscape the name JavaScript was
-adopted and would run small client-side scripts, while big brother Java 
-would work with "Java applets" to take care of the heavier operations. 
+adopted and would run small client-side scripts, while big brother Java
+would work with "Java applets" to take care of the heavier operations.
 If your computer is old enough, you probably still see those occasional pop-ups
 asking you to update Java.
 
 ![Not today](https://i.imgur.com/wJ6ENWm.jpg)
 
-In 1996 Microsoft joined in and tried to some extend take more control of the 
-market by creating their own browser "Internet Explorer", featuring their 
-own implementation of JavaScript, called "JScript" because of 
-trademark issues with the name JavaScript. Netscape reacted to this by making 
-a bunch of standards and beginning to refactor its engine (which had been 
-written in haste). The new interpretor was called SpiderMonkey. 
+In 1996 Microsoft joined in and tried to some extend take more control of the
+market by creating their own browser "Internet Explorer", featuring their
+own implementation of JavaScript, called "JScript" because of
+trademark issues with the name JavaScript. Netscape reacted to this by making
+a bunch of standards and beginning to refactor its engine (which had been
+written in haste). The new interpretor was called SpiderMonkey.
 The name SpiderMonkey can still be found in Firefox, Netscape's grandson.
 
-You can still detect some of the haste JavaScript was written in today. 
+You can still detect some of the haste JavaScript was written in today.
 A good example can be found on the "string" object
 
 ```javascript
@@ -105,7 +106,7 @@ A good example can be found on the "string" object
 
 JScript and SpiderMonkey kept doing their own implementations, making surfing
 the web bit of a chaos. Internet Explorer had all kinds of quirks on the
-[DOM][DOM], that Netscape would miss while Netscape would implement its 
+[DOM][dom], that Netscape would miss while Netscape would implement its
 own things.
 
 Prototypes (the ability to re-use information, functions and other objects from
@@ -130,18 +131,18 @@ to go with the name ECMAScript. While we call the language JavaScript today,
 it's technically still called ECMAScript.
 
 In ECMA 1 & 2 the main focus was to create some standards. Features from
-different browsers were brought together. [Version one][ECMA 1] was released in 
+different browsers were brought together. [Version one][ecma 1] was released in
 June 1997 with NetScape 4. Later ECMA 2 mostly just updated small inconsistencies.
 
 ![Netscape 4](https://i.imgur.com/a0FCY8z.png)
 
 ECMAScript 3 introduced some big changes. Suddenly developers were able to
 perform Regular expressions, `do` and `while`, exceptions (and the ability to
-`catch` them), formatting on numeric output, `in` and `instanceof` operators, 
-more built-in functions on strings and arrays and much much better error 
-handling. 
-The iteration was released in 1999 and became the bread and butter for 
-JavaScript development in the years to follow. Even today a lot of websites 
+`catch` them), formatting on numeric output, `in` and `instanceof` operators,
+more built-in functions on strings and arrays and much much better error
+handling.
+The iteration was released in 1999 and became the bread and butter for
+JavaScript development in the years to follow. Even today a lot of websites
 still transpile new fancy JavaScript code to this old standard.
 
 ECMA ran into some bumps as well. Two factions started to rise within TC-39. One
@@ -154,8 +155,8 @@ asynchronous JavaScript and XML -- allowing code to send requests to servers
 without having to reload web-pages. Most browsers at the time implemented it
 natively, but Internet Explorer didn't join the party. When it eventually did
 one had to go through some weird loops to get it to work.
-The AJAX discussion did however re-kindle the development light for ECMAScript 4. 
-In the peak of its development the new version 4 implementation had features 
+The AJAX discussion did however re-kindle the development light for ECMAScript 4.
+In the peak of its development the new version 4 implementation had features
 like:
 
 - Classes
@@ -169,14 +170,14 @@ like:
 - Iterators
 - Constant binding
 - Destructuring
-- Array comprehensions. 
+- Array comprehensions.
 
 The committee developing ECMAScript 4 at the time was formed by Adobe, Mozilla,
 Opera and Microsoft. Yahoo entered later when most of the features were already
 decided. Douglas Crockford was the person sent by Yahoo. He voiced concerns for
 many of the proposed features and got a lot of support from Microsoft. Microsoft
 didn't want any of ECMAScript 4's features in their browsers and even threatened
-legal actions. ECMAScript 4 development stopped again. 
+legal actions. ECMAScript 4 development stopped again.
 
 Douglas pushed the idea to push out a simpler, reduced set of features for the
 new standard, the things most of the committee could agree on. So no new syntax,
@@ -197,12 +198,12 @@ and posted a mail after a meeting in Oslo in 2008 outlining the following detail
 
 ECMAScript took 8 years of development and was scrapped in the end.
 
-Brendan used the word "Harmony" a few times in the conclusions of his mail. 
-This harmony would become the name for the future place of new JavaScript ideas. 
-"ECMAScript Harmony" was born. 
+Brendan used the word "Harmony" a few times in the conclusions of his mail.
+This harmony would become the name for the future place of new JavaScript ideas.
+"ECMAScript Harmony" was born.
 
-Adobe decided to implement a big bunch of features from ES4 into ActionScript 3 
-and kept maintaining it for a while for its own (from Macromedia acquired) 
+Adobe decided to implement a big bunch of features from ES4 into ActionScript 3
+and kept maintaining it for a while for its own (from Macromedia acquired)
 "Flash".
 
 Before the end of ES4, a small spin-off was created called E4X. It featured some
@@ -211,7 +212,7 @@ long after for lack of use.
 
 So the book on ES4 was closed. TC-39 wasn't sitting still however. The ECMAScript
 Harmony project started coming up with some good ideas!
-The result, ECMAScript 5 became the long sought rebirth of JavaScript. 
+The result, ECMAScript 5 became the long sought rebirth of JavaScript.
 It included:
 
 - Getters and setters
@@ -232,8 +233,8 @@ ECMAScript 5 got a 5.1 iteration in 2011, which fixed some ambiguities.
 
 With the development back on track TC-39 and ECMAScript Harmony steamed on with
 some fundamental new features in ECMAScript 6, 7 and 8 which would get the
-respective names ECMAScript 2015, 2016 and 2017. 
-EcmaScript 2015 featured some ideas from ECMAScript 4 and a range of new 
+respective names ECMAScript 2015, 2016 and 2017.
+EcmaScript 2015 featured some ideas from ECMAScript 4 and a range of new
 improvements to the languages like:
 
 - `let` (rebindable bindings) and `const` (unrebindable bindings)
@@ -259,13 +260,13 @@ improvements to the languages like:
 In the course We'll touch on a good bunch of these.
 
 Thanks to not taking features like namespacing and optional typing along in
-EcmaScript 2015 as well as the rephrasing of some of the features (like classes) 
+EcmaScript 2015 as well as the rephrasing of some of the features (like classes)
 all of these features made it past the standardization process. It did take
 almost 6 years to implement everything however. The fact that the committee as
 well as the community were able to pull something like this off gave a further
 boost to the development of ECMAScript. Short after the release of the
 ECMAScript 2015 spec some further small changes were made like
-Array.prototype.includes (which would be pushed to ECMAScript 2017 later), 
+Array.prototype.includes (which would be pushed to ECMAScript 2017 later),
 the exponention operator and some small corrections.
 
 At this point, most of the features from the ECMAScript 2015 spec are
@@ -283,6 +284,7 @@ the features you are going to use from that in the rest of this course include:
 - RegExp named capture
 
 ## There is however a catch.
+
 And this is and has been the bane of JavaScript developers for quite some time
 now. We need to care about browsers. Sure, there is a standard and browser
 makers do their best to develop new features as soon as possible, but the
@@ -293,7 +295,7 @@ end-users of those browsers need to update their computers.
 - Safari
 - The android built-in browser
 
-There are still a lot of people out there using Windows 7 with Internet 
+There are still a lot of people out there using Windows 7 with Internet
 Explorer 10. This version of Internet explorer still runs on ECMAScript 5 and
 doesn't support all the new fancy features yet. Safari fixed most of the issues
 by continuing to update their browser through Apple update and Android fixed the
@@ -304,14 +306,14 @@ directly from the Google Play Store (and still does today).
 But when developing sites and web-apps we do need to consider the stuff we can
 use or not.
 "Can I Use" is a website that lists new features in Javascript, CSS and HTML and
-tells us where we can use what. Let's take a look at [Async][Can I Use Async].
+tells us where we can use what. Let's take a look at [Async][can i use async].
 
-Here we see that (as of writing) Internet Explorer and Opera Mini don't give any 
+Here we see that (as of writing) Internet Explorer and Opera Mini don't give any
 support at all yet. So here we can do two things:
 
 - Not use Async, until more browsers update and internet users update their
   browsers.
-- Convert Async to something older and unsupported browsers understand. 
+- Convert Async to something older and unsupported browsers understand.
 
 The last can be achieved in two ways:
 
@@ -333,17 +335,17 @@ researched by TC-39 or ECMAScript Harmony. One good example of this is the
 `forEach()` like this:
 
 ```javascript
-[1, 2, 3].forEach((number) => {
-  console.log(number)
-})
+[1, 2, 3].forEach(number => {
+  console.log(number);
+});
 ```
 
 In Chrome, Firefox and Safari you could do:
 
 ```javascript
-document.querySelectorAll('p').forEach((node) => {
-  console.log(node.id)
-})
+document.querySelectorAll('p').forEach(node => {
+  console.log(node.id);
+});
 ```
 
 This will fetch all the `paragraph` objects from a page and put them in a
@@ -352,10 +354,10 @@ above). In Internet explorer however, that forEach doesn't exist forcing you to
 either Polyfill it or write an old fashioned for-loop:
 
 ```javascript
-nodes = document.querySelectorAll('p')
+nodes = document.querySelectorAll('p');
 for (let i = 0; i < nodes.length; i += 1) {
- const node = nodes[i];
- console.log(node)
+  const node = nodes[i];
+  console.log(node);
 }
 ```
 
@@ -365,14 +367,15 @@ started to venue into the native support of a new language called TypeScript.
 We'll eventually venture into the latter in a later stage of this course.
 
 ## Installation
-With the history and  some of the weird quirks now behind us, let's focus on
+
+With the history and some of the weird quirks now behind us, let's focus on
 that computer of yours! We're going to install a program called NodeJS. It's
 basically Javascript, but not in a browser. Just like Python, Ruby and other
-languages we can use NodeJS as a [REPL interface][REPL] and execute files.
+languages we can use NodeJS as a [REPL interface][repl] and execute files.
 
 Looking at the fact that we'll eventually start making either IOS or Android
 apps with JavaScript, it's best if you follow this course on a computer with
-[Ubuntu 19.04](Ubuntu) or Mac OSX. Any laptop or desktop from the past five 
+[Ubuntu 19.04](Ubuntu) or Mac OSX. Any laptop or desktop from the past five
 years will do.
 
 You could probably do major parts of this course in contraptions like Bash for
@@ -388,16 +391,17 @@ I'm going to assume that you've been part of Global Code and know some Terminal
 Lingo already.
 
 > Whenever I prefix a command with `$` You should run the command after
-> (excluding the `$`) in  your terminal. Whenever I prefix with `>`, you should
+> (excluding the `$`) in your terminal. Whenever I prefix with `>`, you should
 > execute the command in a NodeJS REPL.
 > If something goes wrong, open an issue on Github and mention the line in the
 > markdown source of this file where things started to go wrong. You can find
-> [the source of this page here][Page Source]
+> [the source of this page here][page source]
 
 ### For Mac OSX users
+
 First things first, that standard terminal app of yours is ugly and useless.
 Let's install something better called Iterm2, lets download and install the
-[latest stable release][Iterm]
+[latest stable release][iterm]
 
 With that done, let's fire up Iterm and install some basics. For the next steps
 we're going to need 2 components:
@@ -446,8 +450,9 @@ After this you will need to close your existing terminal screen and open a new
 one. (since you edited basic instructions for the terminal)
 
 ### For Ubuntu Users
-Your terminal application should be on par already. If you want to  have
-something more advanced, you could check out [Terminator][Terminator]
+
+Your terminal application should be on par already. If you want to have
+something more advanced, you could check out [Terminator][terminator]
 
 To make sure you have all the necesairy side-plugins, we'll install an older
 version of nodeJS from the Ubuntu apt-get store.
@@ -480,9 +485,8 @@ more info!
 ### For OSX and Ubuntu
 
 Now that we have a node version manager, lets install the latest version of node
-(you can find the latest stable version by executing `nodenv install --list`). 
-In our case we'll go for: 
-
+(you can find the latest stable version by executing `nodenv install --list`).
+In our case we'll go for:
 
 ```sh
 $ nodenv install 12.7.0
@@ -492,7 +496,7 @@ $ node -v # Should return v12.7.0
 ```
 
 The global bit here tells our system that when we don't ask for a specific node
-version, it should  use 12.7.0 instead.
+version, it should use 12.7.0 instead.
 The rehash bit, tells the system to reload all NodeJS related things.
 
 And that's it, Let's boot it up and try some things!
@@ -507,31 +511,32 @@ undefined
 ```
 
 ## Final remarks
+
 That's it for now! Today you learned a bit about the history of ECMA, a bit
 about how the community for JavaScript came to be and you managed to install
-NodeJS! 
+NodeJS!
 
 In the next lab we'll dive into the most common functions and features of
 JavaScript.
 We'll also set you up with a smarter code-editor, that checks your programming-
-spelling (Through small javascript-plugins called ESLint and prettier) and 
+spelling (Through small javascript-plugins called ESLint and prettier) and
 slaps you on the wrist when you happen to write ugly code accidentally.
 
-
 Can't wait? Check out one of these 3 editors today:
+
 - [Atom](Atom) (good for faster computers)
 - [Sublime](Sublime) (good for slower computers)
 - [NeoVim](Neovim) (good for everything)
 
-[DOM]: https://www.computerhope.com/jargon/d/dom.htm
-[TC-39]: https://github.com/tc39
-[ECMA 1]: http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf
-[Can I Use Async]: https://caniuse.com/#feat=async-functions
-[REPL]: https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop
-[Ubuntu]: https://ubuntu.com/download/desktop
-[Page Source]: https://github.com/HendrikPetertje/ecmanatives/blob/master/_posts/2019-08-08-lab-0.markdown
-[Iterm]: https://iterm2.com/downloads.html
-[Terminator]: https://www.tecrobust.com/install-terminator-linux-ubuntu-fedora/
-[Neovim]: https://git.picodevelopment.nl/hendrikpeter/pico-vim
-[Sublime]: https://www.sublimetext.com/
-[Atom]: https://atom.io/
+[dom]: https://www.computerhope.com/jargon/d/dom.htm
+[tc-39]: https://github.com/tc39
+[ecma 1]: http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf
+[can i use async]: https://caniuse.com/#feat=async-functions
+[repl]: https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop
+[ubuntu]: https://ubuntu.com/download/desktop
+[page source]: https://github.com/HendrikPetertje/ecmanatives/blob/master/_posts/2019-08-08-lab-0.markdown
+[iterm]: https://iterm2.com/downloads.html
+[terminator]: https://www.tecrobust.com/install-terminator-linux-ubuntu-fedora/
+[neovim]: https://git.picodevelopment.nl/hendrikpeter/pico-vim
+[sublime]: https://www.sublimetext.com/
+[atom]: https://atom.io/
