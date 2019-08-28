@@ -25,7 +25,7 @@ If you ended last weeks course on an older machine or if you are dealing with
 a slow VirtualBox, then Atom might be a bit to "heavy" to run on your machine. 
 In that case its better to use "Sublime 3"
 
-If you like to use Sublime instead, [follow these instructions](Sublime Install) 
+If you like to use Sublime instead, [follow these instructions][Sublime Install] 
 for the install. 
 
 If you like to use NeoVim instead, Check this post in a few days. I'm writing a
