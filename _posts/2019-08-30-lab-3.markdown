@@ -190,7 +190,7 @@ Y
 >
 > But there is a third option like this:
 >
-> - `npm insall --save-dev` to install dependencies and plugins to your project
+> - `npm install --save-dev` to install dependencies and plugins to your project
 >   that should only run when we're developing stuff. They shouldn't fill up the
 >   hard disk or make your code unsafe when you release your code for production
 >   use.
@@ -345,7 +345,7 @@ code**, but to write them out. That way the `{` `(` `}` and `)` will make sense
 to you.
 
 ```javascript
-const Calculator = require('../calculator.js');
+const calculator = require('../calculator.js');
 
 describe('calculator', () => {
   describe('add', () => {
