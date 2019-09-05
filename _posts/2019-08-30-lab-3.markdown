@@ -125,6 +125,10 @@ Answer the questions like this:
 ? Would you like to install them now with npm? Y (Type "Y" and hit ENTER)
 ```
 
+> **Note: Some students (with custom typescript installations) have noticed an extra
+> question in the list above. If you are asked if your project includes "Typescript"
+> answer with "No".**
+
 Your computer will think for a bit after answering these questions. ESLint will
 automatically add a `.eslintrc.js` file and add itself to your `package.json`
 and then install all dependencies to your `node_modules`
