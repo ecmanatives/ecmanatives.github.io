@@ -194,6 +194,10 @@ keyboard to select the following options (in some cases you also need Space-bar)
 ? Would you like to install them now with npm? Y (Type "Y" and hit ENTER)
 ```
 
+> **Note: Some students (with custom typescript installations) have noticed an extra
+> question in the list above. If you are asked if your project includes "Typescript"
+> answer with "No".**
+
 If you make a mistake, just hit `<CTRL>` + `<C>` on your keyboard and rerun
 `eslint --init`
 
