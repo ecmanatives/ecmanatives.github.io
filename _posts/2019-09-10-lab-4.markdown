@@ -1,0 +1,629 @@
+---
+layout: post
+title: "Lab 4: You got served... some html"
+date: 2019-09-10 10:00:00 +0200
+categories: backend frontend
+---
+
+# THIS LAB IS STILL BEING WRITTEN. PLEASE DON'T DO IT YET AS I'M CONSTANTLY CHANGING THINGS
+
+# Lab 4: You got served... some html!
+After weeks of hurting your head on the basics of JavaScript it's time.
+
+> **WE'RE BUILDING WEB-APPS BABY!**
+
+Okay enough hype already. This week we'll:
+
+- Create a full-fledged back-end server on NodeJS
+- Create a front-end from simple HTML (We'll take the JS bits next week)
+
+That's pretty cool huh? Let's go over each of them.
+
+## The back-end server
+In the back-end server we'll put all the calculating bits. Normally you do stuff
+in the back-end for 2 reasons:
+
+- To do all secret stuff where your users can't see it.  
+  Like talking with the database and connecting to things that cost money.  
+  In other words, do all the sneaky secret "security" stuff.
+- To not blow up the phone/computer of the people that visit your site/app.  
+  If you're doing big things (like going through big data-files or running big
+  calculations) you don't want to do them "client-side" (on your visitors
+  devices). Their batteries could die, their processors overheat and their
+  computers could slow down.  
+  Nobody likes a slow website right?
+
+Both of these things are quite tricky. Every time you build something new you 
+need to decide, what your users can do and see, how fast and fluid their 
+visit in your site/app would be (vs you having to buy bigger expensive servers 
+to do all those calculations for them).  
+While also thinking about how a user with some hacker skills could abuse your
+product.
+
+Let's take a sequence diagram of a news website  
+(spoiler, we're going to build some of this):
+
+<a href="https://i.imgur.com/Z8WK0Mv.jpg" target="_blank">![Graph](https://i.imgur.com/Z8WK0Mv.jpg)</a>  
+_click for a bigger version_
+
+The "browser" (front-end) and "Back-end server" are 2 individual vertical lines.
+When making the app we need to be very careful that we never accidentally mix
+files for backend into front-end (since both are running on JavaScript files)
+
+That said, lets begin building an awesome news website with:
+
+1. A NodeJS Back-end running on "Hapi"
+2. A front-end with some html
+
+## A basic back-end
+In the previous labs you installed and configured NodeJS (with Nodenv) and setup
+a code-editor on your \*Nix machine. If you haven't, go back to "lab 0" and
+start your hike there.
+
+## Level ultra-basic
+NodeJS actually comes with a built-in web-server. You don't have to install
+anything special to make it work!  
+In this level "ULTRA BASIC" we'll look at that real quick.
+
+Open a terminal and `cd` to the folder where you keep your test projects.
+Once there run the following commands:
+
+```
+$ mkdir news_site
+$ cd news_site
+$ touch basic_server.js
+```
+
+Then open your new `news_site` project folder in Atom or sublime using one of
+the following commands:
+
+```sh
+$ atom .      # (for Atom)
+$ sublime .   # (for Sublime)
+$ st .        # (also for Sublime)
+```
+
+If none of them work, open your editor of choice, then go to your projects
+folder (in your normal file explorer) and drag the folder on top of the editor
+like this:
+
+![Drag](https://i.imgur.com/WxsNt4E.png)
+
+If it works, you should get a side-bar like this:
+
+![Result](https://i.imgur.com/fBHyIst.png)
+
+If even this doesn't work, check if the side-bar is "enabled" like this:
+
+![Sublime](https://i.imgur.com/BwujNNe.png)  
+_Example with Sublime_
+
+With the editor open lets update our `basic_server.js` to have the code below  
+(Just copy it from this page and paste it into your editor):
+
+```javascript
+const http = require('http');
+
+// create a server object:
+const server = http.createServer((req, res) => {
+  console.log('new request');
+
+  // write a response to the client
+  res.write('Hello World!');
+
+  // end creating a response and send it to the client
+  res.end();
+});
+
+// the server should start on port 4000
+server.listen(5000);
+
+console.log('server started on 5000.\npress [CTRL] + [C] to exit');
+```
+
+Make sure to save the file. Then run the line below in your terminal:
+
+```sh
+$ node basic_server.js
+```
+
+The server is up! Open a browser and visit: [http://localhost:5000](http://localhost:5000).  
+Nice! Do you see a web-page there?  
+
+The `http` module that comes with NodeJS is
+actually pretty awesome. We need something a bit more juicy however.
+So let's quit this server using the keyboard combo `CTRL + C` from the terminal
+(also `CTRL` on OSX).
+
+> Hint, most terminal programs & servers can be stopped using the `CTRL + C`
+> combo.
+
+Visit your site again to double-check if it's dead. You should get a page like
+this:
+
+![RIP](https://i.imgur.com/TKTLHUp.png)
+
+If you want to know more about basic http in NodeJS you can check out the [docs
+& example page on W3Schools][W3Schools]
+
+## Level less basic
+
+You probably have a `news_site` folder now, Let's go and create a basic project 
+structure in it like we did in previous weeks:
+
+```sh
+$ npm init
+
+package name: (news_site)
+version: (1.0.0)
+description: News Site
+entry point: (server.js)
+test command: jest
+git repository:
+keywords:
+author:
+license: (ISC)
+```
+
+The important bit here is `test cmmand: jest`.  
+With that done we'll update Jest and ESlLint globally on our machine, after that 
+we'll initialize them in our project:
+
+```sh
+$ npm install -g jest eslint
+$ nodenv rehash
+
+$ eslint --init
+
+? How would you like to use ESLint? 
+❯ To check syntax, find problems, and enforce code style
+? What type of modules does your project use? 
+❯ CommonJS (require/exports)
+? Which framework does your project use? 
+❯ None of these
+? Does your project use TypeScript? 
+❯ No
+? Where does your code run? (select both browser and node!)
+ ◉ Browser
+ ◉ Node 
+? How would you like to define a style for your project? 
+❯ Use a popular style guide
+? Which style guide do you want to follow? 
+❯ Airbnb (https://github.com/airbnb/javascript)
+? What format do you want your config file to be in? 
+❯ JavaScript
+
+$ jest --init
+
+? Choose the test environment that will be used for testing
+❯  node
+? Do you want Jest to add coverage reports? 
+❯ yes
+? Automatically clear mock calls and instances between every test? 
+❯ yes
+
+npm install --save-dev eslint-plugin-jest jest
+ ```
+
+Now we just need to make some small config changes (to allow JEST to do
+it's magic without ESLint complaining later on) as well as some other small
+tricks with console.logs (using console.logs should be okay).
+
+Open the newly created `.eslintrc.js` in your project (if the file is hidden in
+your editor use your terminal to open the file using `atom .eslintrc.js`) and
+replace all of its contents with:
+
+ ```javascript
+module.exports = {
+  env: {
+    commonjs: true,
+    es6: true,
+    node: true,
+    'jest/globals': true
+  },
+  extends: [
+    'airbnb-base',
+    'plugin:jest/recommended',
+  ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+  },
+  rules: {
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    "no-console": 0
+  },
+  plugins: ['jest']
+};
+ ```
+
+Finally we need to install "hapi" (as well as some helpers) in to the project,
+this will allow us to build a rich website.  
+In your terminal write:
+
+```sh
+$ npm install @hapi/hapi vision handlebars node-fetch
+```
+
+With all of that done, there's one thing left: Save it!  
+Your project is now at a really nice starting-point. So let's make sure
+to add the current state of it (with all the dependencies and config in place)
+to Git.
+
+First we need to make sure that none of the "dependency code" in the
+`node_modules` folder of our project goes into version control. You can do this
+with:
+
+```sh
+$ echo "node_modules" > .gitignore
+```
+
+Then commit your work away like this:
+
+```sh
+$ git init
+$ git commit -m "initial commit"
+```
+
+Feel free to push the code you have up to Github.
+
+### Our first server
+
+With all the basics setup we can start to dive into the implementation of our
+actual server. We'll start off easy.
+
+Create a new `server.js` file in your project folder and type or paste the
+following code in it:
+
+```javascript
+const Hapi = require('@hapi/hapi');
+
+const init = async () => {
+  const server = Hapi.server({
+    port: 3000,
+    host: 'localhost',
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: () => 'hello world!',
+  });
+
+  await server.start();
+  console.log('Server running on %s', server.info.uri);
+};
+
+process.on('unhandledRejection', (err) => {
+  console.log(err);
+  process.exit(1);
+});
+
+init();
+```
+
+Let's go over some weird phenomena here:
+
+```javascript
+const init = async () => {
+```
+
+And
+
+```javascript
+await server.start();
+```
+
+These are fancy new ECMAScript 2017 features.  
+I could explain them here, but I'll put them in [a GIST][A GIST] instead.  
+Please read that if you have some time.
+
+Okay, our basic HAPI logic is in place. Let's modify our `package.json` a bit.
+Make sure the following 2 items are present in the "scripts":
+
+```json
+"scripts": {
+  "test": "jest",
+  "start": "node server.js"
+},
+
+```
+
+Cool! Let's start that server. Go to the terminal and write:
+
+```sh
+$ npm start
+```
+
+> Normally you'd need to do `npm run [some script]`, but `test` and `start` are
+> defacto standards and can therefore be run directly with 
+> `npm test` and `npm start`.
+
+Our server is started, let's open the browser and check it out at
+`http://localhost:3000`.
+
+Sweet, but this isn't doing that much yet right? Let's expand our site a bit and
+make it more awesome.
+
+Create the following folder and file-structure in your project (create new empty
+files for everything missing), watch out uppercase & lowercase counts!:
+
+```
+news_site/
+│
+├── node_modules/
+│   └── ...
+├── src/
+│   ├── controllers/
+│   │   └── articlesController.js
+│   ├── models/
+│   │   └── article.js
+│   ├── views/
+│   │   ├── articles/
+│   │   │   └── index.html
+│   │   └── layout.html
+│   └── routes.js
+├── .eslintrc.js
+├── .gitignore
+├── basic_server.js
+├── jest.config.js
+├── pacakge-lock.json
+├── pacakge.json
+└── server.js
+```
+
+That's a lot of new folders and files huh? Let's start filling them up!
+
+First we'll look at our `server.js` file. Import the new `routes.js` file,
+change the routes up a bit and add an HTML template system so we can render
+fancy html pages (when in doubt, just copy-paste everything):
+
+```javascript
+const Hapi = require('@hapi/hapi');
+const vision = require('vision');
+const handlebars = require('handlebars');
+const routes = require('./src/routes');
+
+const init = async () => {
+  const server = Hapi.server({
+    port: 3000,
+    host: 'localhost',
+  });
+
+  await server.register({
+    plugin: vision, // This will render HTML templates
+  });
+
+  // configure HTML template support
+  server.views({
+    engines: {
+      html: handlebars,
+    },
+    path: `${__dirname}/src/views`,
+    layout: 'layout',
+  });
+
+  server.route(routes);
+
+  await server.start();
+  console.log('Server running on %s', server.info.uri);
+};
+
+process.on('unhandledRejection', (err) => {
+  console.log(err);
+  process.exit(1);
+});
+
+init();
+```
+
+### The `routes.js`
+
+That's a lot. Most of the stuff is taken care of already, but it looks like
+we're importing `routes` in `server.routes(routes);`. Let's work on that next.  
+Open `src/routes.js` and fill it with the following stuff:
+
+```javascript
+module.exports = [
+  // Ping tester
+  {
+    method: 'GET',
+    path: '/ping',
+    handler: (_request, reply) => reply.response('pong').code(200),
+    config: {
+      description: 'Ping-tests',
+    },
+  },
+]
+```
+
+Okay, that's done, let's test it out.
+Stop your running server (if you still have one running) and start a new server
+with:
+
+```sh
+$ npm start
+```
+
+Then visit http://localhost:3000/ping. Is the response `pong`?
+
+Okay, this was just a test path, let's add our article structure now. Go back to
+`src/routes.js` and make sure it looks something like this:
+
+```javascript
+const articlesController = require('./controllers/articlesController.js');
+
+module.exports = [
+  // Ping tester
+  {
+    method: 'GET',
+    path: '/ping',
+    handler: (_request, reply) => reply.response('pong').code(200),
+    config: {
+      description: 'Ping-tests',
+    },
+  },
+
+  // Start
+  {
+    method: 'GET',
+    path: '/',
+    handler: articlesController.index,
+    config: {
+      description: 'get Posts',
+    },
+  },
+];
+```
+
+It's important to mention that the `handler` can deal with 3 different objects:
+
+- a string or {foo: 'bar'}, which will render either text or json in your
+  browser
+- A function that returns a `reply.response()`
+- A function that returns a `Promise` which returns a `reply.response()`.
+
+### the `articleController.js`
+
+Hey, that's nice, Hapi allows you to use promises! Let's play with that. Open up
+`src/controllers/articlesController.js` and give it the following content:
+
+```javascript
+const Article = require('../models/article');
+
+module.exports = {
+  async index(_request, reply) {
+    const articles = await Article.all();
+
+    return reply.view('articles/index', { articles });
+  },
+};
+```
+
+This file does 2 important things:
+
+- since the `index` function is written as `async index` we are dealing with a
+  function that is a promise.
+- we are `reply.view()`-ing. So we're not just rendering json or text, but we're
+  going to actually make html views in a bit.
+
+
+### The `article.js` model
+
+Apart from these 2 awesome things in our controller, we're also calling for
+`Article.all()`. Let's make it work.  
+Open up `src/models/article.js`. And paste the following stuff:
+
+```javascript
+const fetch = require('node-fetch');
+
+module.exports = class Article {
+  constructor(params = {}) {
+    this.id = params.id;
+    this.title = params.title;
+    this.body = params.body;
+    this.userId = params.userId;
+  }
+
+  static async all() {
+    // real fake articles from an internet Database
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const json = await response.json();
+    return json.map((article) => new Article(article));
+  }
+};
+```
+
+### The views
+So we've written everything up. The only thing we're missing now is some html.
+Let's start with the `src/views/layout.html`. The layout will be the wrapper for all of
+our html pages:
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style type="text/css">
+    html, body {
+      background-color: #DDD;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>My news page</h1>
+    {% raw %}{{{ content }}}{% endraw %}
+  </div>
+</body>
+</html>
+```
+
+The `{% raw %}{{{ content }}}{% endraw %}` here is a "handle-bar" tag. The article
+template will render in there in a bit.
+
+Last we'll create our actual news article, open up
+`src/views/articles/index.html` and paste or write the following code:
+
+```html
+{% raw %} <h2>Articles</h2>
+
+{{# each articles}}
+<h3>{{ title }}</h3>
+<p>{{ body }}</p>
+<hr>
+{{/each}} {% endraw %}
+```
+
+> handlebar tags that are wrapped between three `{% raw %}{{{{% endraw %}` tags 
+> will render a working `<p>`-tag (and other tags). If you wrap 
+> `{% raw %}{{{% endraw %}` then that `<p>` tag (and other tags) will be 
+> "escaped" (they will show up as text, like this `<p>` tag is not
+> actually running as code in this HTML document).  
+> A `{% raw %}{{#{% endraw %}` will run but not "render" anything
+
+That's all, let's see if it works! Exit the node-server in your terminal if you
+have one running, and execute:
+
+```sh
+$ npm start
+```
+
+Make sure to have a working internet connection (we download articles from an
+online database) and visit:
+
+http://localhost:3000
+
+> MVC's  
+> Without you noticing perhaps you have been working on routers, controllers,
+> models and views. This structure of folders and files is called `MVC` or
+> "Model View Controller". You can learn more about it in [this kek youtube video][MVC]
+
+## wrapping up
+So we did a lot of stuff huh? We created a new backend server, created routes in
+it with controllers and views an lots more. All to get a small html server
+running. But the end result is pretty awesome already.
+
+Next week we'll start working on the front-end code that makes pages animate and
+do cool stuff. We'll do this through Webpack.
+
+See ya next week!
+
+[W3Schools]: https://www.w3schools.com/nodejs/nodejs_http.asp
+[A GIST]: https://gist.github.com/HendrikPetertje/0cd5323024a0e001edfa342349342498
+[MVC]: https://www.youtube.com/watch?v=1IsL6g2ixak

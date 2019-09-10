@@ -1,0 +1,39 @@
+@startuml
+
+actor Customer
+participant Browser as "Web browser\n(The news paper)"
+participant Backend as "Backend-server"
+participant UserDB as "User Datbase\n(with passwords)"
+participant NewsDB as "News Articles\nDatabase"
+
+== A customer with a paid account visits the news website ==
+Customer -> Browser: Visits the website
+Browser -> Backend: Asks for news website\nwith "user id=3"\nin browser cookies
+Backend -> UserDB: Asks for a user\nwith "user id=3"
+Backend <-- UserDB: User was found and should\nhave premium access to the website
+Backend -> NewsDB: Asks for the latest news articles
+Backend <-- NewsDB: News database returns article list
+Backend -> Backend: Renders an HTML page with articles
+Browser <-- Backend: Receives an HTML page with articles
+Customer <-- Browser: Is happy with news
+Customer -> Browser: Clicks on "read more" button
+Browser -> Browser: Creates a loading animation\nwith Javascript
+Browser -> Backend: Javascript sends a request to the backend
+Backend -> UserDB: Asks for a user\nwith "user id=3"
+Backend <-- UserDB: User was found and should\nhave premium access to the website
+Backend -> NewsDB: Asks for "read more" news articles
+Backend <-- NewsDB: News database returns article list
+Backend -> Backend: Renders a JSON response with articles
+Browser <-- Backend: Receives JSON list of articles
+Browser -> Browser: Turns the JSON list into\na list of HTML articles
+Customer <-- Browser: Is happy with more news!
+
+== A customer with no account visits the news website ==
+Customer -> Browser: Visits the website
+Browser -> Backend: Asks for news website\nwith "user id=null"\nin browser cookies
+Backend -> UserDB: Asks for a user\nwith "user id=null"
+Backend <-- UserDB: User was not found and should not\nhave premium access to the website
+Backend -> Backend: Renders an HTML page with \ma "please pay" message
+Browser <-- Backend: Receives an HTML page \nwith "please pay" message
+Customer <-- Browser: Is not so happy now
+@enduml

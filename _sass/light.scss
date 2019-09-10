@@ -10,6 +10,39 @@ $border:               dashed 1px rgba(0,0,0,1) !default;
 $selection-background: rgba(0,0,0,0.99) !default;
 $selection-text:       #fff !default;
 $background-color:     #fff !default;
+$container-width:      85%;
 
 
 @import "base";
+
+main {
+  position: relative;
+}
+
+h1::before {
+  content: '#';
+  display: block;
+  position: absolute;
+  left: -10px;
+}
+
+h2::before {
+  content: '##';
+  display: block;
+  position: absolute;
+  left: -20px;
+}
+
+h3::before {
+  content: '###';
+  display: block;
+  position: absolute;
+  left: -30px;
+}
+
+h4::before {
+  content: '###';
+  display: block;
+  position: absolute;
+  left: -40px;
+}
