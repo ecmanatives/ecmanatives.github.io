@@ -1,0 +1,749 @@
+---
+layout: post
+title: "Lab 5: Front-end flatland"
+date: 2019-09-25 10:00:00 +0200
+categories: frontend
+---
+
+# Lab 5: Front-end flatland
+
+Last week we worked on making a back-end with an HTML-only front-end. This week
+we continue making an awesome front-end. We're not going to bother to much with
+CSS and style (since this is a JavaScript lab), but we'll look at the following
+things today:
+
+- Debug things
+- Manipulating HTML
+- Talking with back-end APIs without refreshing pages
+- Hacking a web-browser so we can "automagically" test our code in integration
+  tests.
+
+![Hackity hack](https://media2.giphy.com/media/26tPnAAJxXTvpLwJy/giphy.gif)
+
+Let's get started!
+
+## Setup
+
+In the last couple of weeks we've been doing those things where we run `npm
+init`, `eslint --init`, `jest --init` and what not. We could do that again and
+spend hours perfecting our back-end and getting all the configuration
+bits for "Webpack" and "Babel" in place, but no. Let's not! This time I'll take
+care of that for you
+
+Go to [https://github.com/ecmanatives/front_end_news_site](https://github.com/ecmanatives/front_end_news_site)
+and follow the instructions there to fork, install and start your development
+servers (jep server*s*). Come back when you're done.
+
+## Quick look at back-end:
+
+So, the back-end is pretty much how we left it last week (I did make some small
+changes though by adding a simple CSS-only "component style library").
+Our back-end runs on NodeJS with a swish of the following plugins:
+
+- Hapi: A service allowing us to host a nice web-server
+- Inert: A service that allows us to have a "static" folder where we can put
+  images, CSS files and a browser-JavaScript file
+- Vision & Handlebars: allowing us to make views with HTML
+
+In the back-end we are completely in control of how our application runs, there
+is one JavaScript interpreter (node) and we can do all of our secret stuff
+there.
+
+## Front-end and the magical world of Webpack & Babel.
+
+The front-end is a lot harder and a lot more messy. All of a sudden we have to
+deal with people visiting our site using Chrome, Firefox, Internet Explorer,
+Safari, various mobile browsers... and your granny with her 15 year old laptop
+running windows Vista.
+
+All those fancy ES6 features we've been talking about like 
+`(arrow) => {functions}` suddenly only work on 10% of your visitors computers 
+(if you're lucky).
+
+> Hence I like back-end development a lot 🙉.
+
+Lucky enough we have some help. Mainly from 2 really awesome tools.
+
+### Webpack
+
+[Webpack][Webpack] is a toolbox that allows you to bundle a lot of JavaScript
+files into one file. When your visitors visit your site, you probably don't want
+them to download 50 JavaScript files. So instead they only download one, once.
+
+Apart from bundling this toolbox also "minifies" your files, turning readable
+code like this:
+
+```javascript
+class Fruit {
+  constructor(options) {
+     this.colour = options.colour
+     this.taste = options.taste 
+   }
+}
+
+const apple = new Fruit({colour: 'green', taste: 'sweet'});
+console.log(apple)
+```
+
+Into mangled garbage like this:
+
+```javascript
+class Fruit{constructor(a){this.colour=a.colour,this.taste=a.taste}}const apple=new Fruit({colour:"green",taste:"sweet"});console.log(apple);
+```
+
+The mangled garbage is less code, and therefore a smaller download, it's also
+much harder to read by people with bad intentions.
+
+So Webpack is pretty awesome huh?
+
+### Babel
+
+That makes [Babel][Babel] awesome on steroids. Babel turns all that fancy code
+written in ES6, ES7 and ES8 into code that works in older browsers or browsers
+that lack features.
+
+It turns flashy new code like this:
+
+```
+```javascript
+const helloWorld = name => ([ 'Hello', this ])
+
+const numbers = [1, 2, 3].map(n => n ** 2)
+
+const objectOne = [1, 2]
+const objectTwo = [...objectOne, 3, 4]
+
+const helper = {
+  fruit: 'apple',
+  whatWorld: () => helloWorld,
+};
+```
+
+Into something your granny's old computer understands:
+
+```javascript
+var _this = void 0;
+
+var helloWorld = function helloWorld(name) {
+  return ['Hello', _this];
+};
+
+var numbers = [1, 2, 3].map(function (n) {
+  return Math.pow(n, 2);
+});
+
+var objectOne = [1, 2];
+var objectTwo = [].concat(objectOne, [3, 4]);
+
+var helper = {
+  fruit: 'apple',
+  whatWorld: function whatWorld() {
+    return helloWorld;
+  }
+};
+```
+
+![Awesome](http://giphygifs.s3.amazonaws.com/media/3XrAfHxRxropW/giphy.gif)  
+_Awesome huh?_
+
+## Debugging in the browser
+
+Let's get started now. By now you should have `npm start`-ed `frontend` and
+`backend` in 2 separate windows.
+
+Lets open up a third terminal window (it's getting busy on that screen of yours
+huh?) and navigate to the `frontend` folder. In there we'll type either:
+
+```
+atom .
+sublime .
+st .
+```
+
+Or whatever editor your using to open the current folder as a project in our
+favorite editor.
+
+![windows](https://i.imgur.com/cctK0pM.jpg)
+
+From here we'll open `src/index.js` (if you can't find it, make sure you're in
+the `frontend` folder and not the `backend` folder or last weeks folder.)
+
+This file is still pretty empty huh? Let's `console.log` some stuff to make sure
+everything is working.  
+Insert the following content into the `src/index.js` file:
+
+```javascript
+console.log('hello world!');
+```
+
+Save the file. Then the `npm start` server thing we did earlier in 
+`frontend` will automatically bundle & babel your code into 1 file and put 
+that in `backend/static/script.js`. You don't have to do anything for that ;)
+
+Open a browser, visit `http://localhost:3000` and check if your code works:
+
+![ehh](https://i.imgur.com/IqYhM7e.png)
+_I'm not seeing that console log!!_
+
+Jep. To debug things, we need to open an inspector. Just right-click anywhere in
+the page and hit the option `inspect element`. Inspecting works best in
+Mozilla Firefox and Google Chrome
+
+![Inspect](https://i.imgur.com/WmGrnF4.png)
+
+You should see your console log in the "console-tab"!
+
+![console](https://i.imgur.com/9opu5Ot.png)
+
+> this inspector console is an awesome place to turn to when you want to try 
+> some code out in a JavaScript REPL real quick.
+> Code you write will however not be saved anywhere.  
+> Bonus: Every modern browser has a console like this!
+
+I actually like to break the inspector out of the browser into its own separate
+window. In Firefox and Chrome you can do that like this:
+
+![break out](https://i.imgur.com/FfEoasC.png)
+
+But that is entirely up to your own personal preference.
+
+## Playing with the start page
+
+Cool, so our `console.log`s are working and we can debug things now. Let's
+continue messing around by creating a fancy filled-in start-page.  
+Right now it's kinda ugly.
+
+### Modules
+
+Until now You've been importing stuff with 
+
+```javascript
+const Hapi = require('@hapi/hapi')
+```
+
+Which works fine, but Webpack supports [`Modules`][Modules] instead, let's play with that
+first. 
+
+The code for our start-page should go into `src/pages/start.js`.
+So let's import it into our `index.js` file.
+
+Open your `src/index.js` file, remove the console.log and write:
+
+```
+import './pages/start';
+```
+
+Writing `start` is enough, you don't have to include `.js`.  
+Then in `src/pages/start.js` we'll write the following code:
+
+```
+function init() {
+  console.log('window', window);
+}
+
+init();
+```
+
+Let's save that and refresh the browser page. You should now see something like
+this in the console of the browser inspector:
+
+![window](https://i.imgur.com/ldWPNv8.png)
+
+Sweet, we found the `window` object. This `window` object holds a lot of
+information like what the address of the current page is, what the dimensions of
+our browser window are, etc.
+
+Let's use that. We only want the `src/pages/start.js` code to run when we are in fact on
+the start-page. Open the start.js up and edit it like this:
+
+```javascript
+function init() {
+  console.log('We are on start!');
+}
+
+if (window.location.pathname === '/') init();
+```
+
+Let's refresh the page. You should be seeing the good news in your inspector
+console. Now try visiting the "about" page.
+Cool huh?
+
+Let's see if we can wipe the content of our start page, once the page is loaded.
+
+To do this we are going to interact with another object called `document`. The
+document object is the object that encompasses everything that is inside the
+browser page. You can use the `document` object to search for and manipulate
+things on the page. It also tells you if the page is loading stuff, if people
+are clicking on things, etc.
+
+Edit the code in your `src/pages/start.js` to look like this:
+
+```javascript
+function init() {
+  document.body.innerHTML = 'empty!';
+}
+
+if (window.location.pathname === '/') init();
+```
+
+Save your work and refresh the browser page.
+
+![whoops](https://i.imgur.com/M3skeVJ.png)
+_Whoops_
+
+That went wrong. We were giving commands to `document.body`, but our document
+wasn't done loading yet when that code executed.
+
+Looks like we need to make the page wait for a while.
+Luckily I helped you a bit there. In your `frontend` project there is a file
+called `src/services/utils.js`.  
+In this file I put some helpful goodies for you. Let's use one of them.
+
+Open up your `src/pages/start.js` and make it look like this:
+
+```javascript
+import { asyncDocumentReady } from '../services/utils';
+
+function init() {
+  document.body.innerHTML = 'empty!';
+}
+
+if (window.location.pathname === '/') asyncDocumentReady(init);
+```
+
+This `asyncDocumentReady` function will wait for the page to load, then execute
+the function you gave to it.  
+Let's save our work, refresh the browser (on the start page) and see what
+happens.
+
+Okay, we'll pause here for a second. There's some importing and exporting stuff
+going on. Let's take 2 example files and look at 1 method of exporting:
+
+
+`foo.js`
+```javascript
+export default function() { return 'Hello!' }
+```
+
+`bar.js`
+```javascript
+import foo from 'foo'
+```
+
+The method above is called "default exporting" and "default importing". You use
+this often when a file only has 1 thing to export or when your file contains a
+class or some other kind of important object. Most linters will ask you to
+give the imported name (`foo` in `import foo` in this case) the same name that
+the file has (minus the .js or .ts notation).
+
+Another method is this:
+
+`foo.js`
+```
+export const hello = "There"
+export function helloWorld() { return 'Hello!' }
+```
+
+`bar.js`
+```
+import { hello, helloWorld } from 'foo'
+```
+
+Here we use a more modular way of exporting and importing. You would use this in
+files that need to have many exportable objects, like the `utils.js` file in
+our project. You cherry pick what you need when you import features.
+
+> A good mentality is to not care and just `export const somefo....`. Then When
+> your linter complains you follow its advise ;)
+
+
+### Loading data from the internet without refreshing the page
+
+That `document.body.innerHTML = 'EMPTY!'` removed our entire page quite
+aggressively didn't it?
+
+Let's change it back real quick so we can see the page again. In
+`src/pages/start` remove the `document.body.innerHTML` line and replace it with
+a temporary console.log like this:
+
+
+```javascript
+import { asyncDocumentReady } from '../services/utils';
+
+function init() {
+  console.log('I am ready')
+}
+
+if (window.location.pathname === '/') asyncDocumentReady(init);
+```
+
+Let's refresh it and look at our page again.
+
+![page](https://i.imgur.com/lK12tS9.png)
+
+Let's see if we can fill the colourful blocks on the page with some nice content.
+To do this we need to have some news articles. Let's collect a few!
+
+I secretly added an extra path to our backend. You can find it by visiting:
+
+[http://localhost:3000/api/v1/articles](http://localhost:3000/api/v1/articles)
+
+Depending on your browser, that page will look a bit like this:
+
+![json](https://i.imgur.com/CsWEhcY.png)
+
+The response we just got back is in the format "JSON". JSON isn't really useful
+for humans, but computer programs like it a lot!
+
+Let's use this in our `frontend` code! Open up your code-editor and put a new file
+in services called `articleClient.js`. Your folder structure should look a bit
+like this after that (note, the `C` is uppercase!):
+
+```
+frontend/
+│
+├── node_modules/
+│   └── ...
+├── src/
+│   ├── pages/
+│   │   └── start.js
+│   ├── services /
+│   │   ├── articleClient.js <--- This is the new file
+│   │   └── utils.js
+│   └── index.js
+├── babel.config.js
+├── jest.config.js
+├── package-lock.json
+├── package.json
+└── webpack.config.js
+```
+
+Let's fill this new `src/services/articleClient.js` with some stuff.
+
+```javascript
+export default async function () {
+  const response = await fetch('/api/v1/articles');
+  const responseJSON = await response.json();
+  return responseJSON.articles;
+}
+```
+
+Hmm, interesting! So we are using something called fetch here. Fetch is a
+browser built-in feature that works in [most modern browsers][Fetch]. 
+Luckily we are using Babel and Babel automatically translates fetch to 
+old-fashioned Internet Explorer 10 compatible code.
+
+If you want to know more about fetch, I'd advice you to check out the [Fetch docs
+written by Google][Fetch docs].
+
+Asking things from the internet takes some time, so we'll start to work with
+some `async` and await references here (remember that from last week?). NEAT!
+
+The client that fetches articles is ready, let's use it on our start-page:
+Open up `src/pages/start.js` and modify it a bit. First we need to make sure to
+**make the function Async**, then we'll insert our client-function and
+console.log some our raw articles.
+In the end the file should look something like this:
+
+```javascript
+import { asyncDocumentReady } from '../services/utils';
+import articleClient from '../services/articleClient';
+
+async function init() {
+  const articles = await articleClient();
+  console.log(articles);
+}
+
+if (window.location.pathname === '/') asyncDocumentReady(init);
+```
+
+Let's refresh the site and see if our `console.log` made it to the inspector
+console.
+
+### Let's manipulate the [DOM][DOM].
+
+The function that manages the looks of our start page can now access an array of 
+articles loaded from an API. Sweet, let's fill the first block of the start page
+with the contents of the first article then!
+
+For this we'll need to do a list of things:
+
+- We need to locate the article block in HTML (using JavaScript)
+- We need to fill different components in this block with our article content
+
+Okidoki, Let's right click the first block and inspect it then!
+
+![inspect](https://i.imgur.com/i2ZIaRg.png)
+
+![result](https://i.imgur.com/XUr3vOR.png)
+
+Neat, so we have 5 `<article>` objects on our page. Each `<article>` object has
+a `<p class="title"><a></a></p>`, a `<p class="subtitle"></p>` and a `figure`.
+
+Let's stay in the inspector for a while and figure out if we can grab that first
+article somehow. Go to the `Console` tab and type something like this:
+
+![Console](https://i.imgur.com/gTYLT5y.png)
+
+NEAT! let's see if we can put something in the first title just to test.
+
+![hello](https://i.imgur.com/CfGGApy.png)
+
+Jep that works. Now that we know that "it should work", we can incorporate our
+code into our `src/pages/start.js` file.
+Go back to your editor and make the file look something like this:
+
+```javascript
+import { asyncDocumentReady } from '../services/utils';
+import articleClient from '../services/articleClient';
+
+function fillBlockOne(article) {
+  const articleObject = document.querySelectorAll('article')[0];
+  articleObject.querySelector('.title a').append(article.title);
+  articleObject.querySelector('.subtitle').append(article.subTitle);
+}
+
+async function init() {
+  const articles = await articleClient();
+  fillBlockOne(articles[0]);
+}
+
+if (window.location.pathname === '/') asyncDocumentReady(init);
+```
+
+Then let's check out the browser:
+
+![oops](https://i.imgur.com/VbXkgkD.png)
+
+That is a very long text for a small teaser. It's breaking our page!
+Let's use a neat javascript-feature called "[substring][Substring]"
+Substring works like this:
+
+```javascript
+"Some long string".substring(0, 6)
+```
+
+Substring starts at a character with index `0` (so our `S`) and goes all the way to
+the character with index `6` (so the `l` in `long`), making the final result
+`some l`. That's quite ugly. Let's see if we can also insert some `...` so
+people know there is more to see. But only when there are more than 5 characters
+in the string
+
+```javascript
+let tail = ''
+const foo = "Some long string"
+if (foo.length >= 5) tail = '...' // index starts at 0, length starts at 1!
+`${foo.substring(0, 6)}${tail}`
+```
+
+That will then result in `"Some l..."`.  
+Okay, lets use that! Open up the `src/pages/start.js` again and insert the code
+bit like this:
+
+```javascript
+import { asyncDocumentReady } from '../services/utils';
+import articleClient from '../services/articleClient';
+
+function getShortSubTitle(subTitle) {
+  const tail = subTitle.length >= 60 ? '...' : '';
+  const subStringed = subTitle.substring(0, 61);
+
+  return `${subStringed}${tail}`;
+}
+
+function fillBlockOne(article) {
+  const shortSubTitle = getShortSubTitle(article.subTitle);
+
+
+  const articleObject = document.querySelectorAll('article')[0];
+  articleObject.querySelector('.title a').append(article.title);
+  articleObject.querySelector('.subtitle').append(shortSubTitle);
+}
+
+async function init() {
+  const articles = await articleClient();
+  fillBlockOne(articles[0]);
+}
+
+if (window.location.pathname === '/') asyncDocumentReady(init);
+```
+
+And the result:
+
+![result](https://i.imgur.com/7mOx8hu.png)
+
+Let's see if we can Fill the rest of our articles using some magic loop stuff.
+There is just one problem. We don't want to accidentally fill up the block with
+today's weather.
+
+Luckily we can use `document.querySelectorAll('article:not(.weather)')`. The
+`not(.weather)` makes sure no article objects with the class `.weather` are
+selected.
+
+Additionally we have an extra problem. We could try to do
+`articleObjects.forEach()`, but [Internet Explorer doesn't support `forEach`][Internet Explorer]
+on lists of document nodes, so we need to use a `for loop`
+
+We'll also insert the image if there is an image.
+
+```
+import { asyncDocumentReady } from '../services/utils';
+import articleClient from '../services/articleClient';
+
+function getShortSubTitle(subTitle) {
+  const tail = subTitle.length >= 60 ? '...' : '';
+  const subStringed = subTitle.substring(0, 61);
+
+  return `${subStringed}${tail}`;
+}
+
+function fillBlock(article, articleObject) {
+  const shortSubTitle = getShortSubTitle(article.subTitle);
+  const image = document.createElement('img');
+  image.src = article.imageUrl;
+
+
+  articleObject.querySelector('.title a').append(article.title);
+  articleObject.querySelector('.subtitle').append(shortSubTitle);
+  if (article.imageUrl) {
+    articleObject.querySelector('figure').append(image);
+  }
+}
+
+function fillBlocks(articles) {
+  const articleObjects = document.querySelectorAll('article:not(.weather)');
+
+  for (let i = 0; i < articleObjects.length; i += 1) {
+    fillBlock(articles[i], articleObjects[i]);
+  }
+}
+
+async function init() {
+  const articles = await articleClient();
+  fillBlocks(articles);
+}
+
+if (window.location.pathname === '/') asyncDocumentReady(init);
+```
+
+With that done and saved our page should look like this:
+
+![result](https://i.imgur.com/qJyL3ma.jpg)
+
+Pretty sick huh?
+
+## Hacking a browser
+
+This is the last official thing for this week.
+
+This week we haven't really written any tests yet. Instead of creating unit
+tests (testing features by running small blocks of code) we'll try our hands at
+integration testing. In integration testing we write tests that run as close to
+reality as possible. If a product (your news website in this case) runs in a
+browser, then the tests should probably also use a browser.
+For this we'll use a plugin called puppeteer
+
+So lets do that!
+
+Create a new folder called `src/__tests__/` and in it a new file called
+`index.integration.test.js`. with that file in place, your folder structure
+should look a bit like this:
+
+```
+frontend/
+│
+├── node_modules/
+│   └── ...
+├── src/
+│   ├── __tests__/
+│   │   └── index.integration.test.js <--- This is the new file
+│   ├── pages/
+│   │   └── start.js
+│   ├── services /
+│   │   ├── articleClient.js
+│   │   └── utils.js
+│   └── index.js
+├── babel.config.js
+├── jest.config.js
+├── package-lock.json
+├── package.json
+└── webpack.config.js
+```
+
+Open up `src/__tests__/index.js` and write the following content:
+
+
+
+```javascript
+import puppeteer from 'puppeteer';
+
+describe('The website', () => {
+  let browser;
+
+  beforeAll(async () => {
+    // Before all tests start we'll open a new browser window
+    browser = await puppeteer.launch({ headless: false, slowMo: 80 });
+  });
+
+  afterAll(async () => {
+    // When the tests are done we'll exit the browser
+    await browser.close();
+  });
+
+  describe('start page', () => {
+    it('has a title', async () => {
+      const page = await browser.newPage(); // open a new tab
+      await page.goto('http://localhost:3000/'); // visit a page
+      await page.waitForSelector('body'); // wait for the body to load
+
+      const text = await page.evaluate(() => document.querySelector('h1').innerText);
+      expect(text).toContain('Accra Times'); // The page should contain some text
+    });
+
+    it('has working links to about and contact', async () => {
+      const page = await browser.newPage(); // open a new tab
+      await page.goto('http://localhost:3000/'); // visit a page
+      await page.click('a[href="/about"]'); // click on a link with href to /about
+      await page.waitForSelector('body'); // wait for the body to load
+
+      await page.goto('http://localhost:3000/'); // visit a page
+      await page.click('a[href="/contact"]'); // click on a link with href to /about
+      await page.waitForSelector('body'); // wait for the body to load
+    });
+  });
+});
+```
+
+With that done go to your terminal (make sure the npm-start windows on frontend
+and backend are still running!!!) and execute the test command
+
+```sh
+npm test
+```
+
+If everything is working as it should A Chromiunm browser should open and do all
+kinds of weird things.
+
+
+## Wrapping it up
+
+This week we've quite the hands-on on JavaScript in browsers. There is much much
+more to learn though. I've been developing front-end stuff for the better part
+of 10 years now and I'm still learning new browser based JavaScript stuff daily.
+If you want to dive a bit deeper after this weeks Lab I would advise to look
+into [DOM events][DOM events].
+
+Next week we'll leave the web behind us for a while and instead dive into
+Typesceript.
+
+See ya next week!!
+
+[Webpack]: https://webpack.js.org/
+[Babel]: https://babeljs.io/
+[Modules]: https://medium.com/@trekinbami/a-not-so-in-depth-explanation-of-es6-modules-import-and-export-13a80300f2f0
+[DOM]: https://www.w3.org/TR/REC-DOM-Level-1/introduction.html
+[Fetch]: https://caniuse.com/#feat=fetch
+[Fetch docs]: https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+[Substring]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
+[Internet Explorer]: https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach
+[DOM events]: https://www.w3schools.com/js/js_htmldom_events.asp
