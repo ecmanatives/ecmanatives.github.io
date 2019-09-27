@@ -2,10 +2,10 @@
 layout: post
 title: 'Lab 1: The basics of Awesome!'
 date: 2019-08-15 13:00:00 +0200
-categories: JavaScript Basics
+categories: js
+tags: [backend,classes,basics]
+image: 2019-08-15-lab-1.jpg
 ---
-
-# Lab 1: The basics of Awesome!
 
 Let's rub those hands together, after last weeks introduction and installation
 it's about time we got real!

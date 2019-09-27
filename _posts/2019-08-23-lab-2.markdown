@@ -2,10 +2,10 @@
 layout: post
 title: 'Lab 2: Stay Classy'
 date: 2019-08-23 22:00:00 +0200
-categories: JavaScript classes
+categories: js
+tags: [backend,classes,basics]
+image: 2019-08-23-lab-2.jpg
 ---
-
-# Lab 2: Stay Classy
 
 This lab is the second in a series of three labs where we don't build anything
 awesome yet, but instead look at some of the fundamental building blocks of the

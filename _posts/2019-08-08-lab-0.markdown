@@ -2,10 +2,10 @@
 layout: post
 title: 'Lab 0: The history of JavaScript and installation'
 date: 2019-08-08 10:56:09 +0200
-categories: JavaScript History
+categories: js
+tags: [backend,classes,basics]
+image: 2019-08-08-lab-0.jpg
 ---
-
-# Lab 0: The history of JavaScript and installation
 
 Lab number zero. That sounds a bit weird right? In this lab we're not going to
 do too much. Instead I'll talk a bit about the history of the web, JavaScript,

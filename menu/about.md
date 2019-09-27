@@ -1,10 +1,7 @@
 ---
 layout: page
 title: About
-permalink: /about/
 ---
-
-# About
 
 Welcome to this weird little site sitting somewhere hidden in my Github profile.
 The target of this site and the different labs on it is to teach a small group
@@ -33,6 +30,6 @@ it out. This stuff is going to be slightly next level and mostly focused on
 the front of things. But the principles above can be applied to other 
 languages on back-end too!
 
-The design of this site comes from [b2a3e8][theme site] with some alterations
+The design of this site comes from [Larange][theme site] with some alterations
 
-[theme site]: https://github.com/b2a3e8/jekyll-theme-console
+[theme site]: https://github.com/LeNPaul/Lagrange

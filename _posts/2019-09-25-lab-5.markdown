@@ -2,10 +2,10 @@
 layout: post
 title: "Lab 5: Front-end flatland"
 date: 2019-09-25 10:00:00 +0200
-categories: frontend
+categories: js
+tags: [html,web,front-end]
+image: 2019-09-25-lab-5.jpg
 ---
-
-# Lab 5: Front-end flatland
 
 Last week we worked on making a back-end with an HTML-only front-end. This week
 we continue making an awesome front-end. We're not going to bother to much with

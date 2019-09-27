@@ -2,10 +2,11 @@
 layout: post
 title: "Lab 4: You got served... some html"
 date: 2019-09-10 10:00:00 +0200
-categories: backend frontend
+categories: js
+tags: [html,web,front-end]
+image: 2019-09-10-lab-4.jpg
 ---
 
-# Lab 4: You got served... some html!
 After weeks of hurting your head on the basics of JavaScript it's time.
 
 > **WE'RE BUILDING WEB-APPS BABY!**

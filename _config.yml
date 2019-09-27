@@ -1,17 +1,7 @@
-title: 'The Ecma Natives '
-description: >-
-  A simple site with labs used by lamplighters from the global code programme.
+title: 'The Ecma Natives'
+description: Learning JS like a boss
+author: 'Peter van der Meulen'
 baseurl: '/'
-url: 'https://localhost:4000'
-header_pages:
-  - index.md
-  - about.md
-style: light
-footer: >-
-  <h1><a href="/">Ecma Natives Labs</a></h1>
-  Find this site on <a href="http://github.com/ecmanatives/ecmanatives.github.io" target="_blank">Github</a><br>
-  More from Peter over at <a href="http://picoreclame.nl" target="_blank">Picoreclame</a><br>
-  More about the summer programme at <a href="https://globalcode.org.uk/" target="_blank">Global Code</a>
 
 # Build settings
 markdown: kramdown
@@ -20,6 +10,15 @@ kramdown:
   hard_wrap: false
 plugins:
   - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 host: 0.0.0.0
 port: 4000
+paginate: 10
+highlighter: rouge
+permalink: none
+github:
+  url: https://ecmanatives.github.io
+repository: ecmanatives/ecmanatives.github.io

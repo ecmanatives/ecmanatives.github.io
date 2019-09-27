@@ -1,17 +1,57 @@
 ---
 layout: default
+title: Home
 ---
+{% unless paginator.next_page %}
+<div class="introduction">
+  <p>
+    This is the Labs page for the Ecma Natives Group formed after Global Code 2019
+    ended in Ghana. If you want to know more about this project, please refer to the
+    About page in the top.
+  </p>
 
-{{ content }}
-{% assign contentwonl = content | strip_newlines %} {% unless contentwonl == ""  %} <br /> {% endunless %} <!-- add line break if there is any content -->
+  <p>
+    © Hendrik Peter vd Meulen <br>
+    Want to use articles or pieces of text from this site or the github Repo?
+  </p>
 
-{%- if site.posts.size > 0 -%}
-  <ul>
-    {%- for post in site.posts -%}
-    <li>
-      {%- assign date_format = "%Y-%m-%d" -%}
-      [ {{ post.date | date: date_format }} ] <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-    </li>
-    {%- endfor -%}
-  </ul>
-{%- endif -%}
+  <p>
+    Be nice and ask me -- the writer of this page, that invested a lot of time
+    writing this up -- first. None of the materials on this site or its
+    corresponding GitHub repo may be used for commercial purposes.
+  </p>
+  <hr>
+</div>
+{% endunless %}
+
+{% for post in paginator.posts %}
+<div class="posts">
+  <h1>
+    <a href="{{ post.url }}">{{ post.title }}</a>
+  </h1>
+  {% if post.image %}
+  <div class="thumbnail-container">
+    <a href="{{ post.url }}"><img src="/assets/img/posts/{{ post.image }}"></a>
+  </div>
+  {% endif %}
+  <p>
+    {{ post.content | strip_html | truncate: 350 }} <a href="{{ post.url }}">Read more</a>
+    <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date | date_to_string }} - <i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span>
+  </p>
+</div>
+{% endfor %}
+
+<!-- Pagination links -->
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a class="pagination-button pagination-active next" href="{{ paginator.next_page_path }}">{{ site.data.settings.pagination.previous_page }}</a>
+  {% else %}
+    <span class="pagination-button">{{ site.data.settings.pagination.previous_page }}</span>
+  {% endif %}
+
+  {% if paginator.previous_page %}
+    <a class="pagination-button pagination-active" href="{{ paginator.previous_page_path }}">{{ site.data.settings.pagination.next_page }}</a>
+  {% else %}
+    <span class="pagination-button">{{ site.data.settings.pagination.next_page }}</span>
+  {% endif %}
+</div>

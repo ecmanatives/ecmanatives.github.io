@@ -2,17 +2,15 @@
 layout: post
 title: 'Lab 3: This is a test'
 date: 2019-08-30 10:00:00 +0200
-categories: JavaScript testing
+categories: js
+tags: [testing,backend,jest]
+image: 2019-08-30-lab-3.jpg
 ---
-
-# Lab 3: This is a test
 
 This lab is the third and last in a series of labs where we don't build anything
 too awesome, but instead look at some fundamental building blocks.
 In our first lab we covered the basics of types and last week you got to look at
 classes. That leaves test driven development.
-
-![Test](https://media1.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif)
 
 You might have heard this term if you work with computer science. Test driven
 development (TDD in short) is a style of programming where you'll (often) follow
