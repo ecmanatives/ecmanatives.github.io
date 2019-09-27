@@ -322,13 +322,13 @@ With that done, go to the main folder of your project in the terminal and
 execute:
 
 ```
-npm test
+$ npm test
 ```
 
 Your output should look something like this:
 
 ```sh
- PASS  test/calculator.test.js
+PASS  test/calculator.test.js
   ✓ thinks true is true (2ms)
 
 Test Suites: 1 passed, 1 total
@@ -343,8 +343,8 @@ NICE!
 ![a test](https://media.giphy.com/media/vRHEEwMwhnPzNDcK8E/giphy.gif)
 
 Let's write an actual test! **Make sure not to just copy paste these bits of
-code**, but to write them out. That way the `{` `(` `}` and `)` will make sense
-to you.
+code**, but to write them out. That way the locations of `{` `(` `}` and `)` 
+will make more sense to you.
 
 ```javascript
 const calculator = require('../calculator.js');
@@ -366,8 +366,10 @@ Your linter will already tell you what your next step should be (making a
 $ npm test
 ```
 
-Well that's our next step then, let's create a new `calculator.js` file in the
-main folder of our project
+See the error?
+
+Well that's our next step then. Let's create a new `calculator.js` file in the
+main folder of our project.
 
 ```sh
 $ touch calculator.js
@@ -388,7 +390,8 @@ Your project structure should then look a bit like this:
 |  |- calculator.test.js
 ```
 
-Now we and run the test again to see if the file (without code) can be found:
+Now we flip over to the terminal 
+and run the test again to see if the file (without code) can be found:
 
 ```sh
 $ npm test
@@ -401,10 +404,12 @@ TypeError: Calculator.add is not a function
 ```
 
 Nice, this means that our file was detected, but it didn't provide us with an
-object containing an `add` function!
+object containing an `add` function! (doh, it's empty!)
 
-With our first step done (Writing and programming a simple test) we can
-implement the easiest version of a feature in our `calculator.js` file:
+> remember those steps of TDD? we just did wrote and  programmed a simple test
+
+With our first step done we can implement the easiest version of a feature 
+in our `calculator.js` file:
 
 ```
 const calculator = {
