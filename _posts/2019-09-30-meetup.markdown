@@ -1,0 +1,35 @@
+---
+layout: post
+title: "Accra Meetup & some GPIO"
+date: 2019-09-25 10:00:00 +0200
+categories: js
+tags: [html,web,front-end]
+image: 2019-09-30-meetup.jpg
+---
+
+This is not a lab, but rather a notification and inspirational for those
+interested.
+
+I'll be in Accra for 2 weeks between the 13th and 25th of October. And I'm not
+leaving before we have had an awesome meet-up!
+So my plan is to do a workshop with you on the 19th of October from 17:00.
+
+The program for the evening is:
+
+- Opening with Mingle, drinks, some snacks & foods
+- A 1 or 2 hour workshop on the topic of "Serverless" and the creation of "serverless" programs through Typescript
+- Possibility of short "lightning talks" by students, tech companies, etc.
+- More mingle until we close for the evening
+
+Take with you:
+
+- Your laptop.
+- If able come prepared with a working nodejs (version 10.0 or higher) installation as well as a nice code editor (Atom, Visual Studio Code, Sublime).
+- If you have em, take some power-plugs & cables along so we can plug everyone in!
+
+Drinks & snacks:
+
+Taken care of, just come and have fun
+
+*You can Register to the event for free at 
+https://www.meetup.com/Accra-Couch-Jammers/events/265403149/*
