@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Accra Meetup & some GPIO"
+title: "Accra Meetup"
 date: 2019-09-25 10:00:00 +0200
 categories: js
 tags: [html,web,front-end]
