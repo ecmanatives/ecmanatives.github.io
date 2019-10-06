@@ -1,0 +1,318 @@
+---
+layout: post
+title: "Lab 6: Typically TypeScript"
+date: 2019-09-25 10:00:00 +0200
+categories: js
+tags: [html,web,front-end]
+<!-- image: 2019-09-25-lab-5.jpg -->
+---
+
+Until now you have been writing JavaScript through NodeJS to make back-end apps
+and through webpack for the front-end. JavaScript is a pretty sweet language
+with a lot of freedom. You can write your code in all kinds of fancy ways.
+
+All that freedom is nice, but it becomes messy when your code runs into a bug.
+Javascript is a run-time language too which means that the language gets
+compiled when your end-user or customer visits your site, which makes finding
+bugs even harder.
+
+When you write code in JavaScript there's nothing to stop you from writing:
+
+```javascript
+function addTwoNumbers(a, b) {
+  return a + b;
+}
+
+addTwoNumbers('foo', 2);
+```
+
+The code above doesn't add 2 numbers but instead glues the word `foo` and `2` 
+into the weird word `foo2`, something you probably didn't intend to happen.
+Sure you could write this:
+
+```javascript
+function addTwoNumbers(a, b) {
+  // if a is not a number or b is not a number
+  if (typeof a !== 'number' || typeof b !== 'number') throw "Use numbers!"
+  return a + b
+}
+```
+
+But that's a lot of code!
+
+This is where today's course starts. Today we'll be looking into the beautiful
+world of Typescript.
+
+Does this mean that we're going to learn an entire new language 😱? Nope!
+Typescript is a layer on top of JavaScript, It's basically just JavaScript with
+a type-system on top providing something we call "type-safety"
+
+New word time! Let's [Wikipedia][Wikipedia] Type-safety:
+
+> In computer science, type safety is the extent to which a programming
+> language discourages or prevents type errors. A type error is erroneous or
+> undesirable program behaviour caused by a discrepancy between differing data
+> types for the program's constants, variables, and methods (functions), e.g.,
+> treating an integer (int) as a floating-point number (float). Type safety is
+> sometimes alternatively considered to be a property of a computer program
+> rather than the language in which that program is written; that is, some
+> languages have type-safe facilities that can be circumvented by programmers
+> who adopt practices that exhibit poor type safety. The formal type-theoretic
+> definition of type safety is considerably stronger than what is understood by
+> most programmers.
+
+Okay, that explanation is waay to long and waay to hard.
+
+Type-safety basically comes down to a languages ability to prevent you from
+mixing objects of different types together.
+
+Let's go back to that code-snippet above. In that function we only 
+wanted numbers to be given to the function right?  
+So let's do it the Typescript way:
+
+```typescript
+function addTwoNumbers(a: number, b: number) {
+  return a + b
+}
+```
+
+From now on this function no longer takes anything else but numbers!
+
+In typescript there are however 2 gotchas:
+
+- Typescript is a "programming language" that "compiles" to "JavaScript".
+  Typescript is type-safe, but only for as long as it is Typescript.
+  If an end-user sends a `string` to a function that only takes `numbers` in
+  production, your code has already turned into javascript and lost its
+  type-safety. So you need to "sanitize" (check) the data your users are sending
+  to you.
+- Plugins are not (always) type-safe. Typescript is still JavaScript and will
+  allow you to import JavaScript plugins (like node-fetch). Its smart to find
+  type-script `@type`-files for these plugins that give them type-safety. When
+  those aren't available you need to sanitize input and output from and to these
+  plugins as if they were end-users.
+
+![enough](https://media0.giphy.com/media/fuKdUp3yolu4aBSo7Y/giphy.gif)
+
+Anyway, waay to much talking. Let's just start.
+In this lab we're going to cover the major stuff you can do with Typescript,
+we'll build some small stuff and explore the different possibilities. 
+
+## Your editor
+Until now you've been using Atom editor, sublime or (Neo)Vim.
+Today you are going to have 2 options. 1 easy one, 1 slightly harder.
+
+If you are using my neovim-starter kit, there's no need to do anything as
+Typescript support is already included there.
+
+### The easy way
+If you want to go the easy way, it's best to install an editor called "Visual
+Studio Code". Typescript was made by Microsoft, when they designed and created
+the language they made sure that their editor "visual studio code" would work
+with it out of the box.
+You can install Visual Studio Code here: 
+
+[https://code.visualstudio.com/download](https://code.visualstudio.com/download).
+On ubuntu, download the "Linux DEB" download and open it.
+
+### The harder Atom way
+
+Until now we've been using ESLint with "Atom lint", That plugin is fine, but one
+of the advantages we get with Typescript is that we suddenly get access to the
+fast information bonus that comes with compiled languages. So we'll install a
+special plugin that not only replaces our editors linter but also gives all
+kinds of hints while coding.
+
+Open up Atom and go to the settings screen (found under the "file"-menu 
+on Linux or the "Atom"-menu on OSX).
+
+Once there, go to packages, search for "linter" and disable the
+`linter-ui-default` and `linter` packages if you have them.
+
+![linter](https://i.imgur.com/Mu3BH5n.png)
+
+Then head over to the "install" section in your Atom settings, search for
+"Typescript" and install "Atom-Typescript - the only typescript plugin you'll
+ever need".
+
+If you're asked in a bubble (right-top) to install extra stuff, just hit the
+"ok" button. Installation might take a while.
+
+When that is done look for another package called "atom-ide-ui" and install that
+too.
+
+![atom-ide-ui](https://i.imgur.com/PNeLYwT.png)
+
+And then you're done!
+
+## Let's "Hello World" this thing!
+
+Now that our editor is awesome it's time to start a new project.
+Open your terminal application, `cd` to the place where you keep your peojcts
+and add a new folder there called `ts-snippets`.
+
+```sh
+$ mkdir ts-snippets
+$ cd ts-snippets
+```
+
+Now we'll install some global dependencies:
+
+```sh
+$ npm install -g typescript
+```
+
+This command will add the helper `tsc` to our computer. It will help us generate
+typescript bits and execute the language
+
+Now we need a package.json for our package stuff.
+
+```sh
+$ npm init
+
+package name: (ts-snippets)
+version: (1.0.0)
+description:
+entry point: (index.js)
+test command:
+git repository:
+keywords:
+author:
+license: (ISC)
+```
+
+Cool, we'll spawn typescript as a dependency in to this project and spawn some
+basic config. Today we'll not bother too much with ESLint (or TSLint as it's
+called in typescript).
+
+```sh
+$ npm install --save-dev typescript
+$ tsc --init
+```
+
+And we're done. Lastly we'll create a new file called `index.ts` (not `.js`!)
+
+```sh
+$ touch index.ts
+```
+
+Then open the editor. If you are rocking Visual Studio Code open your project
+like this:
+
+```sh
+$ code .
+```
+
+If you're on Atom you can do the Atom thing
+
+```sh
+atom .
+```
+
+And that's it.
+
+
+## Static and dynamic types
+Javascript comes with 7 dynamic types:
+
+- Undefined
+- Null
+- Boolean
+- Number
+- String
+- Symbol
+- Object
+
+We've been talking about most of them in Lab 1. These dynamic types are used 
+when JavaScript runs (when Typescript has been turned into JavaScript).
+
+Typescript adds a bunch of so called `static` types. These static types are used
+for prediction. Static types are not evaluated at run-time (javascript) but
+rather while you're still coding. They will help you to suggest how you should
+write code and they'll also warn you when you write a bug into your code.
+
+Let's start typing some of these static types.
+Open up `index.ts` in your editor and start typing the following:
+
+```typescript
+let isSomething: boolean = true;
+```
+
+Okay, we need to dissect this a bit.
+When a compiler runs, the Typescript above would be turned into:
+
+
+```javascript
+let isSomething = true;
+```
+
+So in typescript we just add the `: boolean` bit. This is the static type.
+Let's mess with it.
+
+Try to add a new line under our previous line like this:
+
+```
+let isSomething: boolean = true;
+isSomething = 'hello';
+```
+
+![](https://i.imgur.com/dgrVs7Z.png)
+
+We'll that's going wrong! Typescript doesn't allow us to assign a `string` to a
+value that can only contain `boolean` (`true` or `false`).
+Sweet eh?  
+If we try to assign `false` to the variable it should succeed without problems
+
+```
+let isSomething: boolean = true;
+isSomething = false;
+```
+
+Let's see how this "compiles"
+
+In your *Visual Studio code* editor type `⌘⇧B` on Mac OSX or `[CTRL]⇧B` on Linux and
+type `tsc`. Select the option `tsc build: index.ts`
+
+![](https://i.imgur.com/5mIyRyY.png)
+
+In *Atom* type `⌘⇧P` on Mac OSX or `[CTRL]⇧P` on Linux, type `typescript`. Select the
+option `typescript: build`. (You can also hit the F6 key to accomplish this)
+
+![](https://i.imgur.com/v1hwVPi.png)
+
+Alternatively you can also write `tsc index.ts` in the terminal
+
+A new file called `index.js` should pop up in your project. Typescript created a
+JavaScript file for you from your typescript project.
+Let's stay and continue working in our `index.ts` file though.
+
+We have now tried the static type of boolean. Let's type a few different ones:
+
+### Boolean
+So we did this one already
+
+```typescript
+let isSomething: boolean = true;
+```
+
+### String
+Pretty easy right?
+
+```typescript
+let title: string = 'Some Title';
+let content: string = 'some Content';
+```
+
+### number
+swell.
+
+let someDecimalNumber: number = 42;
+let someBinaryNumber: number = 0b101010; // => 42
+let someOctalNumber: number = 0o52; // => 42
+let someHexadecimalNumber: number = 0x2a; // => 42
+
+> Let's not use those last two every though.
+
+
+
+[Wikipedia]: https://en.wikipedia.org/wiki/Type_safety
