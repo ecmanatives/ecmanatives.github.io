@@ -1,0 +1,720 @@
+---
+layout: post
+title: "Lab 6: Typically TypeScript"
+date: 2019-10-12 10:00:00 +0200
+categories: js
+tags: [typescript,javsacript]
+image: 2019-10-12-lab-6.jpg
+---
+
+Until now you have been writing JavaScript through NodeJS to make back-end apps
+and webpack for the front-end. JavaScript is a pretty sweet language
+with a lot of freedom. You can write your code in all kinds of fancy ways.
+
+All that freedom is nice, but it becomes messy when your code runs into a bug.
+Javascript is a run-time language too, which means that the language gets
+compiled when your end-user or customer visits your site. That makes finding
+bugs even harder.
+
+When you write code in JavaScript there's nothing to stop you from writing:
+
+```javascript
+function addTwoNumbers(a, b) {
+  return a + b;
+}
+
+addTwoNumbers('foo', 2);
+```
+
+The code above doesn't add 2 numbers but instead glues the word `foo` and `2` 
+into the weird word `foo2`, something you probably didn't intend to happen.
+Sure you could write this:
+
+```javascript
+function addTwoNumbers(a, b) {
+  // if a is not a number or b is not a number
+  if (typeof a !== 'number' || typeof b !== 'number') throw "Use numbers!"
+  return a + b
+}
+```
+
+But that's a lot of code!
+
+This is where today's lab starts. Today we'll be looking into the beautiful
+world of Typescript.
+
+Does this mean that we're going to learn an entire new language 😱? Nope!
+Typescript is a layer on top of JavaScript, It's basically just JavaScript with
+a type-system on top providing something we call "type-safety"
+
+New word time! Let's [Wikipedia][Wikipedia] Type-safety:
+
+> In computer science, type safety is the extent to which a programming
+> language discourages or prevents type errors. A type error is erroneous or
+> undesirable program behaviour caused by a discrepancy between differing data
+> types for the program's constants, variables, and methods (functions), e.g.,
+> treating an integer (int) as a floating-point number (float). Type safety is
+> sometimes alternatively considered to be a property of a computer program
+> rather than the language in which that program is written; that is, some
+> languages have type-safe facilities that can be circumvented by programmers
+> who adopt practices that exhibit poor type safety. The formal type-theoretic
+> definition of type safety is considerably stronger than what is understood by
+> most programmers.
+
+Okay, that explanation is waay to long and waay to hard.
+
+Type-safety basically comes down to a languages ability to prevent you from
+mixing objects of different types together.
+
+![](https://i.imgur.com/M2buzpt.png)  
+A bit like a rather advanced robot preventing you from mixing red socks and a
+white shirt in the laundry. Which is totally possible, but you'd hate when it
+happened.
+
+Typescript prevents you from accidentally mixing strings, numbers and 
+other objects with each other in your code.
+
+Let's go back to that code-snippet above. In that function we only
+wanted numbers to be given to the function right?  
+So let's do it the Typescript way:
+
+```typescript
+function addTwoNumbers(a: number, b: number) {
+  return a + b
+}
+```
+
+From now on this function no longer takes anything else but numbers!
+When we do send a string, our editor will complain and we can't turn our 
+Typescript code into JavaScript code anymore until we fix the mistake.
+
+![Boom](https://media1.giphy.com/media/2sddCIZRYfiPlNeLZn/giphy.gif)
+
+In typescript there are however 2 gotchas:
+
+- Typescript is a "programming language" that "compiles" to "JavaScript".
+  Typescript is type-safe, but only for as long as it is Typescript.
+  If an end-user sends a `string` to a function that only takes `numbers` in
+  production, your code has already turned into javascript and lost its
+  type-safety. So you need to "sanitize" (check) the data your users are sending
+  to you.
+- Plugins are not (always) type-safe. Typescript is still JavaScript and will
+  allow you to import JavaScript plugins (like node-fetch). Its smart to find
+  type-script `@type`-files for these plugins that give them type-safety. When
+  those aren't available you need to sanitize input and output from and to these
+  plugins as if they were end-users.
+
+Anyway, waay to much talking. Let's just start.
+In this lab we're going to cover the major stuff you can do with Typescript,
+we'll build some small stuff and explore the different possibilities. 
+
+## Your editor
+Until now you've been using Atom editor, sublime or (Neo)Vim.
+Today you are going to have 2 options. 1 easy one, 1 slightly harder.
+
+If you are using my neovim-starter kit, there's no need to do anything as
+Typescript support is already included there.
+
+### The easy way
+If you want to go the easy way, it's best to install an editor called "Visual
+Studio Code". Typescript was made by Microsoft, when they designed and created
+the language they made sure that their editor "visual studio code" would work
+with it out of the box.
+You can install Visual Studio Code here: 
+
+[https://code.visualstudio.com/download](https://code.visualstudio.com/download).
+On ubuntu, download the "Linux DEB" download and open it.
+
+While Visual Studio Code comes with Typescript support out of the box, it
+doesn't lint your code. For that reason make sure to install it. You can do that
+through this link:
+
+[https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+### The harder Atom way
+
+Until now we've been using ESLint with "Atom lint", That plugin is fine, but one
+of the advantages we get with Typescript is that we suddenly get access to the
+fast information bonus that comes with compiled languages. So we'll install a
+special plugin that not only replaces our editors linter but also gives all
+kinds of hints while coding.
+
+Open up Atom and go to the settings screen (found under the "file"-menu 
+on Linux or the "Atom"-menu on OSX).
+
+Once there, go to packages, search for "linter" and disable the
+`linter-ui-default` and `linter` packages if you have them.
+
+![linter](https://i.imgur.com/Mu3BH5n.png)
+
+You'll want to keep `linter-eslint` and friends around. These plugins will work
+fine with the new "Linting" engine we're installing in a sec. ;)
+
+Then head over to the "install" section in your Atom settings, search for
+"Typescript" and install "Atom-Typescript - the only typescript plugin you'll
+ever need".
+
+If you're asked in a bubble (right-top) to install extra stuff, just hit the
+"OK" button. Installation might take a while.
+
+When that is done look for another package called "atom-ide-ui" and install that
+too (this replaces the linter stuff you removed earlier).
+
+![atom-ide-ui](https://i.imgur.com/PNeLYwT.png)
+
+And then you're done!
+
+## Let's "Hello World" this thing!
+
+Now that our editor is awesome it's time to start a new project.
+Open your terminal application, `cd` to the place where you keep your peojects
+and add a new folder there called `ts-snippets`.
+
+```sh
+$ mkdir ts-snippets
+$ cd ts-snippets
+```
+
+Now we'll install some global dependencies:
+
+```sh
+$ npm install -g typescript
+```
+
+This command will add the helper `tsc` to our computer. It will help us generate
+typescript bits and execute the language
+
+Now we need a package.json for our package stuff.
+
+```sh
+$ npm init
+
+package name: (ts-snippets)
+version: (1.0.0)
+description:
+entry point: (index.js)
+test command:
+git repository:
+keywords:
+author:
+license: (ISC)
+```
+
+Cool, we'll spawn typescript as a dependency in to this project and spawn some
+basic config. Today we'll not bother too much with ESLint (or TSLint as it's
+called in typescript).
+
+```sh
+$ npm install --save-dev typescript
+$ tsc --init
+```
+
+And we're done. Lastly we'll create a new file called `index.ts` (not `.js`!)
+
+```sh
+$ touch index.ts
+```
+
+Then open the editor. If you are rocking Visual Studio Code open your project
+like this:
+
+```sh
+$ code .
+```
+
+If you're on Atom you can do the Atom thing
+
+```sh
+atom .
+```
+
+And that's it.
+
+
+## Static and dynamic types
+Javascript comes with 7 dynamic types:
+
+- Undefined
+- Null
+- Boolean
+- Number
+- String
+- Symbol
+- Object
+
+We've been talking about most of them in Lab 1. These so called "dynamic types"
+are used when JavaScript runs (when Typescript has been turned into JavaScript).
+
+Typescript adds a bunch of so called `static` types. These static types are used
+for prediction. Static types are not evaluated at run-time (javascript) but
+rather while you're still coding. They will help you to suggest how you should
+write code and they'll also warn you when you write a bug into your code.
+
+Let's start typing some of these static types.
+Open up `index.ts` in your editor and start typing the following:
+
+```typescript
+let isSomething: boolean = true;
+```
+
+Okay, we need to dissect this a bit.
+When a compiler runs, the Typescript above would be turned into:
+
+
+```javascript
+let isSomething = true;
+```
+
+So in typescript we just add the `: boolean` bit. This is the static type.
+Let's mess with it.
+
+Try to add a new line under our previous line like this:
+
+```
+let isSomething: boolean = true;
+isSomething = 'hello';
+```
+
+When you hover over the spelling-error line underneath the code with your mouse
+you'll see this
+
+![](https://i.imgur.com/dgrVs7Z.png)
+
+We'll that's going wrong! Typescript doesn't allow us to assign a `string` to a
+value that can only contain `boolean` (`true` or `false`).
+Sweet eh?  
+If we try to assign `false` to the variable, our linter shouldn't complain too
+much.
+
+```
+let isSomething: boolean = true;
+isSomething = false;
+```
+
+Let's see how this "compiles"
+
+**Visual studio code**  
+In your *Visual Studio code* editor hit `⌘⇧B` if you are on Mac OSX or `[CTRL]⇧B` 
+if you are on Linux or windows, then type `tsc`. Select the 
+option `tsc build: index.ts`
+
+![](https://i.imgur.com/5mIyRyY.png)
+
+**Atom editor**  
+In *Atom* type `⌘⇧P` on Mac OSX or `[CTRL]⇧P` on Linux, type `typescript`. Select the
+option `typescript: build`. (You can also hit the F6 key to accomplish this)
+
+![](https://i.imgur.com/v1hwVPi.png)
+
+**If that doesnt work or if you are using (Neo)Vim**  
+Alternatively you can also write `tsc index.ts` in the terminal
+
+A new file called `index.js` should pop up in your project. Typescript created a
+JavaScript file for you from your typescript file.
+Let's stay and continue working in our `index.ts` file though.
+
+So we managed to write the static type "boolean". Let's see what other kind of 
+types there are
+
+### Boolean
+We did this one already
+
+```typescript
+let isSomething: boolean = true;
+```
+
+### String
+This one is pretty easy right?
+
+```typescript
+let title: string = 'Some Title';
+let content: string = 'some Content';
+```
+
+We can go multi-line on our strings with back-ticks. Back-ticks can also be used
+to parse information to our strings:
+
+```typescript
+const weather = 'sunyy';
+const report = `
+  Welcome to this evenings weather,
+  The weather forecast for today seems to be ${weather}
+`
+```
+
+In the above 2 examples I didn't bother adding `: string`. When you
+define a variable and immediately put a string in it then Typescript will be 
+smart enough to assume that `string`, will be the only type ever used on the 
+variable. Neat huh? I'll explain this more a bit later!
+
+### number
+swell.
+
+```typescript
+let someDecimalNumber: number = 42;
+let someBinaryNumber: number = 0b101010; // => 42
+let someOctalNumber: number = 0o52; // => 42
+let someHexadecimalNumber: number = 0x2a; // => 42
+```
+
+> Let's not use those last two too much though, they are confusing.
+
+### Array
+Arrays in typescript are commonly written in two ways:
+
+```typescript
+let fruits: string[] = ['apple', 'orange', 'banana'];
+let garageObjects: Array<string | number> = ['wrench', 42, 'hammer'];
+```
+
+We commonly use `string[]` or `number[]`, etc. when an array only contains 1
+type of object.
+
+We start to use the alternative `Array<string | number>` if an array can
+contain multiple types of objects.  
+This method of `<string>` is referred to as a so called "angle bracket notation"
+
+### Tuple
+When we want to work with arrays that contain a specific list of object types we
+use a Tuple type.
+
+```typescript
+let couchDetails [string, number, boolean]
+couchDetails = ['brown', 40, true]; // Success!
+couchDetails = ['red', 40, 'something'] // will fail, the 3rd element should be a boolean
+couchDetails = ['gray', 20, false, 3] // will fail, there should only be 3 elements in the array
+```
+
+### Enum
+An enum is basically a list of predefined constants. Like shirt sizes:
+
+```typescript
+enum Sizes {
+    Small,
+    Medium,
+    Large,
+}
+
+Sizes.Small; // is 0
+Sizes.Medium; // is 1
+Sizes.Large; // is 2
+```
+
+You can make an Enum start at a different count like this:
+
+```typescript
+enum Companies {
+  Google = 1,
+  Facebook,
+  Twitter,
+}
+
+Companies.Google; // is 1
+Companies.Facebook; // is 2
+Companies.Twitter; // is 3
+```
+
+You can also assign other values to Enums
+
+
+```typescript
+enum Companies {
+  Google = 'Google',
+  Facebook = 'Facebook',
+  Twitter = 'Twitter',
+}
+
+Companies.Google; // is 'Google'
+Companies.Facebook; // is 'Facebook'
+Companies.Twitter; // is 'Twitter'
+```
+
+### Object
+We normally don't really use object, as it's better to use either Enumerables or
+"interfaces". We'll dive into interfaces in a small bit.
+
+
+### Any
+As the name suggest, the any-type is pretty much anything you want. With Any you
+can temporarily skip type-safety. If you are working on a new project, you
+should probably put a rule in your `tsconfig` to block the use of the
+any-object. If you are working on translating an old project from JavaScript to
+Typescript, you can't really get away from using `any` types here and there from
+time to time.
+
+```typescript
+let anyThing: any = 42; // assigned a number
+
+anyThing = 'some string'; // can be reassigned to a string
+anyThing = false; // can be reassigned to a boolean
+```
+
+## Void
+void is when you expect something to be completely devoid of anything.
+Having a variable be void would be pretty useless, but void is pretty common in
+functions. Sometimes you want the result of a function to not return anything.
+
+```typescript
+function doSomething(): void {
+  console.log('I write to console, but return nothing');
+  return;
+}
+
+doSomething();
+```
+
+### null and undefined
+these types are very much like each other:
+
+```typescript
+let anUndefinedVariable: undefined = undefined;
+let aNullVariable: null = null;
+let something: null = undefined;
+```
+
+These two types are however a bit special. If I were to write:
+
+```typescript
+let someString: string;
+```
+
+Then that string would be null until I actually assigned something. So by
+default all of the types we've seen so far can be `null` and `undefined`.
+This results into the below being a totally fine thing:
+
+```typescript
+let someString: string = null;
+```
+
+While variables can be empty when we assign them, we probably don't want to
+specifically assign null to our string later. This is why it's smart to make a
+rule in your project's `tsconfig` to block reassigning variables with null.
+
+## Type inference
+In many cases, you won't actually have to type the type annotation. When you
+write something like this:
+
+```typescript
+let fruit = 'apple';
+```
+
+The type-system will be smart and assume that whatever you'll assign to that
+fruit later will probably also be a string
+
+This also counts for default variables in functions:
+
+```typescript
+const fruitLength = (fruit = 'Apple') => {
+    return fruit.length;
+};
+```
+
+The assignment of `= 'Apple'` here tells the type-system that fruit will most
+likely always be a string. Aditionally since you're only returning one variable 
+(the length of the fruit), which happens to come from a native JavaScript
+feature, the type-system will assume that your function always returns numbers
+
+Typescript uses the best common type inference strategy to determine types.
+When you provide it with an array like this:
+
+```typescript
+someArray = [1, 2, 'someString', 3];
+```
+
+It will infer the type `Array<number | string>`, since using that would be more
+common than using a tuple (`[number, number, string, number]`).
+When mixing and matching object like array above, it's probably not a bad idea
+to not let type interface do its magic for you. Being "explicit" is often better
+than being "implicit".
+
+## Interface
+Earlier I refused to explain you how to use the type `object` in favor of
+showing you something much better called `Interfaces`. Let's take a look at
+them:
+
+```typescript
+interface Animal {
+    kind: string;
+    weight: number;
+}
+
+let dog: Animal;
+
+dog = {
+    kind: 'mammal',
+    weight: 10,
+}; // succeeds
+
+dog = {
+    kind: true,
+    weight: 10,
+}; // fails, kind should be a string
+```
+
+Additionally you can also use a `type alias` to achieve the same:
+
+```typescript
+type Animal {
+    kind: string;
+    weight: number;
+}
+
+let dog: Animal;
+
+dog = {
+    kind: 'mammal',
+    weight: 10,
+}; // succeeds
+
+dog = {
+    kind: true,
+    weight: 10,
+}; // fails, kind should be a string
+```
+
+They do the same thing, but have slightly different notation. Just choose
+whatever you like most and stick with it in your projects. It's best to use only
+one approach in your projects for the sake of consistency.
+
+If you want to make an interface for an object you'll only use once in one
+function, it's often best to just use an `inline notation` approach:
+
+```typescript
+let dog: {
+    kind: string;
+    weight: number;
+};
+
+dog = {
+    kind: 'mammal',
+    weight: 10,
+}; // succeeds
+
+dog = {
+    kind: true,
+    weight: 10,
+}; // fails, kind should be a string
+```
+
+## Less commonly used annotations
+### Generics
+There can be situations where the generic type of an object doesn't matter, but
+the relationship between the given object and the returned objects should be
+enforced. That's when we start using Generics. Below an example:
+
+```typescript
+const fillArray = <T>(len: number, element: T) => {
+   return new Array<T>(len).fill(elem);
+}
+
+const newArray = fillArray<string>(3, 'hi'); // => ['hi', 'hi', 'hi']
+
+newArray.push('bye'); // succeeds
+newArray.push(true); // fails, only strings can be added to the array
+```
+
+In the above example the generic type `<T>` gets assigned to `<String>`, but we
+could have written `fillArray<Number>(3, 10)` to create a filled array that
+would only allowed numbers.
+
+### Union-type.
+Sometimes we would allow objects to have 2 different types. This is when we use
+the Union notation.  
+A union notation works like this:
+
+```typescript
+let someValue: string | number = 'hello';
+someValue = 10 // succeeds;
+someValue = false // fails, only strings or numbers can be assigned.
+```
+
+### Intersection type
+While in union types we would allow the use of only 1 type at the same time,
+Intersection types can be used to mix and match 2 types together.
+
+```typescript
+interface Tree {
+  height: number;
+  kind: string;
+}
+
+interface House {
+  colour: string;
+}
+
+let treeHouse: Tree & House;
+
+treeHouse.kind = 'Oak';
+treeHouse.height = 60;
+treeHouse.colour = 'Blue';
+treeHouse.name = 'The Fort' // fails, name does not exist on types Tree and House.
+```
+
+### Optional type
+Say you're building a function, but you'd be okay if a parameter is missing
+sometimes, That's when optional types are used.
+
+```typescript
+function getTrainTrip(line: number, reservedSeatNumber?: number): void {
+  if (reservedSeatNumber) {
+    console.log(`
+    Welcome onboard of train ${line}.
+    You have seat number ${reservedSeatNumber}.
+    `)
+  } else {
+    console.log(`
+    Welcome on board of train ${line}.
+    You did not reserve a seat, please find a free seat in cariage 3
+    `)
+  }
+}
+```
+
+When specifying a list of parameters in a function, it's a best practice to put
+the optional parameters last.
+
+You can also define optional variables in interfaces:
+
+```typescript
+interface Tree {
+  height: number;
+  kind: string;
+  colour?: string;
+}
+```
+
+Here, the order of required and optional variables is not so important, however 
+for the sake of consistency I either sort everything alphabetically or put 
+optional variables last.
+
+## What about promises?
+Promises are a bit special, A promise takes some and will then after a while come
+back with a result. How would you apply Type-safety to that?
+The function below will return a `Promise` that in time will return a `string`
+
+```
+function iWillWait(): Promise<string> {
+  new Promise((resolve) => {
+    // timeout of 2000 miliseconds resolving our promise with "Hello!"
+    setTimeout( () => resolve('Hello!'), 2000 )
+  })
+}
+```
+
+
+## Final remarks
+We covered a lot of ground again today and you learned an entirely "new"
+programming language! Sorta...
+
+If you feel like you don't have the hang of it yet, Google
+around! The makers of the language and lots of enthusiasts have written
+countless guides, labs and reviews on Typescript.
+
+From now on, all of the future labs will base off the use of Typescript.
+
+Next week I'll be in Accra Ghana for a presentation of Serverless. After that
+we'll continue do dive into the world of React!
+
+See you next week!
+
+[Wikipedia]: https://en.wikipedia.org/wiki/Type_safety
