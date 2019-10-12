@@ -66,7 +66,15 @@ Okay, that explanation is waay to long and waay to hard.
 Type-safety basically comes down to a languages ability to prevent you from
 mixing objects of different types together.
 
-Let's go back to that code-snippet above. In that function we only 
+![](https://i.imgur.com/M2buzpt.png)  
+Like a rather advanced robot preventing you from mixing pink socks and a
+white shirt in the laundry. Which is totally possible, but you'd hate when it
+happened.
+
+Typescript prevents you from trying to mix strings, numbers and other objects
+with each other in your code.
+
+Let's go back to that code-snippet above. In that function we only
 wanted numbers to be given to the function right?  
 So let's do it the Typescript way:
 
@@ -77,6 +85,8 @@ function addTwoNumbers(a: number, b: number) {
 ```
 
 From now on this function no longer takes anything else but numbers!
+When we do, our editor will complain and we can't turn our Typescript code into
+JavaScript code anymore.
 
 In typescript there are however 2 gotchas:
 
@@ -131,15 +141,18 @@ Once there, go to packages, search for "linter" and disable the
 
 ![linter](https://i.imgur.com/Mu3BH5n.png)
 
+You'll want to keep `linter-eslint` and friends around. These plugins will work
+fine with the new "Linting" engine we're installing in a sec. ;)
+
 Then head over to the "install" section in your Atom settings, search for
 "Typescript" and install "Atom-Typescript - the only typescript plugin you'll
 ever need".
 
 If you're asked in a bubble (right-top) to install extra stuff, just hit the
-"ok" button. Installation might take a while.
+"OK" button. Installation might take a while.
 
 When that is done look for another package called "atom-ide-ui" and install that
-too.
+too (this replaces the linter stuff you removed earlier).
 
 ![atom-ide-ui](https://i.imgur.com/PNeLYwT.png)
 
@@ -148,7 +161,7 @@ And then you're done!
 ## Let's "Hello World" this thing!
 
 Now that our editor is awesome it's time to start a new project.
-Open your terminal application, `cd` to the place where you keep your peojcts
+Open your terminal application, `cd` to the place where you keep your peojects
 and add a new folder there called `ts-snippets`.
 
 ```sh
@@ -223,8 +236,8 @@ Javascript comes with 7 dynamic types:
 - Symbol
 - Object
 
-We've been talking about most of them in Lab 1. These dynamic types are used 
-when JavaScript runs (when Typescript has been turned into JavaScript).
+We've been talking about most of them in Lab 1. These so called "dynamic types"
+are used when JavaScript runs (when Typescript has been turned into JavaScript).
 
 Typescript adds a bunch of so called `static` types. These static types are used
 for prediction. Static types are not evaluated at run-time (javascript) but
@@ -256,12 +269,16 @@ let isSomething: boolean = true;
 isSomething = 'hello';
 ```
 
+When you hover over the spelling-error line underneath the code with your mouse
+you'll see this
+
 ![](https://i.imgur.com/dgrVs7Z.png)
 
 We'll that's going wrong! Typescript doesn't allow us to assign a `string` to a
 value that can only contain `boolean` (`true` or `false`).
 Sweet eh?  
-If we try to assign `false` to the variable it should succeed without problems
+If we try to assign `false` to the variable, our linter shouldn't complain too
+much.
 
 ```
 let isSomething: boolean = true;
@@ -283,7 +300,7 @@ option `typescript: build`. (You can also hit the F6 key to accomplish this)
 Alternatively you can also write `tsc index.ts` in the terminal
 
 A new file called `index.js` should pop up in your project. Typescript created a
-JavaScript file for you from your typescript project.
+JavaScript file for you from your typescript file.
 Let's stay and continue working in our `index.ts` file though.
 
 We have now tried the static type of boolean. Let's type a few different ones:
@@ -303,16 +320,163 @@ let title: string = 'Some Title';
 let content: string = 'some Content';
 ```
 
+We can go multi-line on our strings with back-ticks. Back-ticks can also be used
+to parse information to our strings:
+
+```typescript
+const weather = 'sunyy';
+const report = `
+  Welcome to this evenings weather,
+  The weather forecast for today seems to be ${weather}
+`
+```
+
+In the above 2 examples I didn't bother to much adding `: string`. When you
+define a constant (`const`), it can never be re-assigned anyway, Typescript is smart
+enough to assume that `string`, will be the only type ever used on the variables
+`weather` and `report`. Neat huh?
+
 ### number
 swell.
 
+```typescript
 let someDecimalNumber: number = 42;
 let someBinaryNumber: number = 0b101010; // => 42
 let someOctalNumber: number = 0o52; // => 42
 let someHexadecimalNumber: number = 0x2a; // => 42
+```
 
-> Let's not use those last two every though.
+> Let's not use those last two too much though, they are confusing.
+
+## Array
+Arrays in typescript are commonly written in two ways:
+
+```typescript
+let fruits: string[] = ['apple', 'orange', 'banana'];
+let garageObjects: Array<String | number> = ['wrench', 42, 'hammer'];
+```
+
+We commonly use `string[]` or `number[]`, etc. when an array only contains 1
+type of object.
+
+We start to use the alternative `Array<string | number>` when an array can
+contain multiple types of objects. This method of `<string>` is referred to as
+the so called "angle bracket notation"
+
+## Tuple
+When we want to work with arrays that contain a specific list of object types we
+use a Tuple type.
+
+```typescript
+let couchDetails [string, number, boolean]
+couchDetails = ['brown', 40, true]; // Success!
+couchDetails = ['red', 40, 'something'] // will fail, the 3rd element should be a boolean
+couchDetails = ['gray', 20, false, 3] // will fail, there should only be 3 elements in the array
+```
+
+## Enum
+An enum is basically a list of predefined constants. Like shirt sizes:
+
+```typescript
+enum Sizes {
+    Small,
+    Medium,
+    Large,
+}
+
+Sizes.Small; // is 0
+Sizes.Medium; // is 1
+Sizes.Large; // is 2
+```
+
+You can make an Enum start at a different count like this:
+
+```typescript
+enum Companies {
+  Google = 1,
+  Facebook,
+  Twitter,
+}
+
+Companies.Google; // is 1
+Companies.Facebook; // is 2
+Companies.Twitter; // is 3
+```
+
+You can also assign other values to Enums
 
 
+```typescript
+enum Companies {
+  Google = 'Google',
+  Facebook = 'Facebook',
+  Twitter = 'Twitter',
+}
+
+Companies.Google; // is 'Google'
+Companies.Facebook; // is 'Facebook'
+Companies.Twitter; // is 'Twitter'
+```
+
+## Object
+We normally don't really use object, as it's better to use either Enumerables or
+"interfaces". We'll dive into interfaces in a small bit.
+
+
+## Any
+As the name suggest, the any-type is pretty much anything you want. With Any you
+can temporarily skip type-safety. If you are working on a new project, you
+should probably put a rule in your `tsconfig` to block the use of the
+any-object. If you are working on translating an old project from JavaScript to
+Typescript, you can't really get away from using `any` types here and there from
+time to time.
+
+```typescript
+let anyThing: any = 42; // assigned a number
+
+anyThing = 'some string'; // can be reassigned to a string
+anyThing = false; // can be reassigned to a boolean
+```
+
+## Void
+void is when you expect something to be completely devoid of anything.
+Having a variable be void would be pretty useless, but void is pretty common in
+functions. Sometimes you want the result of a function to not return anything.
+
+```typescript
+function doSomething(): void {
+  console.log('I write to console, but return nothing');
+  return;
+}
+
+doSomething();
+```
+
+## null and undefined
+these types are very much like each other:
+
+```typescript
+let anUndefinedVariable: undefined = undefined;
+let aNullVariable: null = null;
+let something: null = undefined;
+```
+
+These two types are however a bit special. If I were to write:
+
+```
+let someString: string
+```
+
+Then that string would be null until I actually assigned something. So by
+default all of the types we've seen so far can be `null` and `undefined`.
+This results into the below being a totally fine thing:
+
+```
+let someString: string = null
+```
+
+While variables can be empty when we assign them, we probably don't want to 
+specifically assign null to our string later. This is why it's smart to make a
+rule in your project's `tsconfig` to block the latter of my 2 examples. 
 
 [Wikipedia]: https://en.wikipedia.org/wiki/Type_safety
