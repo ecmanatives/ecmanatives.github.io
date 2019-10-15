@@ -688,8 +688,8 @@ for the sake of consistency I either sort everything alphabetically or put
 optional variables last.
 
 ## What about promises?
-Promises are a bit special, A promise takes some and will then after a while come
-back with a result. How would you apply Type-safety to that?
+Promises are a bit special. A promise starts off and will then resolve
+with a result after a while. How would you apply Type-safety to that?
 The function below will return a `Promise` that in time will return a `string`
 
 ```
