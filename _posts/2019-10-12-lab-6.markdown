@@ -280,7 +280,7 @@ you'll see this
 
 ![](https://i.imgur.com/dgrVs7Z.png)
 
-We'll that's going wrong! Typescript doesn't allow us to assign a `string` to a
+Well that's going wrong! Typescript doesn't allow us to assign a `string` to a
 value that can only contain `boolean` (`true` or `false`).
 Sweet eh?  
 If we try to assign `false` to the variable, our linter shouldn't complain too
@@ -307,7 +307,7 @@ option `typescript: build`. (You can also hit the F6 key to accomplish this)
 ![](https://i.imgur.com/v1hwVPi.png)
 
 **If that doesnt work or if you are using (Neo)Vim**  
-Alternatively you can also write `tsc index.ts` in the terminal
+You can also write `tsc index.ts` in the terminal
 
 A new file called `index.js` should pop up in your project. Typescript created a
 JavaScript file for you from your typescript file.
@@ -343,8 +343,8 @@ const report = `
 ```
 
 In the above 2 examples I didn't bother adding `: string`. When you
-define a variable and immediately put a string in it then Typescript will be 
-smart enough to assume that `string`, will be the only type ever used on the 
+define a variable and immediately put a string in it, then Typescript will be 
+smart enough to assume that `string` is going to be the only type ever used on the 
 variable. Neat huh? I'll explain this more a bit later!
 
 ### number
@@ -372,14 +372,14 @@ type of object.
 
 We start to use the alternative `Array<string | number>` if an array can
 contain multiple types of objects.  
-This method of `<string>` is referred to as a so called "angle bracket notation"
+This method of `<string>` is referred to as an "angle bracket notation"
 
 ### Tuple
 When we want to work with arrays that contain a specific list of object types we
 use a Tuple type.
 
 ```typescript
-let couchDetails [string, number, boolean]
+let couchDetails: [string, number, boolean]
 couchDetails = ['brown', 40, true]; // Success!
 couchDetails = ['red', 40, 'something'] // will fail, the 3rd element should be a boolean
 couchDetails = ['gray', 20, false, 3] // will fail, there should only be 3 elements in the array
@@ -435,7 +435,7 @@ We normally don't really use object, as it's better to use either Enumerables or
 
 
 ### Any
-As the name suggest, the any-type is pretty much anything you want. With Any you
+As the name suggests, the any-type is pretty much anything you want. With Any you
 can temporarily skip type-safety. If you are working on a new project, you
 should probably put a rule in your `tsconfig` to block the use of the
 any-object. If you are working on translating an old project from JavaScript to
