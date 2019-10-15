@@ -247,7 +247,7 @@ are used when JavaScript runs (when Typescript has been turned into JavaScript).
 
 Typescript adds a bunch of so called `static` types. These static types are used
 for prediction. Static types are not evaluated at run-time (javascript) but
-rather while you're still coding. They will help you to suggest how you should
+rather while you're still coding. They will help you by suggesting how you should
 write code and they'll also warn you when you write a bug into your code.
 
 Let's start typing some of these static types.
